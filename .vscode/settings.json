@@ -6,6 +6,7 @@
         "new": "cpp",
         "*.tcc": "cpp",
         "iosfwd": "cpp"
+    
     },
     "files.autoGuessEncoding": true
 }
