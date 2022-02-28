@@ -1,66 +1,4 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-*.ko
-*.elf
-
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-*.so.*
-*.dylib
-
-# Fortran module files
-*.mod
-*.smod
-
-# Linker output
-*.ilk
-*.map
-*.exp
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-*.lo
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
-
-### VisualStudioCode ###
+######### VisualStudioCode ###########
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -80,3 +18,41 @@ dkms.conf
 .ionide
 
 # Support for Project snippet scope
+
+
+#DB
+.txt
+
+########## C++ ###########
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
