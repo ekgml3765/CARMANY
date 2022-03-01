@@ -18,7 +18,6 @@ int main(){
     istringstream ss;
     vector<string> v;
 
-// user.txt를 읽어오기
     ifstream fin("user.txt");
     //ifstream fin("C:\\Users\\user\\Documents\\GitHub\\data\\user.txt");
 
