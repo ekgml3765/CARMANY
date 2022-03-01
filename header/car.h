@@ -25,7 +25,7 @@ private:
 public:
 	void print();
 	static vector<Car> openCarFile();
-	bool getCarList();
+	bool getCarList(int category, int page, bool filter=false);
 	bool getCarInfo(int car_id);
 	bool getBuyCar();
 

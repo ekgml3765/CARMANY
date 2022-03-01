@@ -2,6 +2,8 @@
 #include <sstream>
 
 /*다희*/
+//전역
+vector<Car> carList = Car::openCarFile();
 
 //객체 출력
 void Car::print(){
@@ -51,6 +53,15 @@ vector<Car> Car::openCarFile(){
 	}
     return carList;
 }
+
+//자동차 리스트
+bool Car::getCarList(int category, int page, bool filter){
+    for(int i = 0; i < carList.size(); i++){
+        carList[i].print();
+    }
+    return true;
+}
+
 
 
 //준식
