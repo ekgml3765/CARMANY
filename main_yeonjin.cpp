@@ -12,39 +12,23 @@ int active_user_id = -1;
 string username;
 userLinkedList userlist;
 
-//유저 부분만 만들기 
-// 1. 유저를 읽어와서 자료구조로 저장하기 -> done
-// 2. linkedList 형태로 구현 -> DONE
-// 3. 함수들 생성하기
-// 4. 함수는 로그인, 로그아웃, 회원 정보수정, 회원 가입
 
 int main(){
-    string c;
-    char str[256];
+    string line, word;
     istringstream ss;
     vector<string> v;
-    int idx = 0;
-
 
     ifstream fin("user.txt");
     //ifstream fin("C:\\Users\\user\\Documents\\GitHub\\data\\user.txt");
 
     if(fin.is_open()){
-     
-     
-        while(!fin.eof()){
-
-            getline(fin, c);
-            istringstream ss(c);
-            string stringBuffer;
-
-            while(getline(ss, stringBuffer, ' ')){
-                cout<<stringBuffer<<endl;
-                v.push_back(stringBuffer);
-            }
-            userlist.addNode(stoi(v[0]), v[1], v[2], v[3], v[4], v[5], stoi(v[6]));
-            v.clear();
-        }
+     while(getline(fin, line)) {
+        istringstream ss(line);
+        v.clear();
+        while (getline(ss, word, ' ')){
+            v.push_back(word);
+        } 
+        userlist.addNode(stoi(v[0]), v[1], v[2], v[3], v[4], v[5], stoi(v[6]));
     }
 
     userlist.show();
@@ -54,7 +38,7 @@ int main(){
     // ---------
     while(true){
         cout<<"로그인과 회원 가입 중 선택하세요."<<endl;
-        cout<<"1. 로그인 2. 회원 가입>>";
+        cout<<"1. 로그인 2. 회원 가입 3. 비회원 로그인>>";
         cin>>choice;
 
         if (choice == 1){
@@ -69,6 +53,10 @@ int main(){
                 cout<<"로그인 화면으로 돌아갑니다"<<endl;
                 userlist.show();
             }
+        }
+        else if (choice == 3){
+            cout<<"비회원으로 로그인하셨습니다.";
+            active_user_id = -1;
         }
         else{
             cout<<"잘못입력하였습니다. 다시 입력바랍니다."<<endl;
