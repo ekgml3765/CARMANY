@@ -8,7 +8,7 @@
 
 
 //연진
-#include "user.h"
+#include "../header/user.h"
 #include <string>
 #include <iostream>
 #include <fstream>

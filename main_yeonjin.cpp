@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include "user.h"
+#include "header/user.h"
 
 
 using namespace std;
@@ -26,24 +26,25 @@ int main(){
     int idx = 0;
 
 
-    ifstream fin("user.txt");
+    //ifstream fin("user.txt");
+    ifstream fin("C:\\Users\\user\\Documents\\GitHub\\data\\user.txt");
 
     if(fin.is_open()){
      
      
-        // while(!fin.eof()){
+        while(!fin.eof()){
 
-        //     getline(fin, c);
-        //     istringstream ss(c);
-        //     string stringBuffer;
+            getline(fin, c);
+            istringstream ss(c);
+            string stringBuffer;
 
-        //     while(getline(ss, stringBuffer, ' ')){
-        //         cout<<stringBuffer<<endl;
-        //         v.push_back(stringBuffer);
-        //     }
-        //     userlist.addNode(stoi(v[0]), v[1], v[2], v[3], v[4], v[5], stoi(v[6]));
-        //     v.clear();
-        // }
+            while(getline(ss, stringBuffer, ' ')){
+                cout<<stringBuffer<<endl;
+                v.push_back(stringBuffer);
+            }
+            userlist.addNode(stoi(v[0]), v[1], v[2], v[3], v[4], v[5], stoi(v[6]));
+            v.clear();
+        }
     }
 
     userlist.show();
