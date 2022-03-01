@@ -1,7 +1,11 @@
 #include <iostream>
 #include "header/car.h"
+#include "header/user.h"
 using namespace std;
 
+int active_user_id = -1;
+string username;
+userLinkedList userlist;
 int user_id = -1;
 
 
