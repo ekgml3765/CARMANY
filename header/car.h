@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <set>
 #include <fstream>
 #include <iostream>
 using namespace std;
@@ -32,7 +33,7 @@ public:
 	void print();
 	bool getCarList(int category, int page, bool filter=false);
 	bool getCarInfo(string car_id);
-	bool getBuyCar();
+	bool getBuyCar(string car_id);
 
 	//getter, setter
 };

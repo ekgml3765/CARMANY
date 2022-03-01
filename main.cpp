@@ -68,7 +68,7 @@ int main(){
                     //상세보기
                     if(car_menu_num == 0){
                         string car_id;
-                        cout << "조회할 번호를 입력하세요:";
+                        cout << "조회할 자동차 번호를 입력하세요:";
                         cin >> car_id;
                         if(!car.getCarInfo(car_id))
                             cout << "해당 번호는 없는 번호입니다." << endl;
@@ -103,6 +103,14 @@ int main(){
                     //페이지 이동
                     else if(car_menu_num == 6){
                     
+                    }
+                    //자동차 구매
+                    else{
+                        string car_id;
+                        cout << "구매할 자동차 번호를 입력하세요:";
+                        cin >> car_id;
+                        if(!car.getBuyCar(car_id))
+                            cout << "구매가 취소되었습니다." << endl;
                     }
                     cout << ment << "메뉴를 선택해주세요 (0.상세보기 1.전체, 2.차종별, 3.엔진별, 4.자동차명, 5.필터적용, 6. 페이지 이동, 7.차량 구매) >>" << endl;
                     cin >> car_menu_num;             

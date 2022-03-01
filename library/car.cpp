@@ -94,6 +94,40 @@ bool Car::getCarInfo(string car_id){
     return true;
 }
 
+//자동차 구매
+bool Car::getBuyCar(string car_id){
+    if(car_list_m.find(car_id) == car_list_m.end()){
+        cout << "해당 번호는 없는 번호입니다." << endl;
+        return false;
+    }else{
+        Car car = car_list_m[car_id];
+        set<string> color_list;
+        istringstream ss(car.color);
+        string color;
+        while (getline(ss, color, ',')){
+            cout << color << endl;
+            color_list.insert(color);
+        } 
+
+        cout << car.name << "의 가격은 최저 " << car.min_price << "~ 최고 " << car.max_price << "가격입니다. " << endl; 
+        while(true){
+            cout << "구매하실 색상을 입력해주세요. " << endl;
+            cin >> color;
+            //수정해야해 발견을 못함
+            if(color_list.find(color) == color_list.end()){
+                if(color == "0")
+                   return false;
+                cout << "해당 색상은 존재하지 않습니다. 구매 취소를 원하시면 0을 눌러주세요." << endl;   
+            }else{
+                //파일 쓰기 코드 필요~
+                cout << car.name << " " << color << "색상 구매가 성공적으로 이루어졌습니다." << endl;
+                break;
+            }
+         }
+         cout << endl;
+    }
+    return true;
+}
 
 //준식
 
