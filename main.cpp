@@ -7,12 +7,13 @@ int user_id = 1;
 int main(){
 
     int menu_num = 0;
-
     cout << "대한민국 No.1 자동차 플랫폼 CARMANY 입니다.\n";
     cout << "메뉴를 선택해주세요.(1. 차량구매 2. 차량 추천 3. 마이페이지)" << endl;
     cin >> menu_num;
 
-   Car car;
+    //자동차 데이터
+    Car car;
+    vector<Car> carList = Car::openCarFile();
 
     switch(menu_num){
         //로그아웃
@@ -21,7 +22,9 @@ int main(){
         }
         //차량 구매
         case 1:{
-            car.getCarList();
+            //테스트
+            for(int i = 0; i < carList.size(); i++)
+                carList[i].print();
             break;
         }
         //차량 추천

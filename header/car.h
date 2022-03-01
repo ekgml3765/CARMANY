@@ -1,6 +1,8 @@
 #ifndef CAR_H
 #define CAR_H
 #include <string>
+#include <vector>
+#include <fstream>
 #include <iostream>
 using namespace std;
 
@@ -21,7 +23,13 @@ private:
 	int stock;  	   // 남은 수량
 	int total_stock;  // 총 입고 수량
 public:
+	void print();
+	static vector<Car> openCarFile();
 	bool getCarList();
+	bool getCarInfo(int car_id);
+	bool getBuyCar();
+
+	//getter, setter
 };
 
 
