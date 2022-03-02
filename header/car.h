@@ -8,6 +8,7 @@
 #include <iostream>
 #include <algorithm>
 #include <iomanip>
+#include <sstream>
 using namespace std;
 
 class Car{
@@ -50,6 +51,7 @@ public:
 
 	//추천
 	bool getRecoListByBrand(string brandname, vector<Car> &list, int page=1);
+	bool getRecoListByAge(string age, vector<Car> &list, string buyList_file, string userfile_path, int page=1);
 };
 
 

@@ -11,12 +11,14 @@ int main(){
    
     vector<string> menu_list = {"차량 구매", "차량 추천", "마이페이지"};
 
-    /*자동차 데이터 세팅 및 파일 경로설정*/
+    /*데이터 세팅 및 파일 경로설정*/
     Car car;
     string carfile_path = "C:\\Users\\user\\Documents\\GitHub\\data\\car.txt";
     string buyList_file = "C:\\Users\\user\\Documents\\GitHub\\data\\buyList.txt";
+    string userfile_path = "C:\\Users\\user\\Documents\\GitHub\\data\\user.txt";
     //string carfile_path = "./car.txt";
     //string buyList_file = "./buyList.txt";
+    //string buyList_file = "./user.txt";
     Car::openCarFile(carfile_path);
     
     
@@ -166,6 +168,7 @@ int main(){
                 int reco_menu_num = 1;
                 vector<Car> list = car.car_list_v; //페이징 처리를 위해 담을 리스트 초기화
                 string brand[] = {"KIA", "HYUNDAI", "GENESIS"};
+                string age[] = {"10대", "20대", "30대", "40대", "50대"};
                 cout << "메뉴를 선택해주세요 (0.상세보기. 1. 연령별 추천, 2. 성별 추천, 3.브랜드별 추천 4. 페이지 이동 5.메인으로 돌아가기) >>" << endl;      
                 cin >> reco_menu_num;
                 while(reco_menu_num != 5){
@@ -179,7 +182,10 @@ int main(){
                     }
                     //연령별 추천
                     else if(reco_menu_num == 1){
-
+                        cout << "추천받으실 연령대를 고르세요. (1.10대, 2.20대, 3.30대 4.40대 5.50대):";
+                        int age_no;
+                        cin >> age_no;
+                        car.getRecoListByAge(age[age_no-1], list, buyList_file, userfile_path);
                     }
                     //성별 추천
                     else if(reco_menu_num == 2){
