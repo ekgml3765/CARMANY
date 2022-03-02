@@ -12,7 +12,7 @@ using namespace std;
 int active_user_id = -1;
 int manager_id = -1;
 vector<Manager> managerVector;
-// vector<buyList> buyListVector;
+vector<buyList> buyListVector;
 userLinkedList userlist;
 string username;
 
