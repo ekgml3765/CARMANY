@@ -180,6 +180,12 @@ bool Car::getBuyCar(string car_id, int user_id, string username, string buyList_
         return false;
     }else{
         Car car = car_list_m[car_id];
+        //재고 없으면 구매 불가
+        if(car.stock == 0){
+            cout << "해당 차량은 재고가 다 소진되어 구매가 불가능합니다." << endl;
+            return false;
+        }
+
         vector<string> color_list;
         istringstream ss(car.color);
         string color;
@@ -216,8 +222,18 @@ bool Car::getBuyCar(string car_id, int user_id, string username, string buyList_
 		            fout << user_id <<" " << car_id << " " << username << " " << car.name << " " << car.brand << " " << car.type << " "
                     << car.engine << " " << color << " " << price << "만원" << endl;
 	            }
-                
                 fout.close();
+                //자료구조에서 남은재고 수량-1
+                //vector
+                for(auto it = car_list_v.begin(); it != car_list_v.end(); it++){
+                    if(it->car_id == stoi(car_id)){
+                        it->stock--;
+                        break;
+                    }
+                }
+                //map
+                car.stock--;
+                car_list_m[car_id] = car;
                 cout << car.name << " " << color << "색상 차량 구매가 성공적으로 이루어졌습니다." << endl;
                 break;
             }
