@@ -10,19 +10,19 @@ userLinkedList userlist;
 
 int main(){
    
-    
     vector<string> menu_list = {"차량 구매", "차량 추천", "마이페이지"};
 
-    //자동차
+    /*자동차 데이터 세팅*/
     Car car;
     ifstream fin("C:\\Users\\user\\Documents\\GitHub\\data\\car.txt");
     //ifstream fin("./car.txt"); //linux
+    string buyList_file = "C:\\Users\\user\\Documents\\GitHub\\data\\buyList.txt";
+    //string buyList_file = "./buyList.txt";
     Car::openCarFile(fin);
     
     
-    
     int menu_num = 0;
-    int user_id = 1; //로그인한 유저
+    int user_id = 3; //로그인한 유저
 
     while(menu_num != -1){
         //상단 메뉴 출력        
@@ -121,7 +121,7 @@ int main(){
                         string car_id;
                         cout << "구매할 자동차 번호를 입력하세요:";
                         cin >> car_id;
-                        bool flag = car.getBuyCar(car_id, user_id);
+                        bool flag = car.getBuyCar(car_id, user_id, buyList_file);
                         if(!flag)
                             cout << "구매가 취소되었습니다." << endl;
                     }

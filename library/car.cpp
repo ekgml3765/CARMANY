@@ -92,7 +92,7 @@ bool Car::getCarInfo(string car_id){
 }
 
 //자동차 구매
-bool Car::getBuyCar(string car_id, int user_id){
+bool Car::getBuyCar(string car_id, int user_id, string buyList_file){
     if(car_list_m.find(car_id) == car_list_m.end()){
         cout << "해당 번호는 없는 번호입니다." << endl;
         return false;
@@ -102,7 +102,6 @@ bool Car::getBuyCar(string car_id, int user_id){
         istringstream ss(car.color);
         string color;
         while (getline(ss, color, ',')){
-            cout << color << endl;
             color_list.push_back(color);
         } 
 
@@ -112,7 +111,7 @@ bool Car::getBuyCar(string car_id, int user_id){
             for(int i = 0; i < color_list.size(); i++){
                 cout <<i+1 << "." << color_list[i] << " ";
             }
-            cout << ")";
+            cout << "):";
             int color_num;
             cin >> color_num;
             if(color_num < 1 || color_num > color_list.size()){
@@ -120,13 +119,24 @@ bool Car::getBuyCar(string car_id, int user_id){
             }else{
                 color = color_list[color_num-1];
                 cout << car.name << "의 하위모델은 최저 " << car.min_price << "만원이며 상위모델은 최고 " << car.max_price << "만원입니다. " << endl; 
-                cout << "구매하실 모델을 선택해주세요. (1. 하위, 2.상위)";
+                cout << "구매하실 모델을 선택해주세요. (1. 하위, 2.상위):";
                 string model_num;
                 cin >> model_num;
                 int price = (model_num == "1")? car.min_price : car.max_price;
-                //파일 쓰기 코드 필요~
-                cout << user_id << ", " << car_id << "," << color << "," << price; 
-                cout << car.name << " " << color << "색상 구매가 성공적으로 이루어졌습니다." << endl;
+                
+                //파일 쓰기
+                ofstream fout(buyList_file, ios::app); //쓰기모드, 파일 끝에 추가
+                if(!fout) {
+                    cout << "구매리스트 파일 열기 오류";
+                    return 0;
+                }
+                if (fout.is_open()){
+		            fout << user_id <<" " << car_id << " " << car.name << " " << car.brand << " " << car.type << " "
+                    << car.engine << " " << color << " " << price << endl;
+	            }
+                
+                fout.close();
+                cout << car.name << " " << color << "색상 차량 구매가 성공적으로 이루어졌습니다." << endl;
                 break;
             }
          }
