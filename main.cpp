@@ -22,7 +22,8 @@ int main(){
     
     
     int menu_num = 0;
-    int user_id = 3; //로그인한 유저
+    active_user_id = 3; //로그인한 유저
+    username = "dsaer012";
 
     while(menu_num != -1){
         //상단 메뉴 출력        
@@ -114,16 +115,20 @@ int main(){
                     
                     }
                     //자동차 구매
-                    else{
-                        if(user_id == -1){
+                    else if(car_menu_num == 7){
+                        if(active_user_id == -1){
                             cout << "로그인한 유저만 구매가 가능합니다." << endl;
                         }
                         string car_id;
                         cout << "구매할 자동차 번호를 입력하세요:";
                         cin >> car_id;
-                        bool flag = car.getBuyCar(car_id, user_id, buyList_file);
+                        bool flag = car.getBuyCar(car_id, active_user_id, username, buyList_file);
                         if(!flag)
                             cout << "구매가 취소되었습니다." << endl;
+                    }
+                    //잘못된 입력
+                    else{
+                        cout << "메뉴 번호를 잘못 입력하셨습니다.";
                     }
                     cout << ment << "메뉴를 선택해주세요 (0.상세보기 1.전체, 2.차종별, 3.엔진별, 4.자동차명, 5.필터적용, 6. 페이지 이동, 7.차량 구매) >>" << endl;
                     cin >> car_menu_num;             
