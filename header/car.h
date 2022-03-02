@@ -7,6 +7,7 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
+#include <iomanip>
 using namespace std;
 
 class Car{
@@ -27,15 +28,19 @@ private:
 	int total_stock;  // 총 입고 수량
 
 public:
+	//static 변수
 	static vector<Car> car_list_v;
 	static map<string, Car> car_list_m;
 	Car();
-	static bool openCarFile(ifstream &fin);
 	void print();
 	bool getCarList(int category, vector<Car> &list, string keyword = "", int page=1, int filter=0);
 	bool getCarInfo(string car_id);
 	bool getBuyCar(string car_id, int user_id, string username, string buyList_file);
-
+	
+	//file 관련
+	static bool openCarFile(string carfile_path);
+	static bool writeCarFile(string carfile_path);
+	
 	//getter
 	int getMinPrice() const{ return min_price;}
 	int getMaxPrice() const{ return max_price;}

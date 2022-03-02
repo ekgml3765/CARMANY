@@ -11,13 +11,13 @@ int main(){
    
     vector<string> menu_list = {"차량 구매", "차량 추천", "마이페이지"};
 
-    /*자동차 데이터 세팅*/
+    /*자동차 데이터 세팅 및 파일 경로설정*/
     Car car;
-    ifstream fin("C:\\Users\\user\\Documents\\GitHub\\data\\car.txt");
-    //ifstream fin("./car.txt"); //linux
+    string carfile_path = "C:\\Users\\user\\Documents\\GitHub\\data\\car.txt";
     string buyList_file = "C:\\Users\\user\\Documents\\GitHub\\data\\buyList.txt";
+    //string carfile_path = "./car.txt";
     //string buyList_file = "./buyList.txt";
-    Car::openCarFile(fin);
+    Car::openCarFile(carfile_path);
     
     
     int menu_num = 0;
@@ -131,8 +131,12 @@ int main(){
                     }
                     //페이지 이동
                     else if(car_menu_num == 6){
-                        //어떤쪽에서의 리스트인지 알아야함
-
+                        cout << "이동하실 페이지 번호를 입력해주세요: ";
+                        int page;
+                        cin >> page;
+                        bool flag = car.getCarList(6, list, "", page);
+                        if(!flag)
+                            cout << "잘못된 페이지 접근입니다. " <<endl;
                     }
                     //자동차 구매
                     else if(car_menu_num == 7){
@@ -145,12 +149,14 @@ int main(){
                         bool flag = car.getBuyCar(car_id, active_user_id, username, buyList_file);
                         if(!flag)
                             cout << "구매가 취소되었습니다." << endl;
+                    }else if(car_menu_num == 8){
+                        break;
                     }
                     //잘못된 입력
                     else{
                         cout << "메뉴 번호를 잘못 입력하셨습니다.";
                     }
-                    cout << "메뉴를 선택해주세요 (0.상세보기 1.전체, 2.차종별, 3.엔진별, 4.자동차명, 5.필터적용, 6. 페이지 이동, 7.차량 구매) >>" << endl;
+                    cout << "메뉴를 선택해주세요 (0.상세보기 1.전체, 2.차종별, 3.엔진별, 4.자동차명, 5.필터적용, 6. 페이지 이동, 7.차량 구매. 8.메인으로 돌아가기) >>" << endl;
                     cin >> car_menu_num;             
                 }
                 break;
@@ -172,6 +178,7 @@ int main(){
         }
         cin >> menu_num; //사용자 입력
     }
+    Car::writeCarFile(carfile_path);
     cout << "로그아웃. 종료합니다!" << endl;
 
     return 0;
