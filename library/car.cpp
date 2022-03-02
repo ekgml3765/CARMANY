@@ -95,7 +95,7 @@ bool Car::getCarInfo(string car_id){
 }
 
 //자동차 구매
-bool Car::getBuyCar(string car_id){
+bool Car::getBuyCar(string car_id, int user_id){
     if(car_list_m.find(car_id) == car_list_m.end()){
         cout << "해당 번호는 없는 번호입니다." << endl;
         return false;
@@ -110,23 +110,25 @@ bool Car::getBuyCar(string car_id){
         } 
 
         while(true){
-            cout << "구매하실 색상을 입력해주세요." << endl;
+            cout << "구매하실 색상을 입력해주세요. ";
             cout << "(";
             for(int i = 0; i < color_list.size(); i++){
                 cout <<i+1 << "." << color_list[i] << " ";
             }
             cout << ")";
-            int select_color;
-            cin >> select_color;
-            if(select_color < 1 || select_color > color_list.size()){
+            int color_num;
+            cin >> color_num;
+            if(color_num < 1 || color_num > color_list.size()){
                 cout << "해당 색상은 존재하지 않습니다." << endl;
             }else{
+                color = color_list[color_num-1];
                 cout << car.name << "의 하위모델은 최저 " << car.min_price << "만원이며 상위모델은 최고 " << car.max_price << "만원입니다. " << endl; 
                 cout << "구매하실 모델을 선택해주세요. (1. 하위, 2.상위)";
                 string model_num;
                 cin >> model_num;
                 int price = (model_num == "1")? car.min_price : car.max_price;
                 //파일 쓰기 코드 필요~
+                cout << user_id << ", " << car_id << "," << color << "," << price; 
                 cout << car.name << " " << color << "색상 구매가 성공적으로 이루어졌습니다." << endl;
                 break;
             }
