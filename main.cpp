@@ -6,7 +6,6 @@ using namespace std;
 int active_user_id = -1;
 string username;
 userLinkedList userlist;
-int user_id = -1;
 
 
 int main(){
@@ -16,9 +15,15 @@ int main(){
 
     //자동차
     Car car;
-    Car::openCarFile();
-    user_id = 1;
+    ifstream fin("C:\\Users\\user\\Documents\\GitHub\\data\\car.txt");
+    //ifstream fin("./car.txt"); //linux
+    Car::openCarFile(fin);
+    
+    
+    
     int menu_num = 0;
+    int user_id = 1; //로그인한 유저
+
     while(menu_num != -1){
         //상단 메뉴 출력        
         switch(menu_num){
@@ -110,10 +115,14 @@ int main(){
                     }
                     //자동차 구매
                     else{
+                        if(user_id == -1){
+                            cout << "로그인한 유저만 구매가 가능합니다." << endl;
+                        }
                         string car_id;
                         cout << "구매할 자동차 번호를 입력하세요:";
                         cin >> car_id;
-                        if(!car.getBuyCar(car_id))
+                        bool flag = car.getBuyCar(car_id, user_id);
+                        if(!flag)
                             cout << "구매가 취소되었습니다." << endl;
                     }
                     cout << ment << "메뉴를 선택해주세요 (0.상세보기 1.전체, 2.차종별, 3.엔진별, 4.자동차명, 5.필터적용, 6. 페이지 이동, 7.차량 구매) >>" << endl;
