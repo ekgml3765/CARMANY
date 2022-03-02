@@ -3,8 +3,6 @@
 
 /*다희*/
 
-//전역변수
-//vector<Car> car_list = Car::openCarFile();
 
 //static 변수 선언
 vector<Car> Car::car_list_v;
@@ -21,7 +19,7 @@ void Car::print(){
     << " " << people << " " << stock << " " << total_stock;
 }
 
-//자동차 파일 읽어서 vector, map에 저장
+//자동차 파일 읽어서 자료구조 vector, map에 저장
 bool Car::openCarFile(ifstream &fin){
 
     // 파일 열기 실패
@@ -134,6 +132,11 @@ bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page,
          }
          //인기순
          case 4:{
+            sort( list.begin( ), list.end( ), [ ]( const Car& a, const Car& b ){
+                int a_dif_stock = a.getTotalStock()-a.getStock();
+                int b_dif_sock = b.getTotalStock()-b.getStock();
+                return  a_dif_stock > b_dif_sock;
+            });
              break;
          }
      }

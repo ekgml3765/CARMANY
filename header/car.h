@@ -30,7 +30,6 @@ public:
 	static vector<Car> car_list_v;
 	static map<string, Car> car_list_m;
 	Car();
-	//Car(int car_id, string brand, string name, int min_price, int max_price, string )
 	static bool openCarFile(ifstream &fin);
 	void print();
 	bool getCarList(int category, vector<Car> &list, string keyword = "", int page=1, int filter=0);
@@ -41,6 +40,8 @@ public:
 	int getMinPrice() const{ return min_price;}
 	int getMaxPrice() const{ return max_price;}
 	string getDate() const{ return date;}
+	int getStock() const{ return stock;}
+	int getTotalStock() const{ return total_stock;}
 
 };
 
