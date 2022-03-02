@@ -89,7 +89,11 @@ bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page,
             break;
         }
         //자동차명
-        case 4:{ 
+        case 4:{
+            for(int i = 0; i < car_list_v.size(); i++){
+                if(car_list_v[i].name.find(keyword) != string::npos)
+                    tmp.push_back(car_list_v[i]);
+            }
             break;
         }
     }
