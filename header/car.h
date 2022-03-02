@@ -29,7 +29,7 @@ private:
 public:
 	Car();
 	//Car(int car_id, string brand, string name, int min_price, int max_price, string )
-	static bool openCarFile();
+	static bool openCarFile(ifstream &fin);
 	void print();
 	bool getCarList(int category, int page, bool filter=false);
 	bool getCarInfo(string car_id);

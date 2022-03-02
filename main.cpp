@@ -15,9 +15,14 @@ int main(){
 
     //자동차
     Car car;
-    Car::openCarFile();
+    ifstream fin("C:\\Users\\user\\Documents\\GitHub\\data\\car.txt");
+    //ifstream fin("./car.txt"); //linux
+    Car::openCarFile(fin);
+    
+    
+    
     int menu_num = 0;
-    int user_id = 1;
+    int user_id = 1; //로그인한 유저
 
     while(menu_num != -1){
         //상단 메뉴 출력        

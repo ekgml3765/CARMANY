@@ -22,10 +22,7 @@ void Car::print(){
 }
 
 //자동차 파일 읽어서 vector, map에 저장
-bool Car::openCarFile(){
-
-    ifstream fin("C:\\Users\\user\\Documents\\GitHub\\data\\car.txt"); //window
-    //ifstream fin("./car.txt"); //linux
+bool Car::openCarFile(ifstream &fin){
 
     // 파일 열기 실패
     if(!fin) { 
