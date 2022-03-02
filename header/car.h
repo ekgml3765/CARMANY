@@ -33,7 +33,7 @@ public:
 	void print();
 	bool getCarList(int category, int page, bool filter=false);
 	bool getCarInfo(string car_id);
-	bool getBuyCar(string car_id, int user_id);
+	bool getBuyCar(string car_id, int user_id, string buyList_file);
 
 	//getter, setter
 };
