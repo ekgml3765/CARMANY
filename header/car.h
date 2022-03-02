@@ -2,6 +2,8 @@
 #define CAR_H
 #include <string>
 #include <vector>
+#include <map>
+#include <set>
 #include <fstream>
 #include <iostream>
 using namespace std;
@@ -22,12 +24,16 @@ private:
 	int people;        // 탑승 가능 인원수
 	int stock;  	   // 남은 수량
 	int total_stock;  // 총 입고 수량
+	static vector<Car> car_list_v;
+	static map<string, Car> car_list_m;
 public:
+	Car();
+	//Car(int car_id, string brand, string name, int min_price, int max_price, string )
+	static bool openCarFile();
 	void print();
-	static vector<Car> openCarFile();
 	bool getCarList(int category, int page, bool filter=false);
-	bool getCarInfo(int car_id);
-	bool getBuyCar();
+	bool getCarInfo(string car_id);
+	bool getBuyCar(string car_id);
 
 	//getter, setter
 };
