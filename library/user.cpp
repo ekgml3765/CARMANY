@@ -13,7 +13,6 @@
 #include <iostream>
 #include <fstream>
 
-
 using namespace std;
 
 extern int active_user_id;

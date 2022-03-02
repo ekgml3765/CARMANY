@@ -7,7 +7,6 @@
 #include "header/manager.h"
 #include "header/car.h"
 
-
 using namespace std;
 
 int active_user_id = -1;
