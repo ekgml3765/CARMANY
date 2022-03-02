@@ -48,6 +48,8 @@ public:
 	int getStock() const{ return stock;}
 	int getTotalStock() const{ return total_stock;}
 
+	//추천
+	bool getRecoListByBrand(string brandname, vector<Car> &list, int page=1);
 };
 
 

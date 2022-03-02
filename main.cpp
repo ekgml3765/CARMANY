@@ -77,7 +77,7 @@ int main(){
                 int car_menu_num = 1;
                 string engine[] = {"전기", "가솔린", "디젤", "하이브리드", "수소", "LPG"};
                 string type[] = {"세단", "SUV", "RV", "해치백", "트럭"};
-                while(car_menu_num != -1){
+                while(car_menu_num != 8){
                     //상세보기
                     if(car_menu_num == 0){
                         string car_id;
@@ -149,15 +149,13 @@ int main(){
                         bool flag = car.getBuyCar(car_id, active_user_id, username, buyList_file);
                         if(!flag)
                             cout << "구매가 취소되었습니다." << endl;
-                    }else if(car_menu_num == 8){
-                        break;
                     }
                     //잘못된 입력
                     else{
                         cout << "메뉴 번호를 잘못 입력하셨습니다.";
                     }
                     cout << "메뉴를 선택해주세요 (0.상세보기 1.전체, 2.차종별, 3.엔진별, 4.자동차명, 5.필터적용, 6. 페이지 이동, 7.차량 구매. 8.메인으로 돌아가기) >>" << endl;
-                    cin >> car_menu_num;             
+                    cin >> car_menu_num;         
                 }
                 break;
             }
@@ -165,7 +163,47 @@ int main(){
 
             //2. 차량 추천
             case 2:{
-                
+                int reco_menu_num = 1;
+                vector<Car> list = car.car_list_v; //페이징 처리를 위해 담을 리스트 초기화
+                string brand[] = {"KIA", "HYUNDAI", "GENESIS"};
+                cout << "메뉴를 선택해주세요 (0.상세보기. 1. 연령별 추천, 2. 성별 추천, 3.브랜드별 추천 4. 페이지 이동 5.메인으로 돌아가기) >>" << endl;      
+                cin >> reco_menu_num;
+                while(reco_menu_num != 5){
+                    //상세보기
+                    if(reco_menu_num == 0){
+                        string car_id;
+                        cout << "조회할 자동차 번호를 입력하세요:";
+                        cin >> car_id;
+                        if(!car.getCarInfo(car_id))
+                            cout << "해당 번호는 없는 번호입니다." << endl;
+                    }
+                    //연령별 추천
+                    else if(reco_menu_num == 1){
+
+                    }
+                    //성별 추천
+                    else if(reco_menu_num == 2){
+
+                    }
+                    //브랜드별 추천
+                    else if(reco_menu_num == 3){
+                        cout << "추천받으실 브랜드를 고르세요. (1.KIA, 2.HYUNDAI, 3.GENESIS):";
+                        int brand_no;
+                        cin >> brand_no;
+                        car.getRecoListByBrand(brand[brand_no-1], list);
+                    }
+                    //페이지 이동
+                    else if(reco_menu_num == 4){
+                        cout << "이동하실 페이지 번호를 입력해주세요: ";
+                        int page;
+                        cin >> page;
+                        bool flag = car.getCarList(6, list, "", page);
+                        if(!flag)
+                            cout << "잘못된 페이지 접근입니다. " <<endl;
+                    }
+                    cout << "메뉴를 선택해주세요 (0.상세보기. 1. 연령별 추천, 2. 성별 추천, 3.브랜드별 추천 4. 페이지 이동 5.메인으로 돌아가기) >>" << endl; 
+                    cin >> reco_menu_num;
+                }
                break; 
             }
 
