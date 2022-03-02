@@ -63,31 +63,45 @@ bool Car::openCarFile(ifstream &fin){
 }
 
 //자동차 리스트
-bool Car::getCarList(int category, int page, bool filter){
-
-    switch(category){
+bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page, bool filter){
+     int total_cars;
+     vector<Car> tmp;
+     switch(category){
+        //전체
         case 1:{
+            tmp = car_list_v;
             break;
         }
+        //차종별
         case 2:{
+            for(int i = 0; i < car_list_v.size(); i++){
+                if(car_list_v[i].type == keyword)
+                    tmp.push_back(car_list_v[i]);
+            }
             break;
         }
+        //엔진
         case 3:{
+            for(int i = 0; i < car_list_v.size(); i++){
+                if(car_list_v[i].engine == keyword)
+                    tmp.push_back(car_list_v[i]);
+            }
             break;
         }
-        case 4:{
+        //자동차명
+        case 4:{ 
             break;
         }
     }
-
-    int total_cars = car_list_v.size();
+    list = tmp;
+    total_cars = tmp.size();
     cout << endl;
     cout << "|  총 " << total_cars << "건 조회";
     cout << "필터 [인기순/출시순/가격순]  |" << endl;
 
     for(int i = 0; i < total_cars; i++){
         cout << "|       " ; 
-        car_list_v[i].print();
+        list[i].print();
         cout << "          |" << endl;
     }
     cout << "|--------------------------------------------------------------------------|" << endl;
@@ -147,7 +161,7 @@ bool Car::getBuyCar(string car_id, int user_id, string username, string buyList_
                 }
                 if (fout.is_open()){
 		            fout << user_id <<" " << car_id << " " << username << " " << car.name << " " << car.brand << " " << car.type << " "
-                    << car.engine << " " << color << " " << price << endl;
+                    << car.engine << " " << color << " " << price << "만원" << endl;
 	            }
                 
                 fout.close();
