@@ -101,24 +101,31 @@ bool Car::getBuyCar(string car_id){
         return false;
     }else{
         Car car = car_list_m[car_id];
-        set<string> color_list;
+        vector<string> color_list;
         istringstream ss(car.color);
         string color;
         while (getline(ss, color, ',')){
             cout << color << endl;
-            color_list.insert(color);
+            color_list.push_back(color);
         } 
 
-        cout << car.name << "의 가격은 최저 " << car.min_price << "~ 최고 " << car.max_price << "가격입니다. " << endl; 
         while(true){
-            cout << "구매하실 색상을 입력해주세요. " << endl;
-            cin >> color;
-            //수정해야해 발견을 못함
-            if(color_list.find(color) == color_list.end()){
-                if(color == "0")
-                   return false;
-                cout << "해당 색상은 존재하지 않습니다. 구매 취소를 원하시면 0을 눌러주세요." << endl;   
+            cout << "구매하실 색상을 입력해주세요." << endl;
+            cout << "(";
+            for(int i = 0; i < color_list.size(); i++){
+                cout <<i+1 << "." << color_list[i] << " ";
+            }
+            cout << ")";
+            int select_color;
+            cin >> select_color;
+            if(select_color < 1 || select_color > color_list.size()){
+                cout << "해당 색상은 존재하지 않습니다." << endl;
             }else{
+                cout << car.name << "의 하위모델은 최저 " << car.min_price << "만원이며 상위모델은 최고 " << car.max_price << "만원입니다. " << endl; 
+                cout << "구매하실 모델을 선택해주세요. (1. 하위, 2.상위)";
+                string model_num;
+                cin >> model_num;
+                int price = (model_num == "1")? car.min_price : car.max_price;
                 //파일 쓰기 코드 필요~
                 cout << car.name << " " << color << "색상 구매가 성공적으로 이루어졌습니다." << endl;
                 break;
