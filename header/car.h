@@ -6,6 +6,7 @@
 #include <set>
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 class Car{
@@ -24,18 +25,23 @@ private:
 	int people;        // 탑승 가능 인원수
 	int stock;  	   // 남은 수량
 	int total_stock;  // 총 입고 수량
+
+public:
 	static vector<Car> car_list_v;
 	static map<string, Car> car_list_m;
-public:
 	Car();
 	//Car(int car_id, string brand, string name, int min_price, int max_price, string )
 	static bool openCarFile(ifstream &fin);
 	void print();
-	bool getCarList(int category, int page, bool filter=false);
+	bool getCarList(int category, vector<Car> &list, string keyword = "", int page=1, int filter=0);
 	bool getCarInfo(string car_id);
 	bool getBuyCar(string car_id, int user_id, string username, string buyList_file);
 
-	//getter, setter
+	//getter
+	int getMinPrice() const{ return min_price;}
+	int getMaxPrice() const{ return max_price;}
+	string getDate() const{ return date;}
+
 };
 
 
