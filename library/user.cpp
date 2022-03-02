@@ -13,7 +13,6 @@
 #include <iostream>
 #include <fstream>
 
-
 using namespace std;
 
 extern int active_user_id;
@@ -104,6 +103,7 @@ bool userUpdate(){
 	cout<<"새로운 수정 내용을 입력하세요";
 	cin>>change;
 
+	if (choice == 3){ username = change;}
 	userlist.updateNode(choice, change);
 	cout<<"업데이트 되었습니다.";
 	return true;
