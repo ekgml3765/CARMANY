@@ -116,7 +116,7 @@ int main(){
                     //자동차명
                     else if(car_menu_num == 4){
                         cin.ignore();
-                        cout << "검색할 자동차명을 입력해주세요.:";
+                        cout << "검색할 자동차명을 입력해주세요:";
                         string carname;
                         getline(cin, carname);
                         car.getCarList(4, list, carname);
@@ -124,7 +124,10 @@ int main(){
                     }
                     //필터
                     else if(car_menu_num == 5){
-                        car.getCarList(5, list);
+                        cout << "적용하실 필터 번호를 입력해주세요. (1. 출시순, 2.낮은 가격순, 3.높은 가격순, 4.인기순):";
+                        int filter;
+                        cin >> filter;
+                        car.getCarList(5, list, "", 1, filter);
                     }
                     //페이지 이동
                     else if(car_menu_num == 6){

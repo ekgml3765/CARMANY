@@ -63,9 +63,12 @@ bool Car::openCarFile(ifstream &fin){
 }
 
 //자동차 리스트
-bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page, bool filter){
+bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page, int filter){
+     
      int total_cars;
      vector<Car> tmp;
+
+     //카테고리
      switch(category){
         //전체
         case 1:{
@@ -97,8 +100,54 @@ bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page,
             break;
         }
     }
-    list = tmp;
-    total_cars = tmp.size();
+
+     //필터
+     switch(filter){
+         //출시순
+         case 1:{
+            sort( list.begin( ), list.end( ), [ ]( const Car& a, const Car& b ){
+                string a_date = a.getDate();
+                string b_date = b.getDate();
+                int a_year = stoi(a.date.substr(0, 4));
+                int a_month = stoi(a.date.substr(5));
+                int b_year = stoi(b.date.substr(0, 4));
+                int b_month = stoi(b.date.substr(5));
+                if(a_year == b_year)
+                    return a_month > b_month;
+                return a_year > b_year;
+            });
+            break;
+         }
+         //최저가격순
+         case 2:{
+            sort( list.begin( ), list.end( ), [ ]( const Car& a, const Car& b ){
+                return a.getMinPrice() < b.getMinPrice();
+            });
+            break;
+         }
+         //최고가격순
+         case 3:{
+            sort( list.begin( ), list.end( ), [ ]( const Car& a, const Car& b ){
+                return a.getMaxPrice() > b.getMaxPrice();
+            });
+            break;
+         }
+         //인기순
+         case 4:{
+             break;
+         }
+     }
+
+    //필터 적용 안했을때 카테고리별로 tmp에 담음
+    if(filter == 0){
+        list = tmp;
+        total_cars = tmp.size();
+    }
+    //현재 list는 그대로에서 필터만 적용
+    else{
+        total_cars = list.size();
+    }
+      
     cout << endl;
     cout << "|  총 " << total_cars << "건 조회";
     cout << "필터 [인기순/출시순/가격순]  |" << endl;
