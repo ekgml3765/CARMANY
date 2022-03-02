@@ -107,7 +107,7 @@ bool Car::getCarInfo(string car_id){
 }
 
 //자동차 구매
-bool Car::getBuyCar(string car_id, int user_id, string buyList_file){
+bool Car::getBuyCar(string car_id, int user_id, string username, string buyList_file){
     if(car_list_m.find(car_id) == car_list_m.end()){
         cout << "해당 번호는 없는 번호입니다." << endl;
         return false;
@@ -146,7 +146,7 @@ bool Car::getBuyCar(string car_id, int user_id, string buyList_file){
                     return 0;
                 }
                 if (fout.is_open()){
-		            fout << user_id <<" " << car_id << " " << car.name << " " << car.brand << " " << car.type << " "
+		            fout << user_id <<" " << car_id << " " << username << " " << car.name << " " << car.brand << " " << car.type << " "
                     << car.engine << " " << color << " " << price << endl;
 	            }
                 
