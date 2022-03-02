@@ -65,6 +65,21 @@ bool Car::openCarFile(ifstream &fin){
 //자동차 리스트
 bool Car::getCarList(int category, int page, bool filter){
 
+    switch(category){
+        case 1:{
+            break;
+        }
+        case 2:{
+            break;
+        }
+        case 3:{
+            break;
+        }
+        case 4:{
+            break;
+        }
+    }
+
     int total_cars = car_list_v.size();
     cout << endl;
     cout << "|  총 " << total_cars << "건 조회";
