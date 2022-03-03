@@ -2,8 +2,10 @@
 #include <string>
 #include "header/car.h"
 #include "header/user.h"
+#include "header/buylist.h"
 #include "header/manager.h"
 using namespace std;
+
 
 int active_user_id = -1;
 int manager_id = -1;
@@ -14,6 +16,9 @@ string username;
 int menu_no; 
 string id;
 int login;
+
+extern buylist mark[200];
+extern int totalBuyList;
 
 int main()
 {
@@ -156,23 +161,27 @@ int main()
                 else if (order1 == 4)
                 {
                     char o;
-                    cout << "정말 종료하시겠습니까? (y/n)";
-                    cin >> o;
-                    if (o == 'y' || o == 'Y')
+                    while (1)
                     {
-                        login = -1;
-                        break;
+                        cout << "정말 종료하시겠습니까? (y/n)";
+                        cin >> o;
+                        if (o == 'y' || o == 'Y')
+                        {
+                            login = -1;
+                            break;
+                        }
+                        else if (o == 'n' || o == 'N')
+                        {
+                            // cout << "메뉴를 선택해주세요.(1. 차량구매 2. 차량 추천 3. 마이페이지 4. 프로그램 종료)" << endl;
+                            break;
+                        }
+                        else
+                        {
+                            cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
+                            continue;
+                        }
                     }
-                    else if (o == 'n' || o == 'N')
-                    {
-                        cout << "메뉴를 선택해주세요.(1. 차량구매 2. 차량 추천 3. 마이페이지 4. 프로그램 종료)" << endl;
-                        continue;
-                    }
-                    else
-                    {
-                        cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
-                        continue;
-                    }
+                    break;
                     
                 }
                 else
@@ -336,10 +345,10 @@ int main()
         }
         if (menu_no == 3)
         {
-
-            
-            cout << "|      구매 리스트              찜 리스트                 회원정보 수정    |" << endl;
+            cout << "|      구매 리스트                                        회원정보 수정    |" << endl;
             cout << "|--------------------------------------------------------------------------|" << endl;
+            viewMyCar(1);
+            menu_name = "CARMANY";
 
             //회원정보 수정하기 - user.cpp에 userUpdate가 있습니다.
             //userUpdate
