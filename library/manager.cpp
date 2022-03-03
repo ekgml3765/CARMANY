@@ -16,9 +16,8 @@ using namespace std;
 extern vector<Manager> managerVector;
 extern vector<buyList> buyListVector;
 extern userLinkedList userlist;
-
 extern int manager_id;
-// extern vector<Car> Car::car_list_v;
+vector<Car> tmp = Car::car_list_v;
 
 void getManagerList(){
     string line, word;
@@ -46,20 +45,18 @@ void getManagerList(){
 
 bool managerLogin(){
     char id[256], password[256];
-    callPrint("CARMANY", "");
 
     cout<<"관리자 로그인 선택하였습니다"<<endl;
     cout<<"아이디와 비밀번호 입력해주세요\n"<<endl;
 
-    cout<<"아이디";
+    cout<<"아이디 >>";
     cin>>id;
-    cout<<"비밀번호";
+    cout<<"비밀번호>> ";
     cin>>password;
 
   for(int i = 0; i < managerVector.size(); i++){
         if ((strcmp(id, managerVector[i].id)==0)&&(strcmp(password, managerVector[i].password)==0)){
             manager_id = managerVector[i].manager_id;
-            callPrint("Manager", id);
             cout<<"관리자 로그인 되었습니다."<<endl;
             return true;
         }
@@ -113,8 +110,7 @@ bool appendCarFile(){
 }
 
 bool inputCarList(){
-    ifstream fin("inputCar.txt");
-    Car::openCarFile(fin);
+    Car::openCarFile("inputCar.txt");
     return appendCarFile();
 }
 
@@ -159,14 +155,13 @@ bool readBuyList(){
 }
 
 bool outputBuyList(){
-    cout<<"No.구매자, 차량 이름, 브랜드, 차종, 엔진, 색상, 가격(만원)\n";
     if (buyListVector.empty()){
         return false;
     }
 
     for(int i=0; i<buyListVector.size(); i++){
         //네모에 출력될 내용
-        cout<<to_string(i+1)<<" "<<buyListVector[i].buyer<<" "<<buyListVector[i].carname<<" "<<buyListVector[i].brand<<" "<<buyListVector[i].engine<<" "<<buyListVector[i].color<<" "<<buyListVector[i].price<<"\n";
+        cout<<"|"<<to_string(i+1)<<" "<<buyListVector[i].buyer<<" "<<buyListVector[i].carname<<" "<<buyListVector[i].brand<<" "<<buyListVector[i].engine<<" "<<buyListVector[i].color<<" "<<buyListVector[i].price<<"|"<<endl;
     }
     return true;
 }
@@ -179,69 +174,23 @@ bool buyListCarcnt(int& total_sales){
     return true;
 }
 
-// bool carListcnt(int& total){
-//     if (car_list_v.empty()) return false;
+bool carListcnt(int& total){
+    if (tmp.empty()) return false;
 
-//     for(int i=0; i<=car_list_v.size(); i++){
-//         total += car_list_v[i].stock;
-//     }
-//     return true;
-// }
+    // for(int i=0; i<=tmp.size(); i++){
+    //     total += tmp[i].stock;
+    // }
+    return true;
+}
 
 bool stockOutput(int m_choice){
     if (m_choice == 1){
-        string menu_name = "MANAGER", id="";
-    cout << "+--------------------------------------------------------------------------+" << endl;
-        cout << '|';
-        if (menu_name.length() % 2 == 0)
-        {
-            for (int i = 0; i < 34 - menu_name.length() / 2 + 1; i++)
-            {
-                cout << ' ';
-            }
-        }
-        else
-        {
-            for (int i = 0; i < 34 - menu_name.length() / 2; i++)
-            {
-                cout << ' ';
-            }
-        }
-        cout << menu_name;
-        id = "";
-
-        for (int i=0; i < 42 - id.length() - menu_name.length(); i++)
-        {
-            cout << ' ';
-        }
-        cout <<"관리자님 |"<< endl;
-        cout << "|--------------------------------------------------------------------------|" << endl;
-        cout << "|                       전체 재고               상품별 재고                |" << endl;
-        cout << "|--------------------------------------------------------------------------|" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                            ** 전체 재고 확인                             |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "+--------------------------------------------------------------------------+" << endl;
         
         int total =0, total_sales=0;
-        //네모에 들어가는 내용
-        cout<<"전체 수량 확인을 선택하셨습니다.\n";
         // if (carListcnt(total)){
-            cout<<"현재 재고 수량"<<total<<"\n";
+            cout<<"|            현재 재고 수량:     "<<total<<"|"<<endl;
             if (buyListCarcnt(total_sales)){
-                cout<<"총 판매 수량:"<<total_sales<<"\n";
+                cout<<"|         총 판매 수량:      "<<total_sales<<"|"<<endl;
             }
             return true;
         // }
@@ -249,27 +198,25 @@ bool stockOutput(int m_choice){
         return false;
     }
     else if (m_choice == 2){
-        cout<<"상품별 재고 현황 확인 선택하셨습니다."<<endl;
-        cout<<"No.,차량 이름, 전체 수량, 남은 수량, 판매수량 \n";
-        // for(int i=0; i<car_list_v.size(); i++){
-        //     cout<<i+1<<car_list_v[i].name<<car_list_v[i].brand<<car_list_v[i].total_stock<<car_list_v[i].stock<<car_list_v[i].total_stock-car_list_v[i].stock<<endl;
+        // for(int i=0; i<tmp.size(); i++){
+        //     cout<<i+1<<tmp[i].name<<tmp[i].brand<<tmp[i].total_stock<<tmp[i].stock<<tmp[i].stock<<endl;
         // }
         return true;
-    }
-    else{
-        cout<<"잘못된 숫자를 입력하였습니다."<<endl;
-        return false;
     }
     return false;
 }
 
 bool find_By_param_buyList(int m_choice, string param){
+    cout << "|--------------------------------------------------------------------------|" << endl;
+    cout<<  "|        구매자   차량 이름   브랜드   차종  엔진  색상                      |"<<endl;
+    cout << "| --------------------------------------------------------------------------|" << endl;
+
     bool flag = false;
     if (m_choice == 0){
         for(int i=0; i<buyListVector.size(); i++){
             if (buyListVector[i].buyer == param){
                 flag = true;
-                cout<<buyListVector[i].buyer<<buyListVector[i].carname<<buyListVector[i].carType<<buyListVector[i].engine<<buyListVector[i].brand<<endl;
+                cout<<"|"<<buyListVector[i].buyer<<" "<<buyListVector[i].carname<<" "<<buyListVector[i].brand<<buyListVector[i].carType<<" "<<buyListVector[i].engine<<" "<<buyListVector[i].color<<"|"<<endl;
             }
         }
 
@@ -282,10 +229,9 @@ bool find_By_param_buyList(int m_choice, string param){
     }
     else{
         for(int i=0; i<buyListVector.size(); i++){
-            cout<<buyListVector[i].brand;
             if (buyListVector[i].brand == param){
                 flag = true;
-                cout<<buyListVector[i].buyer<<buyListVector[i].carname<<buyListVector[i].carType<<buyListVector[i].engine<<endl;
+                cout<<"|"<<buyListVector[i].buyer<<" "<<buyListVector[i].carname<<" "<<buyListVector[i].brand<<buyListVector[i].carType<<" "<<buyListVector[i].engine<<" "<<buyListVector[i].color<<"|"<<endl;
             }
         }
 
@@ -304,61 +250,22 @@ bool buyListOutput(int m_choice){
         return outputBuyList();
     }
     else if (m_choice == 2){
-        string menu_name = "MANAGER", id="";
-        cout << "+--------------------------------------------------------------------------+" << endl;
-        cout << '|';
-        if (menu_name.length() % 2 == 0)
-        {
-            for (int i = 0; i < 34 - menu_name.length() / 2 + 1; i++)
-            {
-                cout << ' ';
-            }
-        }
-        else
-        {
-            for (int i = 0; i < 34 - menu_name.length() / 2; i++)
-            {
-                cout << ' ';
-            }
-        }
-        cout << menu_name;
-        id = "";
+        cout<<  "|                                                                           |"<<endl;
+        cout << "|--------------------------------------------------------------------------|" << endl;
 
-        for (int i=0; i < 42 - id.length() - menu_name.length(); i++)
-        {
-            cout << ' ';
-        }
-        cout <<"관리자님 |"<< endl;
-        cout << "|--------------------------------------------------------------------------|" << endl;
-        cout << "|    전체 구매 리스트        차량별 구매 리스트         회원별 구매 리스트   |" << endl;
-        cout << "|--------------------------------------------------------------------------|" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                            전체 구매 리스트                               |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                            차량별 구매 리스트                             |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                            **회원별 구매리스트                           |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "+--------------------------------------------------------------------------+" << endl;
-        
         string name;
-        cout<<"검색할 회원명을 입력하세요.:";
+        cout<<"검색할 회원명을 입력하세요. >>";
         cin>>name;
 
         if (!find_By_param_buyList(0, name)){
             cout<<"해당 회원은 구매한 이력이 없습니다."<<endl;
             return false;
         }
+
     }
     else if (m_choice == 3){
+        cout<<  "|                                                                           |"<<endl;
+        cout << "|--------------------------------------------------------------------------|" << endl;
         string brandname;
         cout<<"검색할 브랜드명을 입력하세요.:";
         cin>>brandname;
@@ -368,9 +275,7 @@ bool buyListOutput(int m_choice){
             return false;
         }
     }
-    else{
-        return false;
-    }
+    
     return true;
 }
 
@@ -385,7 +290,7 @@ void billingBybrand(){
                 tot += stoi(line)*buyListVector[j].cnt;
            }
         }
-        cout<<brand[i]<<" "<<tot<<" 만원"<<endl;
+        cout<<"|"<<brand[i]<<" "<<tot<<" 만원|"<<endl;
     }
 }
 bool billing(int m_choice){
@@ -397,17 +302,14 @@ bool billing(int m_choice){
            tot += stoi(line)*buyListVector[i].cnt;
         }
 
-        cout<<"총 매출입니다."<<endl;
-        cout<<"총 매출 금액: "<<tot<<" 만원"<<endl;
+        cout<<"|                총 매출 금액: "<<tot<<" 만원           |"<<endl;
         return true;
     }
     else if (m_choice == 2){
         billingBybrand();
         return true;
     }
-    else{
-        return false;
-    }
+  
     return true;
 }
 
@@ -419,8 +321,9 @@ int compare(const pair<int, int>& a, const pair<int, int>& b){
 }
 
 bool statistics(){
-    cout<<"통계 선택하셨습니다."<<endl;
-    cout<<"성별에 따라 최다 판매된 상품 10개를 출력해드립니다."<<endl;
+    cout<<"|                 통계 선택하셨습니다.                 |"<<endl;
+    cout<<"|    성별에 따라 최다 판매된 상품 10개를 출력해드립니다. | "<<endl;
+    cout << "|--------------------------------------------------------------------------|" << endl;
 
     int gender, get_gender;
     int man[100]={0,};
@@ -450,7 +353,7 @@ bool statistics(){
             }
         }
 
-        cout<<"남성 TOP 10 입니다!"<<endl;
+        cout<<"|                         남성 TOP 10 입니다!                               |"<<endl;
 
     }
     else if (gender == 1){
@@ -459,7 +362,7 @@ bool statistics(){
                 statistics_gender.push_back(make_pair(i, woman[i]));
             }
         } 
-        cout<<"여성 TOP 10 입니다!"<<endl;
+        cout<<"|                       여성 TOP 10 입니다!                                  |"<<endl;
 
     }
 
@@ -469,14 +372,14 @@ bool statistics(){
     if (statistics_gender.size() < 10) end = statistics_gender.size();
     else end = 10;
 
-    for(int i=0; i<end; i++){
-        cout<<statistics_gender[i].second<<endl;
-        // for (int j=0; j<car_list_v.size(); i++){
-        //     if (car_list_v[i].car_id == statistics_gender[i].second){
-        //         callprint(car_list_v[i].brand,car_list_v[i].name,car_list_v[i].type,car_list_v[i].engine, car_list_v[i].max_price, car_list_v[i].color);
-        //     }
-        // }
-    }
+    // for(int i=0; i<end; i++){
+    //     cout<<statistics_gender[i].second<<endl;
+    //     for (int j=0; j<tmp.size(); i++){
+    //         if (tmp[i].car_id == statistics_gender[i].second){
+    //             cout<<tmp[i].name<<tmp[i].brand<<tmp[i].type<<tmp[i].engine<<tmp[i].max_price<<tmp[i].color<<endl;
+    //         }
+    //     }
+    // }
 
     return true;
 }
