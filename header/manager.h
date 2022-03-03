@@ -1,6 +1,18 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 
+#include <string>
+#include <algorithm>
+
+#include <vector>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+
+using namespace std;
+
 struct Manager{
     int manager_id;
     char id[256];
@@ -10,12 +22,14 @@ struct Manager{
 struct buyList{
     int user_id;
     int car_id;
-    char carname[1026];
-    char brand[1026];
-    char carType[1026];
-    char engine[1026];
-    char color[256];
-    char price[256];
+    string buyer;
+    string carname;
+    string brand;
+    string carType;
+    string engine;
+    string color;
+    string price;
+    int cnt;
 };
 
 void getManagerList();
@@ -23,12 +37,20 @@ bool managerLogin();
 bool managerLogout();
 bool inputCarList();
 
-bool stockOutput();
+bool readBuyList();
+bool outputBuyList();
 
-//C
-int outputCarList();
-int buyListOutput();
-int billling();
-int statistics();
+bool stockOutput(int m_choice);
+bool buyListCarcnt(int& total_sales);
+// bool carListcnt(int& total);
+
+bool find_By_param_buyList(int m_choice, string param);
+bool buyListOutput(int m_choice);
+
+void billingBybrand();
+bool billing(int m_choice);
+int compare(const pair<int, int>& a, const pair<int, int>& b);
+bool statistics();
+extern "C" int callprint(char* brand,char* name,char* type,char* engine, char* max_price, char* color);
 
 #endif
