@@ -177,9 +177,9 @@ bool buyListCarcnt(int& total_sales){
 bool carListcnt(int& total){
     if (tmp.empty()) return false;
 
-    // for(int i=0; i<=tmp.size(); i++){
-    //     total += tmp[i].stock;
-    // }
+    for(int i=0; i<=tmp.size(); i++){
+        total += tmp[i].getStock();
+    }
     return true;
 }
 
@@ -198,9 +198,9 @@ bool stockOutput(int m_choice){
         return false;
     }
     else if (m_choice == 2){
-        // for(int i=0; i<tmp.size(); i++){
-        //     cout<<i+1<<tmp[i].name<<tmp[i].brand<<tmp[i].total_stock<<tmp[i].stock<<tmp[i].stock<<endl;
-        // }
+        for(int i=0; i<tmp.size(); i++){
+            cout<<i+1<<tmp[i].getName()<<tmp[i].getBrand()<<tmp[i].getTotalStock()<<tmp[i].getStock()<<endl;
+        }
         return true;
     }
     return false;
@@ -372,14 +372,14 @@ bool statistics(){
     if (statistics_gender.size() < 10) end = statistics_gender.size();
     else end = 10;
 
-    // for(int i=0; i<end; i++){
-    //     cout<<statistics_gender[i].second<<endl;
-    //     for (int j=0; j<tmp.size(); i++){
-    //         if (tmp[i].car_id == statistics_gender[i].second){
-    //             cout<<tmp[i].name<<tmp[i].brand<<tmp[i].type<<tmp[i].engine<<tmp[i].max_price<<tmp[i].color<<endl;
-    //         }
-    //     }
-    // }
+    for(int i=0; i<end; i++){
+        cout<<statistics_gender[i].second<<endl;
+        for (int j=0; j<tmp.size(); i++){
+            if (tmp[i].getCarId() == statistics_gender[i].second){
+                cout<<tmp[i].getName()<<tmp[i].getBrand()<<tmp[i].getType()<<tmp[i].getEngine()<<tmp[i].getMaxPrice()<<tmp[i].getColor()<<endl;
+            }
+        }
+    }
 
     return true;
 }

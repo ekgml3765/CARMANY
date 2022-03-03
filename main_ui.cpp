@@ -11,25 +11,24 @@ vector<Manager> managerVector;
 vector<buyList> buyListVector;
 userLinkedList userlist;
 string username;
+string menu_name; 
+string id;
+int login;
 
 int main()
 {
     //user.txt 열고 userlist 생성
     openFile();
+    userlist.show();
     //관리자 자료구조 호출
     getManagerList();
     //buyList 호출
     readBuyList();
     //carlist도 호출
-    // Car::openCarFile("car.txt");
+    Car::openCarFile("car.txt");
 
-    string menu_name; // 최상단 메뉴 이름
     menu_name = "MANAGER";
-
-    string id; // 로그인 했을 때 아이디
     id = "";
-
-    int login; // 로그인시 0, 비회원 1, 관리자 2, 종료 -1
     login = 1;
 
     int order1 = -1; // 각 페이지에서 세부 기능 고를 때 쓰는 변수
@@ -44,7 +43,7 @@ int main()
     //string carfile_path = "./car.txt";
     //string buyList_file = "./buyList.txt";
     //string buyList_file = "./user.txt";
-    Car::openCarFile(carfile_path);
+    // Car::openCarFile(carfile_path);
 
     while(1)
     {
@@ -345,12 +344,13 @@ int main()
                         
                             if (inputCarList()){
                                 cout<<"차량 목록이 성공적으로 업데이트 되었습니다.\n";
-                                continue;
                             }
                             else{
                                 cout<<"차량 목록 업데이트에 실패하였습니다. inputCar.txt와 car.txt를 확인하세요.\n";
-                                continue;
                             }
+
+                            order2 = 20000;
+                            continue;
                         
                     }
                     
@@ -371,6 +371,7 @@ int main()
                         }
 
                         order2 = 20000;
+                        continue;
                     }
                 
                 }
@@ -390,6 +391,7 @@ int main()
                         cout<<  "|                                                                           |"<<endl;
                         cout << "|--------------------------------------------------------------------------|" << endl;
                         cout<<"전체 수량 확인을 선택하셨습니다."<<endl;
+  
                     }
                     else if (order2 == 20002)
                     {
@@ -627,7 +629,6 @@ int main()
 
                 }
             }
-            continue;
 
 
         }
