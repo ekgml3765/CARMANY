@@ -25,7 +25,8 @@ int main()
     //buyList 호출
     readBuyList();
     //carlist도 호출
-    Car::openCarFile("car.txt");
+    //Car::openCarFile("car.txt");
+    Car::openCarFile("C:\\Users\\user\\Documents\\GitHub\\data\\car.txt");
 
     menu_name = "MANAGER";
     id = "";
