@@ -24,8 +24,8 @@ void getManagerList(){
     istringstream ss;
     vector<string> v;
 
-    //ifstream fin("manager.txt");
-    ifstream fin("C:\\Users\\user\\Documents\\GitHub\\data\\manager.txt");
+    ifstream fin("manager.txt");
+    // ifstream fin("C:\\Users\\user\\Documents\\GitHub\\data\\manager.txt");
 
     if(fin.is_open()){
      while(getline(fin, line)) {
@@ -81,10 +81,10 @@ bool appendCarFile(){
     string line, word;
     vector<string> v;
 
-	//fout.open("car.txt", ios::app);
-	fout.open("C:\\Users\\user\\Documents\\GitHub\\data\\car.txt", ios::app);
-	//fin.open("inputCar.txt");
-	fin.open("C:\\Users\\user\\Documents\\GitHub\\data\\inputCar.txt");
+	fout.open("car.txt", ios::app);
+	// fout.open("C:\\Users\\user\\Documents\\GitHub\\data\\car.txt", ios::app);
+	fin.open("inputCar.txt");
+	// fin.open("C:\\Users\\user\\Documents\\GitHub\\data\\inputCar.txt");
 
     if (fout.is_open()&&fin.is_open()){
         while(getline(fin,line)){
@@ -113,8 +113,8 @@ bool appendCarFile(){
 }
 
 bool inputCarList(){
-    //Car::openCarFile("inputCar.txt");
-    Car::openCarFile("C:\\Users\\user\\Documents\\GitHub\\data\\inputCar.txt");
+    Car::openCarFile("inputCar.txt");
+    // Car::openCarFile("C:\\Users\\user\\Documents\\GitHub\\data\\inputCar.txt");
     return appendCarFile();
 }
 
@@ -123,8 +123,8 @@ bool readBuyList(){
     istringstream ss;
     vector<string> v;
     
-   //ifstream fin("buyList.txt");
-    ifstream fin("C:\\Users\\user\\Documents\\GitHub\\data\\buyList.txt");
+   ifstream fin("buyList.txt");
+    // ifstream fin("C:\\Users\\user\\Documents\\GitHub\\data\\buyList.txt");
 
     if(fin.is_open()){
      while(getline(fin, line)) {

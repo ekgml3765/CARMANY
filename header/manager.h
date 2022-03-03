@@ -51,6 +51,5 @@ void billingBybrand();
 bool billing(int m_choice);
 int compare(const pair<int, int>& a, const pair<int, int>& b);
 bool statistics();
-extern "C" int callprint(char* brand,char* name,char* type,char* engine, char* max_price, char* color);
 
 #endif
