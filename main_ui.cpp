@@ -30,7 +30,7 @@ int main()
     //buyList 호출
     readBuyList();
     //carlist도 호출
-    //Car::openCarFile("car.txt");
+    Car::openCarFile("car.txt");
     
     menu_no = 0; //0.{"CARMANY", "CARLIST", "CAR Recommend", "MYPAGE", "MANAGER"}
     id = "";
@@ -42,13 +42,13 @@ int main()
 
     /*데이터 세팅 및 파일 경로설정*/
     Car car;
-    string carfile_path = "C:\\Users\\user\\Documents\\GitHub\\data\\car.txt";
-    string buyList_file = "C:\\Users\\user\\Documents\\GitHub\\data\\buyList.txt";
-    string userfile_path = "C:\\Users\\user\\Documents\\GitHub\\data\\user.txt";
-    //string carfile_path = "./car.txt";
-    //string buyList_file = "./buyList.txt";
-    //string buyList_file = "./user.txt";
-    Car::openCarFile(carfile_path);
+    // string carfile_path = "C:\\Users\\user\\Documents\\GitHub\\data\\car.txt";
+    // string buyList_file = "C:\\Users\\user\\Documents\\GitHub\\data\\buyList.txt";
+    // string userfile_path = "C:\\Users\\user\\Documents\\GitHub\\data\\user.txt";
+    string carfile_path = "car.txt";
+    string buyList_file = "buyList.txt";
+    string userfile_path = "user.txt";
+    // Car::openCarFile(carfile_path);
 
 
     //CARMANY = 0, CARLIST = , CARRECO = 3, MYPATE = 4 , MANAGER =5

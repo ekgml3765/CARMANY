@@ -21,8 +21,8 @@ bool openFile(){
     istringstream ss;
     vector<string> v;
 
-    //ifstream fin("user.txt");
-    ifstream fin("C:\\Users\\user\\Documents\\GitHub\\data\\user.txt");
+    ifstream fin("user.txt");
+    // ifstream fin("C:\\Users\\user\\Documents\\GitHub\\data\\user.txt");
     if(fin.is_open()){
      while(getline(fin, line)) {
         istringstream ss(line);
