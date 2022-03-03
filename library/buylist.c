@@ -84,6 +84,7 @@ int getMyCarList()
         idx++;
         totalBuyList++;
     }
+    fclose(fp);
     return 0;
 }
 
@@ -106,26 +107,27 @@ int viewMyCar(int user_num)
                 printf("  ");
             }
             printf("%s", mark[i].brand);
-            for (int j=0; j < 9 - strlen(mark[i].brand); j++)
+            for (int j=0; j < 13 - strlen(mark[i].brand); j++)
             {
                 printf(" ");
             }
             printf("%s", mark[i].carname);
-            for (int j=0; j < 14 - strlen(mark[i].carname); j++)
+            for (int j=0; j < 20 - strlen(mark[i].carname); j++)
             {
                 printf(" ");
             }
             printf("%s", mark[i].engine);
-            for (int j=0; j < 9 - strlen(mark[i].engine); j++)
+            for (int j=0; j < 13 - strlen(mark[i].engine); j++)
             {
                 printf(" ");
             }
             printf("%s", mark[i].color);
-            for (int j=0; j < 13 - strlen(mark[i].color)*2/3; j++)
+            for (int j=0; j < 15 - strlen(mark[i].color)*2/3; j++)
             {
                 printf(" ");
             }
-            printf("%s", mark[i].price);
+            mark[i].price[strlen(mark[i].price) - 1] = '\0';
+            printf("%s ", mark[i].price);
             printf(" |\n");
             index++;
         }

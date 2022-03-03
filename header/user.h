@@ -129,14 +129,32 @@ class userLinkedList{
 				ptr = ptr->next;
 			}
 			//네모 안에 띄워줄 내용
-			cout<<"아이디"<<ptr->id<<endl;
-			cout<<"비밀번호"<<ptr->password<<endl;
-			cout<<"전화번호"<<ptr->phone<<endl;
-			cout<<"이름"<<ptr->name<<endl;
-			cout<<"연령대"<<ptr->age<<endl;
-			cout<<"성별";
-			if (ptr->sex == 0) cout<<"남"<<endl;
-			else cout<<"여"<<endl;
+			string idid = ptr->id;
+			string pwpw = ptr->password;
+			cout<<"| 아이디  "<<idid;
+			for (int i=0; i < 65 - idid.length(); i++)
+			{
+				cout << " ";
+			}
+			cout << "|" << endl;
+			cout << "|                                                                          |" << endl;
+			cout<<"| 비밀번호  "<<pwpw;
+			for (int i=0; i < 63 - pwpw.length(); i++)
+			{
+				cout << " ";
+			}
+			cout << "|" << endl;
+			cout << "|                                                                          |" << endl;
+			cout<<"| 전화번호"<<ptr->phone<<"                                                    |"<<endl;
+			cout << "|                                                                          |" << endl;
+			cout<<"| 이름"<<ptr->name<<"                                                               |"<<endl;
+			cout << "|                                                                          |" << endl;
+			cout<<"| 연령대"<<ptr->age<<"                                                               |"<<endl;
+			cout << "|                                                                          |" << endl;
+			cout<<"| 성별";
+			if (ptr->sex == 0) cout<<"남"<<"                                                                   |"<<endl;
+			else cout<<"여"<<"                                                                   |"<<endl;
+			cout << "+--------------------------------------------------------------------------+" << endl;
 
 		}
 

@@ -83,9 +83,9 @@ bool userLogout(){
 };
 
 bool userUpdate(){
-
-	cout<<"회원 정보 수정 선택하셨습니다."<<endl;
-	cout<<"현재 회원님의 정보입니다."<<endl;
+	cout << "|                                                                          |" << endl;
+	cout<<"| 현재 회원님의 정보입니다.                                                |"<<endl;
+	cout << "|                                                                          |" << endl;
 	
 	//회원정보 보여주기
 	userlist.showCurInfo();
@@ -93,24 +93,47 @@ bool userUpdate(){
 	string change;
 
 	//수정할 항목 입력 받기
-	cout<<"수정할 항목을 정하세요."<<endl;
-	cout<<"(1)비밀번호 (2) 전화번호 (3) 이름 (4) 연령대(20대, 30대, 40대, 50대, 60대)";
-	cin.ignore(1);
-	
-	cin>>choice;
-	//1번에서 4번 이외의 값을 받으면 false 반환
-	if (choice<=1 && choice >=4) return false;
+	while (1)
+	{
+		int tag = 0;
+		cout<<"수정할 항목을 정하세요."<<endl;
+		cout<<"(1)비밀번호 (2) 전화번호 (3) 이름 (4) 연령대(20대, 30대, 40대, 50대, 60대)"<<endl;
+		cout<<"(-1)이전 메뉴로 돌아가기";
+		cin.ignore(1);
+		while (1)
+		{
+			cin>>choice;
+			if (choice == -1)
+			{
+				return false;
+			}
+			if (choice <=1 || choice >=4)
+			{
+				cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
+				cout << ">>";
+				continue;
+			}
+			else
+			{
+				//잘 입력했다면 계속해서 진행
+				cout<<"새로운 수정 내용을 입력하세요";
+				cin>>change;
 
-	//잘 입력했다면 계속해서 진행
-	cout<<"새로운 수정 내용을 입력하세요";
-	cin>>change;
-
-	if (choice == 3){ username = change;}
-	//User들이 담긴 LinkedList의 노드 업데이트
-	userlist.updateNode(choice, change);
-	
-	cout<<"업데이트 되었습니다.";
-	active_user_id = -1;
+				if (choice == 3){ username = change;}
+				//User들이 담긴 LinkedList의 노드 업데이트
+				userlist.updateNode(choice, change);
+				
+				cout<<"업데이트 되었습니다." << endl;
+				active_user_id = -1;
+				tag++;
+				break;
+			}
+		}
+		if (tag == 1)
+		{
+			break;
+		}
+	}
 	return true;
 }
 
@@ -150,3 +173,6 @@ bool createUser(){
 
 	return false;
 }
+
+
+
