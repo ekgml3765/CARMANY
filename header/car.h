@@ -35,8 +35,9 @@ public:
 	static map<string, Car> car_list_m;
 	Car();
 	void print(int sales);
+	void detailPrint(int sales);
 	void navbarPrint(int login, string menu_name, string id);
-	bool getCarList(int category, vector<Car> &list, string keyword = "", int page=1, int filter=0);
+	bool getCarList(int category, vector<Car> &list, string keyword = "", int page=1, int filter=0, bool is_reco=false);
 	bool getCarInfo(string car_id);
 	bool getBuyCar(string car_id, int user_id, string username, string buyList_file);
 	
@@ -54,6 +55,7 @@ public:
 	//추천
 	bool getRecoListByBrand(string brandname, vector<Car> &list, int page=1);
 	bool getRecoListByAge(string age, vector<Car> &list, string buyList_file, string userfile_path, int page=1);
+	
 };
 
 

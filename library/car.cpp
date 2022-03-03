@@ -56,7 +56,16 @@ cout << "+----------------------------------------------------------------------
         cout << "|--------------------------------------------------------------------------|" << endl;
 }
 
-//객체출력
+//상세보기 출력
+void Car::detailPrint(int sales){
+    cout << car_id << " " << brand << "  " << name << "  " << min_price
+    << "  " << max_price << "  " << type << "  " << engine << "  " << date
+    << "  " << color << "  " << size << "  " << efficency
+    << " " << people << " " << sales;
+}
+
+
+//리스트 출력
 void Car::print(int sales){
     cout << car_id;
     for (int i=0; i < 3 - to_string(car_id).length(); i++)
@@ -169,7 +178,7 @@ bool Car:: writeCarFile(string carfile_path){
 }
 
 //자동차 리스트
-bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page, int filter){
+bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page, int filter, bool is_reco){
      
      int total_cnt;
      vector<Car> tmp;
@@ -317,7 +326,7 @@ bool Car::getCarInfo(string car_id){
         cout << "|      전체            차종별            엔진            차 이름 검색      |" << endl;
         cout << "|--------------------------------------------------------------------------|" << endl;
         cout << "| " ; 
-        car.print(car.total_stock-car.stock);
+        car.detailPrint(car.total_stock-car.stock);
         cout << "|" << endl; 
         cout << "|--------------------------------------------------------------------------|" << endl;
         cout << endl;
