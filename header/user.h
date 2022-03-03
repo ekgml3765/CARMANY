@@ -146,7 +146,8 @@ class userLinkedList{
 			userNode* tmp = HEAD;
 			ofstream fout;
 
-			fout.open("user.txt");
+			//fout.open("user.txt");
+			fout.open("C:\\Users\\user\\Documents\\GitHub\\data\\user.txt");
 			
 			while(tmp!=nullptr){
 				if (fout.is_open()){

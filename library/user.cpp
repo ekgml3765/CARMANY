@@ -21,8 +21,8 @@ bool openFile(){
     istringstream ss;
     vector<string> v;
 
-    ifstream fin("user.txt");
-    //ifstream fin("C:\\Users\\user\\Documents\\GitHub\\data\\user.txt");
+    //ifstream fin("user.txt");
+    ifstream fin("C:\\Users\\user\\Documents\\GitHub\\data\\user.txt");
     if(fin.is_open()){
      while(getline(fin, line)) {
         istringstream ss(line);
@@ -42,7 +42,8 @@ bool openFile(){
 void appendInFile(int userid, string id, string password, string phone, string name, string age, int sex){
 	ofstream fout;
 
-	fout.open("user.txt", ios::app);
+	//fout.open("user.txt", ios::app);
+	fout.open("C:\\Users\\user\\Documents\\GitHub\\data\\user.txt", ios::app);
 	if (fout.is_open()){
 		fout<<"\n"<<userid<<" "<<id<<" "<<password<<" "<<phone<<" "<<name<<" "<<age<<" "<<sex;
 	}
