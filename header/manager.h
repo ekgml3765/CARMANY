@@ -2,6 +2,14 @@
 #define MANAGER_H
 
 #include <string>
+#include <algorithm>
+
+#include <vector>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include <cstdio>
+#include <cstring>
 
 using namespace std;
 
