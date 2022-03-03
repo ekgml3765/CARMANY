@@ -4,9 +4,11 @@
 //연령별 추천
 bool Car::getRecoListByAge(string age, vector<Car> &list, string buyList_file, string userfile_path, int page){
     
-    map<string, string> user_map;
-    set<string> car_set; // -> map으로 바꿔서 구매리스트 카운트 해야해!!!!
-
+    map<string, string> user_map; //key-user_id, value - age
+    map<string, int> car_map; //key-car_id, value - count (default:1)
+    vector <pair<string, int>> v; //car_map을 vector로 변경
+    vector<Car> tmp; 
+    
     //1. uset.txt파일 오픈
     ifstream fin(userfile_path);
     
@@ -54,29 +56,30 @@ bool Car::getRecoListByAge(string age, vector<Car> &list, string buyList_file, s
         if(user_map[user_id] != age) //입력받은 연령대와 같아야함
             continue;
         string car_id = v[1];
+        auto it = car_map.find(car_id);
+        if(it != car_map.end())
+            car_map[car_id]++;
+        else
+            car_map[car_id] = 1;
 
-        //자료구조 저장 - 구매리스트에 car_id 중복 제거
-        car_set.insert(car_id);
 	}
     fin2.close();
-    //vector에 carlist 뽑기
-    vector<Car> tmp; 
-    for(auto it = car_set.begin(); it != car_set.end(); it++){
-        string car_id = *it;
-        tmp.push_back(car_list_m[car_id]); 
+
+    //car_map을 vector로 변경해 value기준 정렬
+    copy(car_map.begin(), car_map.end(), back_inserter<vector<pair<string, int>>>(v));
+    sort(v.begin(), v.end(), [ ]( pair<string, int> left , pair<string, int> right ){
+        return left.second > right.second;
+    });
+
+  
+    for(int i = 0; i < v.size(); i++){
+        //cout << v[i].first << " " << v[i].second;
+        tmp.push_back(car_list_m[v[i].first]);
     }
 
     list = tmp;
     int total_cnt = list.size();    
-    
-    //판매량 기준 정렬
-    sort( list.begin( ), list.end( ), [ ]( const Car& a, const Car& b ){
-        int a_dif_stock = a.getTotalStock()-a.getStock();
-        int b_dif_sock = b.getTotalStock()-b.getStock();
-        return  a_dif_stock > b_dif_sock;
-    });    
-    
-    
+       
     //페이징
     int item = 10;
     int total_page = (total_cnt % item == 0)? total_cnt / item : (total_cnt / item)+1; //전체 페이지 수
@@ -93,6 +96,7 @@ bool Car::getRecoListByAge(string age, vector<Car> &list, string buyList_file, s
 		for (int i = start_idx; i <= end_idx; i++) {
 			    cout << "|       " ; 
                 list[i].print();
+                cout << v[i].second;
                 cout << "          |" << endl;
 		}
         //페이지 번호 출력

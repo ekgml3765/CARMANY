@@ -23,8 +23,8 @@ int main(){
     
     
     int menu_num = 0;
-    active_user_id = 3; //로그인한 유저
-    username = "dsaer012";
+    active_user_id = 2; //로그인한 유저
+    username = "황다희";
 
     while(menu_num != -1){
         //상단 메뉴 출력        
