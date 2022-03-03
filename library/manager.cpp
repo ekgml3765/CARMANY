@@ -167,7 +167,7 @@ bool outputBuyList(){
 
     for(int i=0; i<buyListVector.size(); i++){
         //네모에 출력될 내용
-        cout<<"|"<<to_string(i+1)<<" "<<buyListVector[i].buyer<<" "<<buyListVector[i].carname<<" "<<buyListVector[i].brand<<" "<<buyListVector[i].engine<<" "<<buyListVector[i].color<<" "<<buyListVector[i].price<<"|"<<endl;
+        cout<<"   "<<to_string(i+1)<<"      "<<buyListVector[i].buyer<<"      "<<buyListVector[i].carname<<"      "<<buyListVector[i].brand<<"      "<<buyListVector[i].engine<<"      "<<buyListVector[i].color<<"      "<<buyListVector[i].price<<endl;
     }
     return true;
 }
@@ -193,11 +193,11 @@ bool carListcnt(int& total){
 bool stockOutput(int m_choice){
     if (m_choice == 1){
         
-        int total =0, total_sales=0;
+        int total = 0, total_sales=0;
         // if (carListcnt(total)){
-            cout<<"|            현재 재고 수량:     "<<total<<"|"<<endl;
+            cout<<"   현재 재고 수량: "<<total << endl;
             if (buyListCarcnt(total_sales)){
-                cout<<"|         총 판매 수량:      "<<total_sales<<"|"<<endl;
+                cout<<"   총 판매 수량: "<<total_sales << endl;
             }
             return true;
         // }
@@ -207,7 +207,7 @@ bool stockOutput(int m_choice){
     else if (m_choice == 2){
         vector<Car> tmp = Car::car_list_v;
         for(int i=0; i<tmp.size(); i++){
-            cout<<i+1<<tmp[i].getName()<<tmp[i].getBrand()<<tmp[i].getTotalStock()<<tmp[i].getStock()<<endl;
+            cout<<"   "<<i+1<< "  "<<tmp[i].getName()<< "  "<<tmp[i].getBrand()<< "  "<<tmp[i].getTotalStock()<< "  "<<tmp[i].getStock()<<endl;
         }
         return true;
     }
@@ -215,16 +215,16 @@ bool stockOutput(int m_choice){
 }
 
 bool find_By_param_buyList(int m_choice, string param){
-    cout << "|--------------------------------------------------------------------------|" << endl;
-    cout<<  "|        구매자   차량 이름   브랜드   차종  엔진  색상                      |"<<endl;
-    cout << "| --------------------------------------------------------------------------|" << endl;
+    cout << "----------------------------------------------------------------------------" << endl;
+    cout<<  "|        구매자   차량 이름   브랜드   차종  엔진  색상                    |"<<endl;
+    cout << "----------------------------------------------------------------------------" << endl;
 
     bool flag = false;
     if (m_choice == 0){
         for(int i=0; i<buyListVector.size(); i++){
             if (buyListVector[i].buyer == param){
                 flag = true;
-                cout<<"|"<<buyListVector[i].buyer<<" "<<buyListVector[i].carname<<" "<<buyListVector[i].brand<<buyListVector[i].carType<<" "<<buyListVector[i].engine<<" "<<buyListVector[i].color<<"|"<<endl;
+                cout<<"   "<<buyListVector[i].buyer<<"      "<<buyListVector[i].carname<<"      "<<buyListVector[i].brand<<"      "<<buyListVector[i].carType<<"      "<<buyListVector[i].engine<<"      "<<buyListVector[i].color<<endl;
             }
         }
 
@@ -239,7 +239,7 @@ bool find_By_param_buyList(int m_choice, string param){
         for(int i=0; i<buyListVector.size(); i++){
             if (buyListVector[i].brand == param){
                 flag = true;
-                cout<<"|"<<buyListVector[i].buyer<<" "<<buyListVector[i].carname<<" "<<buyListVector[i].brand<<buyListVector[i].carType<<" "<<buyListVector[i].engine<<" "<<buyListVector[i].color<<"|"<<endl;
+                cout<<"   "<<buyListVector[i].buyer<<"  "<<buyListVector[i].carname<<"  "<<buyListVector[i].brand<<"  "<<buyListVector[i].carType<<"  "<<buyListVector[i].engine<<"  "<<buyListVector[i].color<<endl;
             }
         }
 
@@ -258,8 +258,8 @@ bool buyListOutput(int m_choice){
         return outputBuyList();
     }
     else if (m_choice == 2){
-        cout<<  "|                                                                           |"<<endl;
-        cout << "|--------------------------------------------------------------------------|" << endl;
+        cout<<  "|                                                                          |"<<endl;
+        cout << "----------------------------------------------------------------------------" << endl;
 
         string name;
         cout<<"검색할 회원명을 입력하세요. >>";
@@ -272,8 +272,8 @@ bool buyListOutput(int m_choice){
 
     }
     else if (m_choice == 3){
-        cout<<  "|                                                                           |"<<endl;
-        cout << "|--------------------------------------------------------------------------|" << endl;
+        cout<<  "|                                                                          |"<<endl;
+        cout << "----------------------------------------------------------------------------" << endl;
         string brandname;
         cout<<"검색할 브랜드명을 입력하세요.:";
         cin>>brandname;
@@ -298,8 +298,10 @@ void billingBybrand(){
                 tot += stoi(line)*buyListVector[j].cnt;
            }
         }
-        cout<<"|"<<brand[i]<<" "<<tot<<" 만원|"<<endl;
+        cout<<"   "<<brand[i]<<" :"<<tot<<" 만원"<<endl;
+
     }
+    cout << "----------------------------------------------------------------------------" << endl;
 }
 bool billing(int m_choice){
     if (m_choice == 1){
@@ -310,7 +312,8 @@ bool billing(int m_choice){
            tot += stoi(line)*buyListVector[i].cnt;
         }
 
-        cout<<"|                총 매출 금액: "<<tot<<" 만원           |"<<endl;
+        cout<<"   총 매출 금액: "<<tot<<" 만원" << endl;
+        cout << "----------------------------------------------------------------------------" << endl;
         return true;
     }
     else if (m_choice == 2){

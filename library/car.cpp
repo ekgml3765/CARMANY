@@ -64,10 +64,22 @@ cout << "+----------------------------------------------------------------------
 
 //상세보기 출력
 void Car::detailPrint(int sales){
-    cout << car_id << " " << brand << "  " << name << "  " << min_price
-    << "  " << max_price << "  " << type << "  " << engine << "  " << date
-    << "  " << color << "  " << size << "  " << efficency
-    << " " << people << " " << sales;
+    // cout << car_id << " " << brand << "  " << name << "  " << min_price
+    // << "  " << max_price << "  " << type << "  " << engine << "  " << date
+    // << "  " << color << "  " << size << "  " << efficency
+    // << " " << people << " " << sales;
+
+    cout << "     Car_id:         " << car_id << endl;
+    cout << "     Brand:          " << brand << endl;
+    cout << "     Name:           " << name << endl;
+    cout << "     Minimum price:  " << min_price << "만원" << endl;
+    cout << "     Maximum price:  " << max_price << "만원" << endl;
+    cout << "     Type:           " << type << endl;
+    cout << "     Engine:         " << engine << endl;
+    cout << "     Release date:   " << date << endl;
+    cout << "     Color:          " << color << endl;
+    cout << "     Size:           " << size << endl;
+    cout << "     Efficiency:     " << efficency << endl;
 }
 
 
@@ -354,15 +366,13 @@ bool Car::getCarInfo(string car_id, bool is_reco){
             cout << "|--------------------------------------------------------------------------|" << endl;   
         }else{
             cout << "|      전체            차종별            엔진            차 이름 검색      |" << endl;
-            cout << "|--------------------------------------------------------------------------|" << endl;
+            cout << "----------------------------------------------------------------------------" << endl;
         }
      
         
         
-        cout << "| " ; 
         car.detailPrint(car.total_stock-car.stock);
-        cout << "|" << endl; 
-        cout << "|--------------------------------------------------------------------------|" << endl;
+        cout << "----------------------------------------------------------------------------" << endl;
         cout << endl;
     }
     return true;
