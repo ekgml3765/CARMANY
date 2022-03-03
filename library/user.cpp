@@ -42,8 +42,8 @@ bool openFile(){
 void appendInFile(int userid, string id, string password, string phone, string name, string age, int sex){
 	ofstream fout;
 
-	//fout.open("user.txt", ios::app);
-	fout.open("C:\\Users\\user\\Documents\\GitHub\\data\\user.txt", ios::app);
+	fout.open("user.txt", ios::app);
+	//fout.open("C:\\Users\\user\\Documents\\GitHub\\data\\user.txt", ios::app);
 	if (fout.is_open()){
 		fout<<"\n"<<userid<<" "<<id<<" "<<password<<" "<<phone<<" "<<name<<" "<<age<<" "<<sex;
 	}
