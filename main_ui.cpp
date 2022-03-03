@@ -262,7 +262,7 @@ int main()
                     }
                     //자동차 구매
                     else if(car_menu_num == 7){
-                        if(login == 0){
+                        if(login != 0){
                             cout << "*로그인한 유저만 구매가 가능합니다." << endl;
                             break;
                         }
@@ -292,7 +292,7 @@ int main()
 
         if (menu_no == 2)
         {
-                           int reco_menu_num = 9;
+                int reco_menu_num = 9;
                 vector<Car> list = car.car_list_v; //페이징 처리를 위해 담을 리스트 초기화
                 string brand[] = {"KIA", "HYUNDAI", "GENESIS"};
                 string age[] = {"10대", "20대", "30대", "40대", "50대"};
