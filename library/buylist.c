@@ -14,7 +14,7 @@
 #include<stdlib.h>
 #define file_name "buyList.txt"
 #include "../header/buylist.h"
-buylist mark[200];
+buylistC mark[200];
 int totalBuyList;
 
 

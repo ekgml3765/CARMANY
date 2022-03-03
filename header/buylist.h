@@ -6,7 +6,7 @@ extern "C" int viewMyCar(int user_num);
 // extern "C" void AppendNode(Node** List, int user_id, int car_id, char* carname, char* brand, char* carType, char* engine, char* color, char* price);
 // extern "C" Node* CreateNode(int user_id, int car_id, char* carname, char* brand, char* carType, char* engine, char* color, char* price);
 
-typedef struct buyList{
+typedef struct buyListC{
     int user_id;
     int car_id;
     char buyer[20];
@@ -16,7 +16,7 @@ typedef struct buyList{
     char engine[20];
     char color[20];
     char price[20];
-}buylist;
+}buylistC;
 
 
 
