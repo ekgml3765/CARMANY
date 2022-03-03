@@ -179,5 +179,18 @@ class userLinkedList{
 			updateFile();
 
 		}
+
+		void getGender(int user_id, int& get_gender){
+			userNode* ptr = HEAD;
+
+			while(ptr!=nullptr){
+				if (ptr->user_id == user_id){
+					cout<<ptr->sex<<"ptr->sex"<<endl;
+					get_gender = ptr->sex;
+					break;
+				}
+				ptr = ptr->next;
+			}		
+		}
 };
 #endif

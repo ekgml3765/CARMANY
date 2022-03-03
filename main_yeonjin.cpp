@@ -4,13 +4,17 @@
 #include <string>
 #include <vector>
 #include "header/user.h"
-
+#include "header/manager.h"
+#include "header/car.h"
 
 using namespace std;
 
 int active_user_id = -1;
-string username;
+int manager_id = -1;
+vector<Manager> managerVector;
+vector<buyList> buyListVector;
 userLinkedList userlist;
+string username;
 
 
 int main(){
@@ -39,7 +43,7 @@ int main(){
     // ---------
     while(true){
         cout<<"로그인과 회원 가입 중 선택하세요."<<endl;
-        cout<<"1. 로그인 2. 회원 가입 3. 비회원 로그인>>";
+        cout<<"1. 로그인 2. 회원 가입 3. 비회원 로그인 4. 관리자 로그인>>";
         cin>>choice;
 
         if (choice == 1){
@@ -58,6 +62,9 @@ int main(){
         else if (choice == 3){
             cout<<"비회원으로 로그인하셨습니다.";
             active_user_id = -1;
+        }
+        else if (choice == 4){
+            return 0;
         }
         else{
             cout<<"잘못입력하였습니다. 다시 입력바랍니다."<<endl;
