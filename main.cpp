@@ -61,9 +61,8 @@ int main()
         }
 
         // ui 시작
-        if(menu_no != 1 || menu_no != 2){
-            cout << "호출되냐?" << endl;
-             car.navbarPrint(login, menu_no, id);
+        if(menu_no != 1 && menu_no != 2){
+            car.navbarPrint(login, menu_no, id);
         }
            
 
