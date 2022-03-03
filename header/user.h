@@ -19,7 +19,9 @@ struct userNode{
 	int sex;          //사용자 성별 (0-남자, 1-여자)
 	struct userNode* next;
 };
-
+void callPrint(string menu_name, string id);
+void callManagerPrint(int choice);
+bool openFile();
 bool userLogin();
 bool userLogout();
 bool userUpdate();
@@ -84,7 +86,6 @@ class userLinkedList{
 
 			while(ptr!=nullptr){
 				if (ptr->id == id && ptr->password == password ){
-					cout<<ptr->name<<"반갑습니다!"<<endl;
 					isFind = true;
 					active_user_id = ptr->user_id;
 					username = ptr->name;
@@ -94,7 +95,8 @@ class userLinkedList{
 			}
 
 			if (isFind == false){
-				cout<<"못찾음"<<endl;
+				// cout<<"못찾음"<<endl;
+				return false;
 			}
 			return false;
 		}
@@ -126,7 +128,7 @@ class userLinkedList{
 				}
 				ptr = ptr->next;
 			}
-
+			//네모 안에 띄워줄 내용
 			cout<<"아이디"<<ptr->id<<endl;
 			cout<<"비밀번호"<<ptr->password<<endl;
 			cout<<"전화번호"<<ptr->phone<<endl;
