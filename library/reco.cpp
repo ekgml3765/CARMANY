@@ -84,7 +84,7 @@ bool Car::getRecoListByAge(string age, vector<Car> &list, string buyList_file, s
     list = tmp;
     int total_cnt = list.size();    
     navbarPrint(login, menu_name, id);
-    cout << "|   연령대별 추천       성별 추천       브랜드별 추천        개인화 추천   |" << endl;
+    cout << "|              연령대별 추천               브랜드별 추천               |" << endl;
     cout << "|--------------------------------------------------------------------------|" << endl;
                    
     
@@ -98,7 +98,6 @@ bool Car::getRecoListByAge(string age, vector<Car> &list, string buyList_file, s
     //페이지에 해당되는 리스트 출력
     cout << endl;
     cout << "| 총 " << total_cnt << "건 조회";
-    cout << "               필터 [인기순/출시순/낮은 가격순/높은 가격순]  |" << endl;
     cout << "|                                                                          |" << endl;
     cout << "| n  brand    name          price     type      engine   date    sales     |" << endl;
 
@@ -153,7 +152,7 @@ bool Car::getRecoListByBrand(string brand, vector<Car> &list, int page){
     }); 
 
     navbarPrint(login, menu_name, id);
-    cout << "|   연령대별 추천       성별 추천       브랜드별 추천        개인화 추천   |" << endl;
+    cout << "|              연령대별 추천               브랜드별 추천               |" << endl;
     cout << "|--------------------------------------------------------------------------|" << endl;
      
     
@@ -166,7 +165,6 @@ bool Car::getRecoListByBrand(string brand, vector<Car> &list, int page){
     //페이지에 해당되는 리스트 출력
     cout << endl;
     cout << "| 총 " << total_cnt << "건 조회";
-    cout << "               필터 [인기순/출시순/낮은 가격순/높은 가격순]  |" << endl;
     cout << "|                                                                          |" << endl;
     cout << "| n  brand    name          price     type      engine   date    sales     |" << endl;
 

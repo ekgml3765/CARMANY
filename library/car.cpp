@@ -274,17 +274,25 @@ bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page,
 
     //상단바 - 출력
     navbarPrint(login, menu_name, id);
-    cout << "|      전체            차종별            엔진            차 이름 검색      |" << endl;
-    cout << "|--------------------------------------------------------------------------|" << endl;
+    if(is_reco == true){
+        cout << "|              연령대별 추천               브랜드별 추천               |" << endl;
+        cout << "|--------------------------------------------------------------------------|" << endl;
+        cout<< endl;
+        cout << "| 총 " << total_cnt << "건 조회" << endl;
+    }else{
+        cout << "|      전체            차종별            엔진            차 이름 검색      |" << endl;
+        cout << "|--------------------------------------------------------------------------|" << endl;
+        cout<< endl;
+        cout << "| 총 " << total_cnt << "건 조회";
+        cout << "               필터 [인기순/출시순/낮은 가격순/높은 가격순]  |" << endl;
+        cout << "|                                                                          |" << endl;
+    }
+   
 
 
-    //페이지에 해당되는 리스트 출력
-    cout << endl;
-    cout << "| 총 " << total_cnt << "건 조회";
-    cout << "               필터 [인기순/출시순/낮은 가격순/높은 가격순]  |" << endl;
-    cout << "|                                                                          |" << endl;
+    //페이지에 해당되는 리스트 출력 
     cout << "| n  brand    name          price     type      engine   date    sales     |" << endl;
-
+    cout << endl;
     end_idx = (end_idx < total_cnt)? end_idx : total_cnt-1;
 	if(start_idx < total_cnt) {
 		for (int i = start_idx; i <= end_idx; i++) {
@@ -316,15 +324,23 @@ bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page,
 }
 
 //자동차 상세보기
-bool Car::getCarInfo(string car_id){
+bool Car::getCarInfo(string car_id, bool is_reco){
     if(car_list_m.find(car_id) == car_list_m.end()) 
             return false;
     else{
         Car car = car_list_m[car_id];
         //상단바 출력
         navbarPrint(login, menu_name, id);
-        cout << "|      전체            차종별            엔진            차 이름 검색      |" << endl;
-        cout << "|--------------------------------------------------------------------------|" << endl;
+        if(is_reco == true){
+            cout << "|              연령대별 추천               브랜드별 추천               |" << endl;
+            cout << "|--------------------------------------------------------------------------|" << endl;   
+        }else{
+            cout << "|      전체            차종별            엔진            차 이름 검색      |" << endl;
+            cout << "|--------------------------------------------------------------------------|" << endl;
+        }
+     
+        
+        
         cout << "| " ; 
         car.detailPrint(car.total_stock-car.stock);
         cout << "|" << endl; 

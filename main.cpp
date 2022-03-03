@@ -1,20 +1,41 @@
 #include <iostream>
+#include <string>
 #include "header/car.h"
 #include "header/user.h"
 #include "header/manager.h"
 using namespace std;
 
 int active_user_id = -1;
-string username;
-userLinkedList userlist;
-
+int manager_id = -1;
 vector<Manager> managerVector;
 vector<buyList> buyListVector;
+userLinkedList userlist;
+string username;
+string menu_name;
+string id;
+int login; 
+int main()
+{
+    //user.txt 열고 userlist 생성
+    openFile();
+    //관리자 자료구조 호출
+    getManagerList();
+    //buyList 호출
+    readBuyList();
+    //carlist도 호출
 
+    // 최상단 메뉴 이름
+    menu_name = "CARMANY";
 
-int main(){
-   
-    vector<string> menu_list = {"차량 구매", "차량 추천", "마이페이지"};
+    // 로그인 했을 때 아이디
+    id = "";
+
+    // 로그인시 0, 비회원 1, 관리자 2, 종료 -1
+    login = 1;
+
+    int order1 = -1; // 각 페이지에서 세부 기능 고를 때 쓰는 변수
+    int order2 = 20000; // 세부 기능의 세부기능을 고를 때 쓰는 변수(디폴트 - 전체보기)
+
 
     /*데이터 세팅 및 파일 경로설정*/
     Car car;
@@ -25,164 +46,253 @@ int main(){
     //string buyList_file = "./buyList.txt";
     //string buyList_file = "./user.txt";
     Car::openCarFile(carfile_path);
-    
-    
-    int menu_num = 0;
-    active_user_id = 2; //로그인한 유저
-    username = "황다희";
 
-    while(menu_num != -1){
-        //상단 메뉴 출력        
-        switch(menu_num){
-            //메인화면
-            default:{
-                    cout << "|--------------------------------------------------------------------------|" << endl;
-                    cout << "|      ";
-                    for (int i = 0; i < menu_list.size(); i++)
-                    {
-                        cout << menu_list[i] << " ";   
-                    }
-                    cout << "|" << endl;
-                    cout << "|--------------------------------------------------------------------------|" << endl;
-                    cout << "|                                                                          |" << endl;
-                    cout << "|                                                                          |" << endl;
-                    cout << "|  .d8008b.  .d8008b.  .d8008b.  .d888888b.  .d8008b.  .d8008b.  dP    dP  |" << endl;
-                    cout << "|  88        88    88  88    88  88  88  88  88    88  88    88  dP    dP  |" << endl;
-                    cout << "|  88        88    88  8800808P  88  88  88  88    88  88    88  dPYYYYdP  |" << endl;
-                    cout << "|  88        88YYYY88  8800      88  88  88  88YYYY88  88    88     00     |" << endl;
-                    cout << "|  88        88    88  88  00    88  88  88  88    88  88    88     00     |" << endl;
-                    cout << "|  888008b.  88    88  88   000  88  88  88  88    88  88    88     00     |" << endl;
-                    cout << "|                                                                          |" << endl;
-                    cout << "|                        _____.-------__            신차 살 땐             |" << endl;
-                    cout << "|                      /                '--.               카매니          |" << endl;
-                    cout << "|             ________/                     '--.                           |" << endl;
-                    cout << "|            /*    __                  __       |  ~~~@@@@                 |" << endl;
-                    cout << "|           |____ /  \\ ______________ /  \\ ____--  ~~~@@                   |" << endl;
-                    cout << "|                 \\__/                \\__/                                 |" << endl;
-                    cout << "|--------------------------------------------------------------------------|" << endl;
-                    cout << endl;
-                    cout << "대한민국 No.1 자동차 플랫폼 CARMANY 입니다.\n";
-                    cout << "메뉴를 선택해주세요.(1. 차량구매 2. 차량 추천 3. 마이페이지)" << endl;
-                break;
-            }
+    while(1)
+    {
 
-            //1. 차량 구매
-            case 1:{
-                menu_list = {"전체", "차종별", "엔진", "자동차명"};
-                    cout << "|--------------------------------------------------------------------------|" << endl;
-                    cout << "|      ";
-                    for (int i = 0; i < menu_list.size(); i++)
-                    {
-                        cout << menu_list[i] << " ";   
-                    }
-                    cout << "|" << endl;
-                    cout << "|--------------------------------------------------------------------------|" << endl;           
+        if (login == -1)
+        {
+            cout << "이용해 주셔서 감사합니다." << endl;
+            break;
+        }
+        if (id == "관리자")
+        {
+            menu_name = "Manager";
+        }
+
+        // ui 시작
+        if(menu_name != "CARLIST" || menu_name != "CAR Recommend"){
+            car.navbarPrint(login, menu_name, id);
+
+        }
+            
+        if (menu_name == "CARMANY")
+        {
+            cout << "|      차량 구매                차량 추천                  마이페이지      |" << endl;
+            cout << "|--------------------------------------------------------------------------|" << endl;
+            cout << "|                                                                          |" << endl;
+            cout << "|                                                                          |" << endl;
+            cout << "|  .d8008b.  .d8008b.  .d8008b.  .d888888b.  .d8008b.  .d8008b.  dP    dP  |" << endl;
+            cout << "|  88        88    88  88    88  88  88  88  88    88  88    88  dP    dP  |" << endl;
+            cout << "|  88        88    88  8800808P  88  88  88  88    88  88    88  dPYYYYdP  |" << endl;
+            cout << "|  88        88YYYY88  8800      88  88  88  88YYYY88  88    88     00     |" << endl;
+            cout << "|  88        88    88  88  00    88  88  88  88    88  88    88     00     |" << endl;
+            cout << "|  888008b.  88    88  88   000  88  88  88  88    88  88    88     00     |" << endl;
+            cout << "|                                                                          |" << endl;
+            cout << "|                        _____.-------__            신차 살 땐             |" << endl;
+            cout << "|                      /                '--.               카매니          |" << endl;
+            cout << "|             ________/                     '--.                           |" << endl;
+            cout << "|            /*    __                  __       |  ~~~@@@@                 |" << endl;
+            cout << "|           |____ /  \\ ______________ /  \\ ____--  ~~~@@                   |" << endl;
+            cout << "|                 \\__/                \\__/                                 |" << endl;
+            cout << "+--------------------------------------------------------------------------+" << endl;
+
+            cout << "대한민국 No.1 자동차 플랫폼 CARMANY 입니다.\n"; 
+
+           if (login == 0) cout << "메뉴를 선택해주세요.(1. 차량구매 2. 차량 추천 3. 마이페이지 4. 프로그램 종료)" << endl;
+           else{
+                int choice;
+                cout<<"메뉴를 선택해주세요.(1. 로그인 2. 회원 가입 3. 비회원 로그인 4. 관리자 로그인)>>";
+                cin>>choice;
                 
-                //data
+                if (choice == 1){
+                    if (!userLogin()) continue;
+                    else {
+                        login = 0;
+                        id = username;
+                        continue;
+                    }
+
+                }
+                else if (choice == 2){
+                    if (!createUser()){
+                        cout<<" 계정 생성이 제대로 되지 않아 다시 시작합니다."<<endl;
+                        continue;
+                    }
+                    else{
+                        cout<<endl;
+                        cout<<"회원가입이 잘 되었습니다!"<<endl;
+                        cout<<username<<"의 계정이 생성되었습니다"<<endl;
+                        cout<<"로그인 화면으로 돌아갑니다"<<endl;
+                        continue;
+                    }
+                } 
+                else if (choice == 3){
+                    cout<<"비회원으로 로그인하셨습니다. !! 비회원 계정은 검색만 가능합니다."<<endl;
+                    username = "비회원";
+                    menu_name = "CARLIST";
+                    continue;
+                }
+                else if (choice == 4){
+                    menu_name = "MANAGER";
+                    continue;
+                }
+           }
+                        
+            while (1)
+            {
+                cin >> order1;
+                if (order1 == 1)
+                {
+                    menu_name = "CARLIST";
+                    break;
+                }
+                else if (order1 == 2)
+                {
+                    menu_name = "CAR Recommend";
+                    break;
+                }
+                else if (order1 == 3)
+                {
+                    menu_name = "MYPAGE";
+                    break;
+                }
+                else if (order1 == 4)
+                {
+                    char o;
+                    cout << "정말 종료하시겠습니까? (y/n)";
+                    cin >> o;
+                    if (o == 'y' || o == 'Y')
+                    {
+                        login = -1;
+                        break;
+                    }
+                    else if (o == 'n' || o == 'N')
+                    {
+                        cout << "메뉴를 선택해주세요.(1. 차량구매 2. 차량 추천 3. 마이페이지 4. 프로그램 종료)" << endl;
+                        continue;
+                    }
+                    else
+                    {
+                        cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
+                        continue;
+                    }
+                    
+                }
+                else
+                {
+                    cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
+                }
+            }
+            continue;
+
+        }
+        if (menu_name == "CARLIST")
+        {
+                
                 vector<Car> list = car.car_list_v; //페이징 처리를 위해 담을 리스트 초기화
                 int sub_menu_num;
                 int car_menu_num = 1;
-                string engine[] = {"전기", "가솔린", "디젤", "하이브리드", "수소", "LPG"};
-                string type[] = {"세단", "SUV", "RV", "해치백", "트럭"};
-                while(car_menu_num != 8){
+                string engine[] = {"electric", "gasoline", "diesel", "hybrid", "hydrogen", "LPG"};
+                string type[] = {"sedan", "SUV", "RV", "hatchback", "truck"};
+                while(true){
                     //상세보기
                     if(car_menu_num == 0){
                         string car_id;
-                        cout << "조회할 자동차 번호를 입력하세요:";
+                        cout << "*조회할 자동차 번호를 입력하세요: ";
                         cin >> car_id;
                         if(!car.getCarInfo(car_id))
-                            cout << "해당 번호는 없는 번호입니다." << endl;
+                            cout << "*해당 번호는 없는 번호입니다." << endl;
                     }
                     //전체
                     else if(car_menu_num == 1){
                         list = car.car_list_v;
                         car.getCarList(1, list);
-                        cout << "전체 자동차 리스트 입니다. ";
+                        cout << "*전체 자동차 리스트 입니다. ";
                        
                     }
                     //차종별
                     else if(car_menu_num == 2){
-                        cout << "검색할 차종 번호를 입력해주세요. (1.세단, 2.SUV, 3.RV, 4.해치백, 5.트럭):";
+                        cout << "*검색할 차종 번호를 입력해주세요. (1.세단, 2.SUV, 3.RV, 4.해치백, 5.트럭): ";
                         cin >> sub_menu_num;
                         if(sub_menu_num < 1 || sub_menu_num > 5)
-                            cout << "잘못된 차종 번호입니다." << endl;
+                            cout << "*잘못된 차종 번호입니다." << endl;
                         car.getCarList(2, list, type[sub_menu_num-1]);
-                        cout << "차종별 자동차 리스트 입니다. ";
+                        cout << "*차종별 자동차 리스트 입니다. ";
                         
                     }
                     //엔진별
                     else if(car_menu_num == 3){
-                        cout << "검색할 엔진 번호를 입력해주세요. (1.전기, 2.가솔린, 3.디젤, 4.하이브리드, 5.수소, 6.LPG):";
+                        cout << "*검색할 엔진 번호를 입력해주세요. (1.전기, 2.가솔린, 3.디젤, 4.하이브리드, 5.수소, 6.LPG): ";
                         cin >> sub_menu_num;
                         if(sub_menu_num < 1 || sub_menu_num > 5)
-                            cout << "잘못된 엔진 번호입니다." << endl;
+                            cout << "*잘못된 엔진 번호입니다." << endl;
                         car.getCarList(3, list, engine[sub_menu_num-1]);
-                        cout <<  "엔진별 자동차 리스트 입니다. ";
+                        cout <<  "*엔진별 자동차 리스트 입니다. ";
                         
                     }
                     //자동차명
                     else if(car_menu_num == 4){
                         cin.ignore();
-                        cout << "검색할 자동차명을 입력해주세요:";
+                        cout << "*검색할 자동차명을 입력해주세요:";
                         string carname;
                         getline(cin, carname);
                         car.getCarList(4, list, carname);
-                        cout << "자동차명 검색 리스트 입니다. ";
+                        cout << "*자동차명 검색 리스트 입니다. ";
                     }
                     //필터
                     else if(car_menu_num == 5){
-                        cout << "적용하실 필터 번호를 입력해주세요. (1. 출시순, 2.낮은 가격순, 3.높은 가격순, 4.인기순):";
+                        cout << "*적용하실 필터 번호를 입력해주세요. (1. 출시순, 2.낮은 가격순, 3.높은 가격순, 4.인기순): ";
                         int filter;
                         cin >> filter;
                         car.getCarList(5, list, "", 1, filter);
                     }
                     //페이지 이동
                     else if(car_menu_num == 6){
-                        cout << "이동하실 페이지 번호를 입력해주세요: ";
+                        cout << "*이동하실 페이지 번호를 입력해주세요: ";
                         int page;
                         cin >> page;
                         bool flag = car.getCarList(6, list, "", page);
                         if(!flag)
-                            cout << "잘못된 페이지 접근입니다. " <<endl;
+                            cout << "*잘못된 페이지 접근입니다. " <<endl;
                     }
                     //자동차 구매
                     else if(car_menu_num == 7){
                         if(active_user_id == -1){
-                            cout << "로그인한 유저만 구매가 가능합니다." << endl;
+                            cout << "*로그인한 유저만 구매가 가능합니다." << endl;
                         }
                         string car_id;
-                        cout << "구매할 자동차 번호를 입력하세요:";
+                        cout << "*구매할 자동차 번호를 입력하세요: ";
                         cin >> car_id;
                         bool flag = car.getBuyCar(car_id, active_user_id, username, buyList_file);
                         if(!flag)
-                            cout << "구매가 취소되었습니다." << endl;
+                            cout << "*구매가 취소되었습니다." << endl;
                     }
                     //잘못된 입력
                     else{
-                        cout << "메뉴 번호를 잘못 입력하셨습니다.";
+                        cout << "*메뉴 번호를 잘못 입력하셨습니다.";
                     }
-                    cout << "메뉴를 선택해주세요 (0.상세보기 1.전체, 2.차종별, 3.엔진별, 4.자동차명, 5.필터적용, 6. 페이지 이동, 7.차량 구매. 8.메인으로 돌아가기) >>" << endl;
-                    cin >> car_menu_num;         
-                }
-                break;
-            }
+                    cout << "메뉴를 선택해 주세요. (-1. 입력시 홈 화면 이동)" << endl;
+                    cout << "*0. 상세보기 1. 전체보기 2. 차종별 보기 3. 엔진별 보기 4. 차 이름 검색 5. 필터 6. 페이지 이동, 7. 구매" << endl;
+                    cin >> car_menu_num;
+                    if(car_menu_num == -1)
+                        break;
+                } 
+                menu_name = "CARMANY";       
+                continue;
+        }
 
 
-            //2. 차량 추천
-            case 2:{
-                int reco_menu_num = 1;
+
+        if (menu_name == "CAR Recommend")
+        {
+                int reco_menu_num = 9;
                 vector<Car> list = car.car_list_v; //페이징 처리를 위해 담을 리스트 초기화
                 string brand[] = {"KIA", "HYUNDAI", "GENESIS"};
                 string age[] = {"10대", "20대", "30대", "40대", "50대"};
-                cout << "메뉴를 선택해주세요 (0.상세보기. 1. 연령별 추천, 2. 성별 추천, 3.브랜드별 추천 4. 페이지 이동 5.메인으로 돌아가기) >>" << endl;      
-                cin >> reco_menu_num;
-                while(reco_menu_num != 5){
+                while(true){
+                    //초기 현대 브랜드 리스트 뿌리기
+                    if(reco_menu_num == 9){
+                        list = car.car_list_v;
+                        car.getRecoListByBrand(brand[1], list);
+                        cout << "*추천 서비스에 오신걸 환영합니다.";
+                    }
                     //상세보기
-                    if(reco_menu_num == 0){
+                    else if(reco_menu_num == 0){
                         string car_id;
                         cout << "조회할 자동차 번호를 입력하세요:";
                         cin >> car_id;
-                        if(!car.getCarInfo(car_id))
+                        if(!car.getCarInfo(car_id, true))
                             cout << "해당 번호는 없는 번호입니다." << endl;
                     }
                     //연령별 추천
@@ -192,43 +302,277 @@ int main(){
                         cin >> age_no;
                         car.getRecoListByAge(age[age_no-1], list, buyList_file, userfile_path);
                     }
-                    //성별 추천
-                    else if(reco_menu_num == 2){
-
-                    }
                     //브랜드별 추천
-                    else if(reco_menu_num == 3){
+                    else if(reco_menu_num == 2){
                         cout << "추천받으실 브랜드를 고르세요. (1.KIA, 2.HYUNDAI, 3.GENESIS):";
                         int brand_no;
                         cin >> brand_no;
                         car.getRecoListByBrand(brand[brand_no-1], list);
                     }
                     //페이지 이동
-                    else if(reco_menu_num == 4){
+                    else if(reco_menu_num == 3){
                         cout << "이동하실 페이지 번호를 입력해주세요: ";
                         int page;
                         cin >> page;
-                        bool flag = car.getCarList(6, list, "", page);
+                        bool flag = car.getCarList(6, list, "", page, 0, true);
                         if(!flag)
                             cout << "잘못된 페이지 접근입니다. " <<endl;
                     }
-                    cout << "메뉴를 선택해주세요 (0.상세보기. 1. 연령별 추천, 2. 성별 추천, 3.브랜드별 추천 4. 페이지 이동 5.메인으로 돌아가기) >>" << endl; 
+                    cout << "메뉴를 선택해주세요 (0.상세보기. 1. 연령별 추천, 2.브랜드별 추천 3. 페이지 이동 -1.메인으로 돌아가기) >>" << endl; 
                     cin >> reco_menu_num;
+                    if(reco_menu_num == -1)
+                        break;
                 }
-               break; 
-            }
+                menu_name = "CARMANY";       
+                continue;      
 
-
-            //3. 마이페이지
-            case 3:{
-                
-               break; 
-            }
         }
-        cin >> menu_num; //사용자 입력
-    }
-    Car::writeCarFile(carfile_path);
-    cout << "로그아웃. 종료합니다!" << endl;
+        if (menu_name == "MYPAGE")
+        {
 
-    return 0;
+            
+            cout << "|      구매 리스트              찜 리스트                 회원정보 수정    |" << endl;
+            cout << "|--------------------------------------------------------------------------|" << endl;
+            
+        }
+
+        if (menu_name == "Manager")  // 관리자는 로그아웃하지 않는 이상 이 안에서만 놀게함 -> 얘는 디폴트 화면 -> order2에 20000할당
+        {
+            if (order2 == 20000)
+            {
+                cout << "|   입출고 관리      재고 현황      구매 리스트      매출 관리      통계   |" << endl;
+                cout << "|--------------------------------------------------------------------------|" << endl;
+                cout << "|                                                                          |" << endl;
+                cout << "|                                                                          |" << endl;
+                cout << "|                                                                          |" << endl;
+                cout << "|                                                                          |" << endl;
+                cout << "|   차량 입고   |   전체 재고   |   전체   |   전체 매출   |   성별 통계   |" << endl;
+                cout << "|               |               |          |               |               |" << endl;
+                cout << "|               |               |          |               |               |" << endl;
+                cout << "|   차량 출고   |  상품별 재고  |  차량별  | 브랜드별 매출 | 연령대별 통계 |" << endl;
+                cout << "|               |               |          |               |               |" << endl;
+                cout << "|               |               |          |               |               |" << endl;
+                cout << "|               |               |  회원별  |               |               |" << endl;
+                cout << "|                                                                          |" << endl;
+                cout << "|                                                                          |" << endl;
+                cout << "|                                                                          |" << endl;
+                cout << "|                                                                          |" << endl;
+                cout << "+--------------------------------------------------------------------------+" << endl;
+                cout << "메뉴 선택 1.입출고 관리 2. 재고 현황 3. 구매 리스트 4. 매출 관리 5. 통계 6. 로그아웃" << endl;
+            }
+            else
+            {
+                if (order1 == 1)
+                {
+                    cout << "|               차량 입고               차량 출고               |" << endl;
+                    cout << "|--------------------------------------------------------------------------|" << endl;
+                    if (order2 == 10001)
+                    {
+                        // 차량 입고 목록 출력하는 함수
+                    }
+                    else if (order2 == 10002)
+                    {
+                        // 차량 출고 목록 출력하는 함수
+                    }
+                }
+                else if (order1 == 2)
+                {
+                    cout << "|               전체 재고               상품별 재고               |" << endl;
+                    cout << "|--------------------------------------------------------------------------|" << endl;
+                    if (order2 == 20001)
+                    {
+                        // 전체 재고 목록 출력하는 함수
+                    }
+                    else if (order2 == 20002)
+                    {
+                        // 상품별 목록 출력하는 함수
+                    }
+                }
+                else if (order1 == 3)
+                {
+                    cout << "|        전체 구매 리스트        차량별 구매 리스트         회원별 구매 리스트               |" << endl;
+                    cout << "|--------------------------------------------------------------------------|" << endl;
+                    if (order2 == 30001)
+                    {
+                        // 전체 구매 리스트 출력하는 함수
+                    }
+                    else if (order2 == 30002)
+                    {
+                        // 차량별 구매 리스트 출력하는 함수
+                    }
+                    else if (order2 == 30003)
+                    {
+                        // 회원별 구매 리스트 출력하는 함수
+                    }
+                }
+                else if (order1 == 4)
+                {
+                    cout << "|               전체 매출               브랜드별 매출               |" << endl;
+                    cout << "|--------------------------------------------------------------------------|" << endl;
+                    if (order2 == 40001)
+                    {
+                        // 전체 매출 출력하는 함수
+                    }
+                    else if (order2 == 40002)
+                    {
+                        // 브랜드별 매출 출력하는 함수
+                    }
+                }
+                else if (order1 == 5)
+                {
+                    cout << "|               성별 통계               연령대별 통계               |" << endl;
+                    cout << "|--------------------------------------------------------------------------|" << endl;
+                    if (order2 == 50001)
+                    {
+                        // 성별 통계 출력하는 함수
+                    }
+                    else if (order2 == 50002)
+                    {
+                        // 연령대별 통계 출력하는 함수
+                    }
+                }
+            }
+
+
+
+            while (1)
+            {
+                cin >> order1;
+                if (order1 == 1)
+                {
+                    cout << "세부 메뉴를 선택해 주세요." << endl;
+                    cout << "1. 차량 입고 2. 차량 출고" << endl;
+                    while (1)  // 입출고 관리 10001, 10002 할당
+                    {
+                        cin >> order2;
+                        if (order2 == 1)
+                        {
+                            order2 = 10001;
+                            break;
+                        }
+                        else if (order2 == 2)
+                        {
+                            order2 = 10002;
+                            break;
+                        }
+                        else
+                        {
+                            cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
+                        }
+                    }
+                    break;
+                }
+                else if (order1 == 2)
+                {
+                    cout << "세부 메뉴를 선택해 주세요." << endl;
+                    cout << "1. 전체 재고 2. 상품별 재고" << endl;
+                    while (1)  // 재고 현황은 20001, 20002 할당
+                    {
+                        cin >> order2;
+                        if (order2 == 1)
+                        {
+                            order2 = 20001;
+                            break;
+                        }
+                        else if (order2 == 2)
+                        {
+                            order2 = 20002;
+                            break;
+                        }
+                        else
+                        {
+                            cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
+                        }
+                    }
+                    break;
+                }
+                else if (order1 == 3)
+                {
+                    cout << "세부 메뉴를 선택해 주세요." << endl;
+                    cout << "1. 전체 구매 리스트 2. 차량별 구매 리스트 3. 회원별 구매 리스트" << endl;
+                    while (1)  // 구매리스트 30001, 30002, 30003 할당
+                    {
+                        cin >> order2;
+                        if (order2 == 1)
+                        {
+                            order2 = 30001;
+                            break;
+                        }
+                        else if (order2 == 2)
+                        {
+                            order2 = 30002;
+                            break;
+                        }
+                        else if (order2 == 3)
+                        {
+                            order2 = 30003;
+                            break;
+                        }
+                        else
+                        {
+                            cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
+                        }
+                    }
+                    break;
+                }
+                else if (order1 == 4)
+                {
+                    cout << "세부 메뉴를 선택해 주세요." << endl;
+                    cout << "1. 전체 매출 2. 브랜드별 매출" << endl;
+                    while (1)  // 매출 관리는 40001, 40002 할당
+                    {
+                        cin >> order2;
+                        if (order2 == 1)
+                        {
+                            order2 = 40001;
+                            break;
+                        }
+                        else if (order2 == 2)
+                        {
+                            order2 = 40002;
+                            break;
+                        }
+                        else
+                        {
+                            cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
+                        }
+                    }
+                    break;
+                }
+                else if (order1 == 5)
+                {
+                    cout << "세부 메뉴를 선택해 주세요." << endl;
+                    cout << "1. 성별 통계 2. 연령대별 통계" << endl;
+                    while (1)  // 통계 50001, 50002 할당
+                    {
+                        cin >> order2;
+                        if (order2 == 1)
+                        {
+                            order2 = 50001;
+                            break;
+                        }
+                        else if (order2 == 2)
+                        {
+                            order2 = 50002;
+                            break;
+                        }
+                        else
+                        {
+                            cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
+                        }
+                    }
+                    break;
+                }
+                else
+                {
+                    cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
+                }
+            }
+            continue;
+
+
+        }
+
+        // cout << "+--------------------------------------------------------------------------+" << endl;
+    }
 }
