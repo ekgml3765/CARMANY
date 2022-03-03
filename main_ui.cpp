@@ -2,29 +2,34 @@
 #include <string>
 #include "header/car.h"
 #include "header/user.h"
+#include "header/manager.h"
 using namespace std;
 
 int active_user_id = -1;
-string username;
+int manager_id = -1;
+vector<Manager> managerVector;
+vector<buyList> buyListVector;
 userLinkedList userlist;
+string username;
 
 int main()
 {
-
-
-
-
-
-
+    //user.txt 열고 userlist 생성
+    openFile();
+    //관리자 자료구조 호출
+    getManagerList();
+    //buyList 호출
+    readBuyList();
+    //carlist도 호출
 
     string menu_name; // 최상단 메뉴 이름
     menu_name = "CARMANY";
 
     string id; // 로그인 했을 때 아이디
-    id = "관리자";
+    id = "";
 
-    int login; // 로그인시 0, 비회원 1, 종료 -1
-    login = 0;
+    int login; // 로그인시 0, 비회원 1, 관리자 2, 종료 -1
+    login = 1;
 
     int order1 = -1; // 각 페이지에서 세부 기능 고를 때 쓰는 변수
     int order2 = 20000; // 세부 기능의 세부기능을 고를 때 쓰는 변수(디폴트 - 전체보기)
@@ -102,10 +107,48 @@ int main()
             cout << "|                 \\__/                \\__/                                 |" << endl;
             cout << "+--------------------------------------------------------------------------+" << endl;
 
-            cout << "대한민국 No.1 자동차 플랫폼 CARMANY 입니다.\n";
-            cout << "메뉴를 선택해주세요.(1. 차량구매 2. 차량 추천 3. 마이페이지 4. 프로그램 종료)" << endl;
-            
-            
+            cout << "대한민국 No.1 자동차 플랫폼 CARMANY 입니다.\n"; 
+
+           if (login == 0) cout << "메뉴를 선택해주세요.(1. 차량구매 2. 차량 추천 3. 마이페이지 4. 프로그램 종료)" << endl;
+           else{
+                int choice;
+                cout<<"메뉴를 선택해주세요.(1. 로그인 2. 회원 가입 3. 비회원 로그인 4. 관리자 로그인)>>";
+                cin>>choice;
+                
+                if (choice == 1){
+                    if (!userLogin()) continue;
+                    else {
+                        login = 0;
+                        id = username;
+                        continue;
+                    }
+
+                }
+                else if (choice == 2){
+                    if (!createUser()){
+                        cout<<" 계정 생성이 제대로 되지 않아 다시 시작합니다."<<endl;
+                        continue;
+                    }
+                    else{
+                        cout<<endl;
+                        cout<<"회원가입이 잘 되었습니다!"<<endl;
+                        cout<<username<<"의 계정이 생성되었습니다"<<endl;
+                        cout<<"로그인 화면으로 돌아갑니다"<<endl;
+                        continue;
+                    }
+                } 
+                else if (choice == 3){
+                    cout<<"비회원으로 로그인하셨습니다. !! 비회원 계정은 검색만 가능합니다."<<endl;
+                    username = "비회원";
+                    menu_name = "CARLIST";
+                    continue;
+                }
+                else if (choice == 4){
+                    menu_name = "MANAGER";
+                    continue;
+                }
+           }
+                        
             while (1)
             {
                 cin >> order1;
@@ -433,7 +476,7 @@ int main()
                 cout << "|                                                                          |" << endl;
                 cout << "|                                                                          |" << endl;
                 cout << "+--------------------------------------------------------------------------+" << endl;
-                cout << "메뉴 선택 1.입출고 관리 2. 재고 현황 3. 구매 리스트 4. 매출 관리 5. 통계" << endl;
+                cout << "메뉴 선택 1.입출고 관리 2. 재고 현황 3. 구매 리스트 4. 매출 관리 5. 통계 6. 로그아웃" << endl;
             }
             else
             {
