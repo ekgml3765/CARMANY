@@ -26,7 +26,6 @@ int main()
     readBuyList();
     //carlist도 호출
     //Car::openCarFile("car.txt");
-    Car::openCarFile("C:\\Users\\user\\Documents\\GitHub\\data\\car.txt");
 
     menu_no = 0; //0.{"CARMANY", "CARLIST", "CAR Recommend", "MYPAGE", "MANAGER"}
     id = "";

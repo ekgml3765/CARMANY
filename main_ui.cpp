@@ -26,8 +26,7 @@ int main()
     readBuyList();
     //carlist도 호출
     //Car::openCarFile("car.txt");
-    Car::openCarFile("C:\\Users\\user\\Documents\\GitHub\\data\\car.txt");
-
+    
     menu_no = 0; //0.{"CARMANY", "CARLIST", "CAR Recommend", "MYPAGE", "MANAGER"}
     id = "";
     login = 1;
@@ -254,8 +253,9 @@ int main()
                     }
                     //자동차 구매
                     else if(car_menu_num == 7){
-                        if(active_user_id == -1){
+                        if(login == 0){
                             cout << "*로그인한 유저만 구매가 가능합니다." << endl;
+                            break;
                         }
                         string car_id;
                         cout << "*구매할 자동차 번호를 입력하세요: ";
