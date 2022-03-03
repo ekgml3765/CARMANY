@@ -38,7 +38,7 @@ cout << "+----------------------------------------------------------------------
                 cout << ' ';
             }
         }
-        cout << menu_name;
+        cout << menu_name[0];
         if (login == 1) // 로그인 안했을 때
         {
             for (int i = 0; i < 21 - menu_name[menu_no].length() / 2; i++)

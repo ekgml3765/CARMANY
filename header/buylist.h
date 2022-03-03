@@ -1,5 +1,5 @@
-#ifndef BUYLIST_H
-#define BUYLIST_H
+#ifndef BUYLISTC_H
+#define BUYLISTC_H
 
 extern "C" int getMyCarList();
 extern "C" int viewMyCar(int user_num);
