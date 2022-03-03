@@ -9,11 +9,6 @@
 
 //연진
 #include "../header/user.h"
-#include <string>
-#include <iostream>
-#include <sstream>
-#include <vector>
-#include <fstream>
 
 using namespace std;
 
@@ -21,139 +16,6 @@ extern int active_user_id;
 extern string username;
 extern userLinkedList userlist;
 
-void callPrint(string menu_name, string id){
-    cout << "+--------------------------------------------------------------------------+" << endl;
-    cout << '|';
-        if (menu_name.length() % 2 == 0)
-        {
-            for (int i = 0; i < 34 - menu_name.length() / 2 + 1; i++)
-            {
-                cout << ' ';
-            }
-        }
-           else
-        {
-            for (int i = 0; i < 34 - menu_name.length() / 2; i++)
-            {
-                cout << ' ';
-            }
-        }
-        cout << menu_name;
-		if (menu_name == "CARMANY"){
-		if (id == ""){
-			for (int i = 0; i < 21 - menu_name.length() / 2; i++)
-        {
-            cout << ' ';
-        }
-        cout << "회원가입 / 로그인 |" << endl;
-		}
-		else{
-			for (int i=0; i < 42 - id.length() - menu_name.length(); i++)
-            {
-                cout << ' ';
-            }
-            cout << id << " 님 |"<< endl;
-
-		}
-        cout << "|--------------------------------------------------------------------------|" << endl;
-        cout << "|      차량 구매                차량 추천                  마이페이지      |" << endl;
-        cout << "|--------------------------------------------------------------------------|" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|  .d8008b.  .d8008b.  .d8008b.  .d888888b.  .d8008b.  .d8008b.  dP    dP  |" << endl;
-        cout << "|  88        88    88  88    88  88  88  88  88    88  88    88  dP    dP  |" << endl;
-        cout << "|  88        88    88  8800808P  88  88  88  88    88  88    88  dPYYYYdP  |" << endl;
-        cout << "|  88        88YYYY88  8800      88  88  88  88YYYY88  88    88     00     |" << endl;
-        cout << "|  88        88    88  88  00    88  88  88  88    88  88    88     00     |" << endl;
-        cout << "|  888008b.  88    88  88   000  88  88  88  88    88  88    88     00     |" << endl;
-        cout << "|                                                                          |" << endl;
-        cout << "|                        _____.-------__            신차 살 땐             |" << endl;
-        cout << "|                      /                '--.               카매니          |" << endl;
-        cout << "|             ________/                     '--.                           |" << endl;
-        cout << "|            /*    __                  __       |  ~~~@@@@                 |" << endl;
-        cout << "|           |____ /  \\ ______________ /  \\ ____--  ~~~@@                   |" << endl;
-        cout << "|                 \\__/                \\__/                                 |" << endl;
-        cout << "+--------------------------------------------------------------------------+" << endl;
-		}
-		else if (menu_name == "Manager"){
-			for (int i=0; i < 42 - id.length() - menu_name.length(); i++)
-            {
-                cout << ' ';
-            }
-            cout <<"관리자님 |"<< endl;
-			cout << "|--------------------------------------------------------------------------|" << endl;
-			cout << "|   입출고 관리      재고 현황      구매 리스트      매출 관리      통계   |" << endl;
-			cout << "|--------------------------------------------------------------------------|" << endl;
-			cout << "|                                                                          |" << endl;
-			cout << "|                                                                          |" << endl;
-			cout << "|                                                                          |" << endl;
-			cout << "|                                                                          |" << endl;
-			cout << "|   차량 입고   |   전체 재고   |   전체   |   전체 매출   |   성별 통계   |" << endl;
-			cout << "|               |               |          |               |               |" << endl;
-			cout << "|               |               |          |               |               |" << endl;
-			cout << "|   차량 출고   |  상품별 재고  |  차량별  | 브랜드별 매출 | 연령대별 통계 |" << endl;
-			cout << "|               |               |          |               |               |" << endl;
-			cout << "|               |               |          |               |               |" << endl;
-			cout << "|               |               |  회원별  |               |               |" << endl;
-			cout << "|                                                                          |" << endl;
-			cout << "|                                                                          |" << endl;
-			cout << "|                                                                          |" << endl;
-			cout << "|                                                                          |" << endl;
-			cout << "+--------------------------------------------------------------------------+" << endl;
-		}
-}
-
-void callManagerPrint(int choice){
-	cout << "+--------------------------------------------------------------------------+" << endl;
-	cout << '|';
-	string menu_name = "MANAGER";
-	string id = "";
-
-	if (menu_name.length() % 2 == 0)
-	{
-		for (int i = 0; i < 34 - menu_name.length() / 2 + 1; i++)
-		{
-			cout << ' ';
-		}
-	}
-		else
-	{
-		for (int i = 0; i < 34 - menu_name.length() / 2; i++)
-		{
-			cout << ' ';
-		}
-	}
-	cout << menu_name;
-
-	for (int i=0; i < 42 - id.length() - menu_name.length(); i++)
-            {
-                cout << ' ';
-            }
-            cout <<"관리자님 |"<< endl;
-			cout << "|--------------------------------------------------------------------------|" << endl;
-			cout << "|   입출고 관리      재고 현황      구매 리스트      매출 관리      통계   |" << endl;
-			cout << "|--------------------------------------------------------------------------|" << endl;
-			cout << "|                                                                          |" << endl;
-			cout << "|                                                                          |" << endl;
-			if (choice == 1){
-				cout << "|                                                                          |" << endl;
-				cout << "|                                                                          |" << endl;
-				cout << "|                               1. 입고 관리                               |" << endl;
-				cout << "|                                                                          |" << endl;
-				cout << "|                               2. 출고 관리                               |" << endl;
-
-			}
-			cout << "|                                                                          |" << endl;
-			cout << "|                                                                          |" << endl;
-			cout << "|                                                                          |" << endl;
-			cout << "|                                                                          |" << endl;
-			cout << "|                                                                          |" << endl;
-			cout << "|                                                                          |" << endl;
-			cout << "|                                                                          |" << endl;
-			cout << "|                                                                          |" << endl;
-			cout << "+--------------------------------------------------------------------------+" << endl;
-
-}
 bool openFile(){
 	string line, word;
     istringstream ss;
@@ -220,25 +82,32 @@ bool userLogout(){
 };
 
 bool userUpdate(){
+
 	cout<<"회원 정보 수정 선택하셨습니다."<<endl;
 	cout<<"현재 회원님의 정보입니다."<<endl;
 	
+	//회원정보 보여주기
 	userlist.showCurInfo();
 	int choice;
 	string change;
 
+	//수정할 항목 입력 받기
 	cout<<"수정할 항목을 정하세요."<<endl;
 	cout<<"(1)비밀번호 (2) 전화번호 (3) 이름 (4) 연령대(20대, 30대, 40대, 50대, 60대)";
 	cin.ignore(1);
 	
 	cin>>choice;
+	//1번에서 4번 이외의 값을 받으면 false 반환
 	if (choice<=1 && choice >=4) return false;
 
+	//잘 입력했다면 계속해서 진행
 	cout<<"새로운 수정 내용을 입력하세요";
 	cin>>change;
 
 	if (choice == 3){ username = change;}
+	//User들이 담긴 LinkedList의 노드 업데이트
 	userlist.updateNode(choice, change);
+	
 	cout<<"업데이트 되었습니다.";
 	active_user_id = -1;
 	return true;
