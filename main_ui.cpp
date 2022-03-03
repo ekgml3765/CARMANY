@@ -30,7 +30,7 @@ int main()
     //buyList 호출
     readBuyList();
     //carlist도 호출
-    //Car::openCarFile("car.txt");
+    Car::openCarFile("car.txt");
     
     menu_no = 0; //0.{"CARMANY", "CARLIST", "CAR Recommend", "MYPAGE", "MANAGER"}
     id = "";
@@ -42,13 +42,13 @@ int main()
 
     /*데이터 세팅 및 파일 경로설정*/
     Car car;
-    string carfile_path = "C:\\Users\\user\\Documents\\GitHub\\data\\car.txt";
-    string buyList_file = "C:\\Users\\user\\Documents\\GitHub\\data\\buyList.txt";
-    string userfile_path = "C:\\Users\\user\\Documents\\GitHub\\data\\user.txt";
-    //string carfile_path = "./car.txt";
-    //string buyList_file = "./buyList.txt";
-    //string buyList_file = "./user.txt";
-    Car::openCarFile(carfile_path);
+    // string carfile_path = "C:\\Users\\user\\Documents\\GitHub\\data\\car.txt";
+    // string buyList_file = "C:\\Users\\user\\Documents\\GitHub\\data\\buyList.txt";
+    // string userfile_path = "C:\\Users\\user\\Documents\\GitHub\\data\\user.txt";
+    string carfile_path = "car.txt";
+    string buyList_file = "buyList.txt";
+    string userfile_path = "user.txt";
+    // Car::openCarFile(carfile_path);
 
 
     //CARMANY = 0, CARLIST = , CARRECO = 3, MYPATE = 4 , MANAGER =5
@@ -359,13 +359,13 @@ int main()
         {
             if (order2 == 20000)
             {
-                cout << "|   입출고 관리      재고 현황      구매 리스트      매출 관리      통계   |" << endl;
+                cout << "|   입출고 관리      재고 현황      구매 리스트      매출 관리             |" << endl;
                 cout << "|--------------------------------------------------------------------------|" << endl;
                 cout << "|                                                                          |" << endl;
                 cout << "|                                                                          |" << endl;
                 cout << "|                                                                          |" << endl;
                 cout << "|                                                                          |" << endl;
-                cout << "|   차량 입고   |   전체 재고   |   전체   |   전체 매출   |   성별 통계   |" << endl;
+                cout << "|   차량 입고   |   전체 재고   |   전체   |   전체 매출   |                |" << endl;
                 cout << "|               |               |          |               |               |" << endl;
                 cout << "|               |               |          |               |               |" << endl;
                 cout << "|   차량 출고   |  상품별 재고  |  브랜드별  | 브랜드별 매출 |              |" << endl;
@@ -377,7 +377,7 @@ int main()
                 cout << "|                                                                          |" << endl;
                 cout << "|                                                                          |" << endl;
                 cout << "+--------------------------------------------------------------------------+" << endl;
-                cout << "메뉴 선택 1.입출고 관리 2. 재고 현황 3. 구매 리스트 4. 매출 관리 5. 통계 6. 로그아웃" << endl;
+                cout << "메뉴 선택 1.입출고 관리 2. 재고 현황 3. 구매 리스트 4. 매출 관리 5. 로그아웃" << endl;
             }
             else
             {
@@ -538,23 +538,7 @@ int main()
                     order2 = 20000;
                     continue;
                 }
-                else if (order1 == 5)
-                {
-                    cout << "|                                성별 통계                                 |" << endl;
-                    cout << "|--------------------------------------------------------------------------|" << endl;
-                    if (order2 == 50001)
-                    {
-                        // 성별 통계 출력하는 함수
-                         while(1){
-                            if (!statistics()) cout<<"잘못 입력하였습니다!"<<endl;
-                            else{
-                                break;
-                            }
-                        }
-                    }
-                    order2 = 20000;
-                    continue;
-                }
+     
             }
 
             while (1)
@@ -662,25 +646,6 @@ int main()
                     break;
                 }
                 else if (order1 == 5)
-                {
-                    cout << "세부 메뉴를 선택해 주세요." << endl;
-                    cout << "1. 성별 통계 " << endl;
-                    while (1)  // 통계 50001, 50002 할당
-                    {
-                        cin >> order2;
-                        if (order2 == 1)
-                        {
-                            order2 = 50001;
-                            break;
-                        }
-                        else
-                        {
-                            cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
-                        }
-                    }
-                    break;
-                }
-                else if (order1 == 6)
                 {
                     managerLogout();
 

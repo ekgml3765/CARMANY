@@ -21,8 +21,6 @@ struct userNode{
 	int sex;          //사용자 성별 (0-남자, 1-여자)
 	struct userNode* next;
 };
-void callPrint(string menu_name, string id);
-void callManagerPrint(int choice);
 bool openFile();
 bool userLogin();
 bool userLogout();
@@ -146,8 +144,8 @@ class userLinkedList{
 			userNode* tmp = HEAD;
 			ofstream fout;
 
-			//fout.open("user.txt");
-			fout.open("C:\\Users\\user\\Documents\\GitHub\\data\\user.txt");
+			fout.open("user.txt");
+			// fout.open("C:\\Users\\user\\Documents\\GitHub\\data\\user.txt");
 			
 			while(tmp!=nullptr){
 				if (fout.is_open()){
