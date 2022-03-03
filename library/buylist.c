@@ -121,16 +121,16 @@ int viewMyCar(int user_num)
                 printf(" ");
             }
             printf("%s", mark[i].color);
-            for (int j=0; j < 13 - strlen(mark[i].color); j++)
+            for (int j=0; j < 13 - strlen(mark[i].color)*2/3; j++)
             {
                 printf(" ");
             }
             printf("%s", mark[i].price);
-            printf("    |\n");
+            printf(" |\n");
             index++;
         }
     }
-    printf("+--------------------------------------------------------------------------+");
+    printf("+--------------------------------------------------------------------------+\n");
     return 0;
 }
 
