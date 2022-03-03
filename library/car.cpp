@@ -38,7 +38,7 @@ cout << "+----------------------------------------------------------------------
                 cout << ' ';
             }
         }
-        cout << menu_name[0];
+        cout << menu_name[menu_no];
         if (login == 1) // 로그인 안했을 때
         {
             for (int i = 0; i < 21 - menu_name[menu_no].length() / 2; i++)
@@ -278,16 +278,23 @@ bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page,
     //상단바 - 출력
     navbarPrint(login, menu_no, id);
     if(is_reco == true){
-        cout << "|              연령대별 추천               브랜드별 추천               |" << endl;
+        cout << "|             연령대별 추천                      브랜드별 추천             |" << endl;
         cout << "|--------------------------------------------------------------------------|" << endl;
         cout<< endl;
         cout << "| 총 " << total_cnt << "건 조회" << endl;
     }else{
         cout << "|      전체            차종별            엔진            차 이름 검색      |" << endl;
         cout << "|--------------------------------------------------------------------------|" << endl;
-        cout<< endl;
+        cout << "|                                                                          |" << endl;
         cout << "| 총 " << total_cnt << "건 조회";
+        if (to_string(total_cnt).length() == 2)
+        {
         cout << "               필터 [인기순/출시순/낮은 가격순/높은 가격순]  |" << endl;
+        }
+        else if (to_string(total_cnt).length() == 1)
+        {
+        cout << "                필터 [인기순/출시순/낮은 가격순/높은 가격순]  |" << endl;
+        }
         cout << "|                                                                          |" << endl;
     }
    
@@ -295,31 +302,36 @@ bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page,
 
     //페이지에 해당되는 리스트 출력 
     cout << "| n  brand    name          price     type      engine   date    sales     |" << endl;
-    cout << endl;
+    cout << "|                                                                          |" << endl;
     end_idx = (end_idx < total_cnt)? end_idx : total_cnt-1;
 	if(start_idx < total_cnt) {
 		for (int i = start_idx; i <= end_idx; i++) {
 			cout << "| " ; 
             list[i].print(list[i].total_stock-list[i].stock);
             cout << "|" << endl;
-
 		}
         //페이지 번호 출력
-        cout << endl;
-        cout << "              [                   " ;
+        cout << "|                                                                          |" << endl;
+        cout << "|    " ;
+        int cnt=0;
         for(int i = 1; i <= total_page; i++){ 
             if(i == page){
                 cout << "'" << i  << "'"<< "  ";
+                cnt+=4;
             }else{
                 cout << i << "  ";
+                cnt+=3;
             }
         }
-        cout << "                    ]" << endl;
-        cout << endl;
-        cout << "|--------------------------------------------------------------------------|" << endl;
+        for (int i = 0; i < 69 - cnt; i++)
+        {
+            cout << " ";
+        }
+        cout << "|" << endl;
+        cout << "+--------------------------------------------------------------------------+" << endl;
         cout << endl;
 	}else{
-        cout << "|--------------------------------------------------------------------------|" << endl;
+        cout << "+--------------------------------------------------------------------------+" << endl;
         cout << endl;
         return false;
     }
