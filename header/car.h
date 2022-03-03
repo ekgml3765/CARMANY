@@ -34,7 +34,7 @@ public:
 	static vector<Car> car_list_v;
 	static map<string, Car> car_list_m;
 	Car();
-	void print();
+	void print(int sales);
 	void navbarPrint(int login, string menu_name, string id);
 	bool getCarList(int category, vector<Car> &list, string keyword = "", int page=1, int filter=0);
 	bool getCarInfo(string car_id);
