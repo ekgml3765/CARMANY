@@ -90,19 +90,29 @@ bool userUpdate(){
 	//회원정보 보여주기
 	userlist.showCurInfo();
 	int choice;
-	string change;
+	string change, chk;
 
 	//수정할 항목 입력 받기
 	while (1)
 	{
 		int tag = 0;
-		cout<<"수정할 항목을 정하세요."<<endl;
-		cout<<"(1)비밀번호 (2) 전화번호 (3) 이름 (4) 연령대(20대, 30대, 40대, 50대, 60대)"<<endl;
-		cout<<"(-1)이전 메뉴로 돌아가기";
-		cin.ignore(1);
 		while (1)
-		{
-			cin>>choice;
+		{	
+			cout<<"수정할 항목을 정하세요."<<endl;
+			cout<<"(1)비밀번호 (2) 전화번호 (3) 이름 (4) 연령대(20대, 30대, 40대, 50대, 60대)";
+			cout<<"(-1)이전 메뉴로 돌아가기 >>";
+			
+			cin.ignore(1);
+			cin>>chk;
+
+			if (chk == "1" || chk == "2"|| chk=="3" || chk=="4"||chk=="-1"){
+				choice = stoi(chk);
+			}
+			else{
+				cout<<"잘못입력하셨습니다\n"<<endl;
+				continue;
+			}
+
 			if (choice == -1)
 			{
 				return false;

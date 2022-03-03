@@ -360,10 +360,10 @@ int main()
                 //회원정보 수정하기 - user.cpp에 userUpdate가 있습니다.
                 // userUpdate()
                 t = userUpdate();
-                if (!t)
+                cout<<t<<endl;
+                if (t == 0)
                 {
                     menu_no = 0;
-                    break;
                 }
             }
 
