@@ -143,7 +143,7 @@ bool createUser(){
 	cout<<"회원 가입 선택하셨습니다";
 	cout<<" 계정 생성을 위한 정보 입력입니다."<<endl<<endl;
 
-	string id, password, phone, name, age;
+	string id, password, phone, name, age, chk;
 	int sex;
 	cout<<"아이디 >> ";
 	cin>>id;
@@ -157,13 +157,50 @@ bool createUser(){
 		cin>>password;
 		cout<<"전화번호 >>";
 		cin>>phone;
-		cout<<"이름 >>";
+		cout<<"이름 (3글자로 입력해주세요)>>";
 		cin>>name;
-		cout<<"연령대(20대, 30대, 40대, 50대, 60대) >>";
-		cin>>age;
-		cout<<"성별(남:0, 여:1) >>";
-		cin>>sex;
-		
+
+		while(1){
+			cout<<"연령대( (1).20대, (2).30대, (3).40대, (4).50대, (5).60대) >>";
+			cin>>chk;
+
+			if (chk == "1"){
+				age = "20대";
+				break;
+			}
+			else if (chk == "2"){
+				age = "30대";break;
+			}
+			else if (chk == "3"){
+				age = "40대";break;
+			}
+			else if (chk == "4"){
+				age = "50대";break;
+			}
+			else if (chk == "5"){
+				age = "60대";break;
+			}
+			else{
+				cout<<"다시 입력해주세요"<<endl;
+			}
+		}
+		while(1){
+			cout<<"성별(남:0, 여:1) >>";
+			cin>>chk;
+
+			if (chk == "0"){
+				sex = 0;
+				break;
+			}
+			else if (chk == "1"){
+				sex = 1;
+				break;
+			}
+			else{
+				cout<<"다시 입력해주세요"<<endl;
+			}
+		}
+	
 		int userid = userlist.lastUserId() +1;
 		userlist.addNode(userid, id, password, phone, name, age, sex);
 		appendInFile(userid, id, password, phone, name, age, sex);
