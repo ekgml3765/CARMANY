@@ -17,7 +17,7 @@ int menu_no;
 string id;
 int login;
 
-extern buylist mark[200];
+extern buylistC mark[200];
 extern int totalBuyList;
 
 int main()
@@ -348,7 +348,7 @@ int main()
             cout << "|      구매 리스트                                        회원정보 수정    |" << endl;
             cout << "|--------------------------------------------------------------------------|" << endl;
             viewMyCar(1);
-            menu_name = "CARMANY";
+            menu_no = 0;
 
             //회원정보 수정하기 - user.cpp에 userUpdate가 있습니다.
             //userUpdate
