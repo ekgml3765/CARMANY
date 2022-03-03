@@ -1,10 +1,12 @@
 #include "../header/car.h"
-#include <sstream>
+
 
 /*다희*/
 
 //전역변수
-//vector<Car> car_list = Car::openCarFile();
+extern string menu_name; 
+extern string id;
+extern int login;
 
 //static 변수 선언
 vector<Car> Car::car_list_v;
@@ -13,18 +15,110 @@ map<string, Car> Car::car_list_m;
 //생성자
 Car::Car(){};
 
-//객체출력
-void Car::print(){
-    cout << car_id << " " << brand << " " << name << " " << min_price
-    << " " << max_price << " " << type << " " << engine << " " << date
-    << " " << color << " " << size << " " << efficency
-    << " " << people << " " << stock << " " << total_stock;
+//상단바 출력
+void Car::navbarPrint(int login, string menu_name, string id){
+cout << endl;
+cout << endl;
+cout << "+--------------------------------------------------------------------------+" << endl;
+        cout << '|';
+        if (menu_name.length() % 2 == 0)
+        {
+            for (int i = 0; i < 34 - menu_name.length() / 2 + 1; i++)
+            {
+                cout << ' ';
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 34 - menu_name.length() / 2; i++)
+            {
+                cout << ' ';
+            }
+        }
+        cout << menu_name;
+        if (login == 1) // 로그인 안했을 때
+        {
+            for (int i = 0; i < 21 - menu_name.length() / 2; i++)
+            {
+                cout << ' ';
+            }
+            cout << "회원가입 / 로그인 |" << endl;
+        }
+        else  // 로그인 했을 때
+        {
+            for (int i=0; i < 42 - id.length() - menu_name.length(); i++)
+            {
+                cout << ' ';
+            }
+            cout << id << " 님 |"<< endl;
+        }
+
+        cout << "|--------------------------------------------------------------------------|" << endl;
 }
 
-//자동차 파일 읽어서 vector, map에 저장
-bool Car::openCarFile(ifstream &fin){
+//상세보기 출력
+void Car::detailPrint(int sales){
+    cout << car_id << " " << brand << "  " << name << "  " << min_price
+    << "  " << max_price << "  " << type << "  " << engine << "  " << date
+    << "  " << color << "  " << size << "  " << efficency
+    << " " << people << " " << sales;
+}
+
+
+//리스트 출력
+void Car::print(int sales){
+    cout << car_id;
+    for (int i=0; i < 3 - to_string(car_id).length(); i++)
+    {
+        cout << " ";
+    }
+    cout << brand;
+    for (int i=0; i < 9 - brand.length(); i++)
+    {
+        cout << " ";
+    }
+    cout << name;
+    for (int i=0; i < 14 - name.length(); i++)
+    {
+        cout << " ";
+    }
+    cout << min_price;
+    for (int i=0; i < 5 - to_string(min_price).length(); i++)
+    {
+        cout << " ";
+    }
+    cout << max_price;
+    for (int i=0; i < 5 - to_string(max_price).length(); i++)
+    {
+        cout << " ";
+    }
+    cout << type;
+    for (int i=0; i < 10 - type.length(); i++)
+    {
+        cout << " ";
+    }
+    cout << engine;
+    for (int i=0; i < 9 - engine.length(); i++)
+    {
+        cout << " ";
+    }
+    cout << date;
+    for (int i=0; i < 8 - date.length(); i++)
+    {
+        cout << " ";
+    }
+    cout << sales;
+    for (int i=0; i < 10 - to_string(sales).length(); i++)
+    {
+        cout << " ";
+    }
+}
+
+//자동차 파일 읽어서 자료구조 vector, map에 저장
+bool Car::openCarFile(string carfile_path){
 
     // 파일 열기 실패
+    ifstream fin(carfile_path);
     if(!fin) { 
 		cout << "Can't Open File";
         return false;
@@ -62,20 +156,40 @@ bool Car::openCarFile(ifstream &fin){
     return true;
 }
 
+//자료구조 다시 car.txt에 저장 -> 구매 등 변경사항 파일에 적용
+bool Car:: writeCarFile(string carfile_path){
+    
+    // 파일 열기 실패
+    ofstream fout(carfile_path, ios::out | ios::trunc); //쓰기모드, 다 지우고 다시 쓰기
+    if(!fout) {
+        cout << "car.txt 파일 열기 오류";
+        return false;
+    }
+    if (fout.is_open()){
+        for(int i = 0; i < car_list_v.size(); i++){
+            fout << car_list_v[i].car_id <<" " << car_list_v[i].brand << " " << car_list_v[i].name << " " << car_list_v[i].min_price 
+            << " " << car_list_v[i].max_price << " " << car_list_v[i].type << " "
+            << car_list_v[i].engine << " " << car_list_v[i].date << " " << car_list_v[i].color << " " << car_list_v[i].size
+            << " " << car_list_v[i].efficency << " " << car_list_v[i].people << " " << car_list_v[i].stock << " " << car_list_v[i].total_stock << endl;
+        }
+	}
+    fout.close();
+    return true;
+}
+
 //자동차 리스트
-bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page, int filter){
+bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page, int filter, bool is_reco){
      
-     int total_cars;
+     int total_cnt;
      vector<Car> tmp;
 
-     //카테고리
      switch(category){
-        //전체
+        //1.전체
         case 1:{
             tmp = car_list_v;
             break;
         }
-        //차종별
+        //2.차종별
         case 2:{
             for(int i = 0; i < car_list_v.size(); i++){
                 if(car_list_v[i].type == keyword)
@@ -83,7 +197,7 @@ bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page,
             }
             break;
         }
-        //엔진
+        //3.엔진
         case 3:{
             for(int i = 0; i < car_list_v.size(); i++){
                 if(car_list_v[i].engine == keyword)
@@ -91,7 +205,7 @@ bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page,
             }
             break;
         }
-        //자동차명
+        //4.자동차명
         case 4:{
             for(int i = 0; i < car_list_v.size(); i++){
                 if(car_list_v[i].name.find(keyword) != string::npos)
@@ -99,76 +213,139 @@ bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page,
             }
             break;
         }
+        //5.필터
+        case 5:{
+            switch(filter){
+                //출시순 정렬
+                case 1:{
+                    sort( list.begin( ), list.end( ), [ ]( const Car& a, const Car& b ){
+                        string a_date = a.getDate();
+                        string b_date = b.getDate();
+                        int a_year = stoi(a.date.substr(0, 4));
+                        int a_month = stoi(a.date.substr(5));
+                        int b_year = stoi(b.date.substr(0, 4));
+                        int b_month = stoi(b.date.substr(5));
+                        if(a_year == b_year)
+                            return a_month > b_month;
+                        return a_year > b_year;
+                    });
+                    break;
+                }
+                //낮은 가격순 정렬
+                case 2:{
+                    sort( list.begin( ), list.end( ), [ ]( const Car& a, const Car& b ){
+                        return a.getMinPrice() < b.getMinPrice();
+                    });
+                    break;
+                }
+                //높은 가격순 정렬
+                case 3:{
+                    sort( list.begin( ), list.end( ), [ ]( const Car& a, const Car& b ){
+                        return a.getMaxPrice() > b.getMaxPrice();
+                    });
+                    break;
+                }
+                //인기순 정렬
+                case 4:{
+                    sort( list.begin( ), list.end( ), [ ]( const Car& a, const Car& b ){
+                        int a_dif_stock = a.getTotalStock()-a.getStock();
+                        int b_dif_sock = b.getTotalStock()-b.getStock();
+                        return  a_dif_stock > b_dif_sock;
+                    });
+                    break;
+                }
+            }
+        }
     }
 
-     //필터
-     switch(filter){
-         //출시순
-         case 1:{
-            sort( list.begin( ), list.end( ), [ ]( const Car& a, const Car& b ){
-                string a_date = a.getDate();
-                string b_date = b.getDate();
-                int a_year = stoi(a.date.substr(0, 4));
-                int a_month = stoi(a.date.substr(5));
-                int b_year = stoi(b.date.substr(0, 4));
-                int b_month = stoi(b.date.substr(5));
-                if(a_year == b_year)
-                    return a_month > b_month;
-                return a_year > b_year;
-            });
-            break;
-         }
-         //최저가격순
-         case 2:{
-            sort( list.begin( ), list.end( ), [ ]( const Car& a, const Car& b ){
-                return a.getMinPrice() < b.getMinPrice();
-            });
-            break;
-         }
-         //최고가격순
-         case 3:{
-            sort( list.begin( ), list.end( ), [ ]( const Car& a, const Car& b ){
-                return a.getMaxPrice() > b.getMaxPrice();
-            });
-            break;
-         }
-         //인기순
-         case 4:{
-             break;
-         }
-     }
-
-    //필터 적용 안했을때 카테고리별로 tmp에 담음
-    if(filter == 0){
+    //리스트 변경할 경우
+    if(1 <= category && category <= 4){
         list = tmp;
-        total_cars = tmp.size();
+        total_cnt = tmp.size();
+    }else{ //리스트 그대로
+        total_cnt = list.size();
     }
-    //현재 list는 그대로에서 필터만 적용
-    else{
-        total_cars = list.size();
-    }
-      
-    cout << endl;
-    cout << "|  총 " << total_cars << "건 조회";
-    cout << "필터 [인기순/출시순/가격순]  |" << endl;
 
-    for(int i = 0; i < total_cars; i++){
-        cout << "|       " ; 
-        list[i].print();
-        cout << "          |" << endl;
+    //페이징
+    int item = 10;
+    int total_page = (total_cnt % item == 0)? total_cnt / item : (total_cnt / item)+1; //전체 페이지 수
+	int start_idx = (page - 1 ) * item; //시작 인덱스
+	int end_idx = start_idx + item - 1; //끝 인덱스
+
+    //상단바 - 출력
+    navbarPrint(login, menu_name, id);
+    if(is_reco == true){
+        cout << "|              연령대별 추천               브랜드별 추천               |" << endl;
+        cout << "|--------------------------------------------------------------------------|" << endl;
+        cout<< endl;
+        cout << "| 총 " << total_cnt << "건 조회" << endl;
+    }else{
+        cout << "|      전체            차종별            엔진            차 이름 검색      |" << endl;
+        cout << "|--------------------------------------------------------------------------|" << endl;
+        cout<< endl;
+        cout << "| 총 " << total_cnt << "건 조회";
+        cout << "               필터 [인기순/출시순/낮은 가격순/높은 가격순]  |" << endl;
+        cout << "|                                                                          |" << endl;
     }
-    cout << "|--------------------------------------------------------------------------|" << endl;
+   
+
+
+    //페이지에 해당되는 리스트 출력 
+    cout << "| n  brand    name          price     type      engine   date    sales     |" << endl;
+    cout << endl;
+    end_idx = (end_idx < total_cnt)? end_idx : total_cnt-1;
+	if(start_idx < total_cnt) {
+		for (int i = start_idx; i <= end_idx; i++) {
+			cout << "| " ; 
+            list[i].print(list[i].total_stock-list[i].stock);
+            cout << "|" << endl;
+
+		}
+        //페이지 번호 출력
+        cout << endl;
+        cout << "              [                   " ;
+        for(int i = 1; i <= total_page; i++){ 
+            if(i == page){
+                cout << "'" << i  << "'"<< "  ";
+            }else{
+                cout << i << "  ";
+            }
+        }
+        cout << "                    ]" << endl;
+        cout << endl;
+        cout << "|--------------------------------------------------------------------------|" << endl;
+        cout << endl;
+	}else{
+        cout << "|--------------------------------------------------------------------------|" << endl;
+        cout << endl;
+        return false;
+    }
     return true;
 }
 
 //자동차 상세보기
-bool Car::getCarInfo(string car_id){
+bool Car::getCarInfo(string car_id, bool is_reco){
     if(car_list_m.find(car_id) == car_list_m.end()) 
             return false;
     else{
-         Car car = car_list_m[car_id];
-         car.print();
-         cout << endl;
+        Car car = car_list_m[car_id];
+        //상단바 출력
+        navbarPrint(login, menu_name, id);
+        if(is_reco == true){
+            cout << "|              연령대별 추천               브랜드별 추천               |" << endl;
+            cout << "|--------------------------------------------------------------------------|" << endl;   
+        }else{
+            cout << "|      전체            차종별            엔진            차 이름 검색      |" << endl;
+            cout << "|--------------------------------------------------------------------------|" << endl;
+        }
+     
+        
+        
+        cout << "| " ; 
+        car.detailPrint(car.total_stock-car.stock);
+        cout << "|" << endl; 
+        cout << "|--------------------------------------------------------------------------|" << endl;
+        cout << endl;
     }
     return true;
 }
@@ -176,13 +353,13 @@ bool Car::getCarInfo(string car_id){
 //자동차 구매
 bool Car::getBuyCar(string car_id, int user_id, string username, string buyList_file){
     if(car_list_m.find(car_id) == car_list_m.end()){
-        cout << "해당 번호는 없는 번호입니다." << endl;
+        cout << "*해당 번호는 없는 번호입니다." << endl;
         return false;
     }else{
         Car car = car_list_m[car_id];
         //재고 없으면 구매 불가
         if(car.stock == 0){
-            cout << "해당 차량은 재고가 다 소진되어 구매가 불가능합니다." << endl;
+            cout << "*해당 차량은 재고가 다 소진되어 구매가 불가능합니다." << endl;
             return false;
         }
 
@@ -194,20 +371,20 @@ bool Car::getBuyCar(string car_id, int user_id, string username, string buyList_
         } 
 
         while(true){
-            cout << "구매하실 색상을 입력해주세요. ";
+            cout << "*구매하실 색상을 입력해주세요. ";
             cout << "(";
             for(int i = 0; i < color_list.size(); i++){
                 cout <<i+1 << "." << color_list[i] << " ";
             }
-            cout << "):";
+            cout << ") :";
             int color_num;
             cin >> color_num;
             if(color_num < 1 || color_num > color_list.size()){
-                cout << "해당 색상은 존재하지 않습니다." << endl;
+                cout << "*해당 색상은 존재하지 않습니다." << endl;
             }else{
                 color = color_list[color_num-1];
-                cout << car.name << "의 하위모델은 최저 " << car.min_price << "만원이며 상위모델은 최고 " << car.max_price << "만원입니다. " << endl; 
-                cout << "구매하실 모델을 선택해주세요. (1. 하위, 2.상위):";
+                cout << car.name << "의 하위 모델은 최저 " << car.min_price << "만원이며, 상위 모델은 최고 " << car.max_price << "만원 입니다. " << endl; 
+                cout << "*구매하실 모델을 선택해주세요. (1. 하위, 2. 상위): ";
                 string model_num;
                 cin >> model_num;
                 int price = (model_num == "1")? car.min_price : car.max_price;
@@ -215,8 +392,8 @@ bool Car::getBuyCar(string car_id, int user_id, string username, string buyList_
                 //파일 쓰기
                 ofstream fout(buyList_file, ios::app); //쓰기모드, 파일 끝에 추가
                 if(!fout) {
-                    cout << "구매리스트 파일 열기 오류";
-                    return 0;
+                    cout << "*구매리스트 파일 열기 오류";
+                    return false;
                 }
                 if (fout.is_open()){
 		            fout << user_id <<" " << car_id << " " << username << " " << car.name << " " << car.brand << " " << car.type << " "
@@ -234,7 +411,7 @@ bool Car::getBuyCar(string car_id, int user_id, string username, string buyList_
                 //map
                 car.stock--;
                 car_list_m[car_id] = car;
-                cout << car.name << " " << color << "색상 차량 구매가 성공적으로 이루어졌습니다." << endl;
+                cout << car.name << " " << color << "색상 차량 구매가 성공적으로 이루어졌습니다 !!" << endl;
                 break;
             }
          }
