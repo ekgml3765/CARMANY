@@ -35,6 +35,7 @@ public:
 	static map<string, Car> car_list_m;
 	Car();
 	void print();
+	void navbarPrint(int login, string menu_name, string id);
 	bool getCarList(int category, vector<Car> &list, string keyword = "", int page=1, int filter=0);
 	bool getCarInfo(string car_id);
 	bool getBuyCar(string car_id, int user_id, string username, string buyList_file);

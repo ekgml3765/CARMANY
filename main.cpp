@@ -1,11 +1,16 @@
 #include <iostream>
 #include "header/car.h"
 #include "header/user.h"
+#include "header/manager.h"
 using namespace std;
 
 int active_user_id = -1;
 string username;
 userLinkedList userlist;
+
+vector<Manager> managerVector;
+vector<buyList> buyListVector;
+
 
 int main(){
    

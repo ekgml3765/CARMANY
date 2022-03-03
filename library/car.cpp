@@ -11,6 +11,45 @@ map<string, Car> Car::car_list_m;
 //생성자
 Car::Car(){};
 
+//상단바 출력
+void Car::navbarPrint(int login, string menu_name, string id){
+cout << "+--------------------------------------------------------------------------+" << endl;
+        cout << '|';
+        if (menu_name.length() % 2 == 0)
+        {
+            for (int i = 0; i < 34 - menu_name.length() / 2 + 1; i++)
+            {
+                cout << ' ';
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 34 - menu_name.length() / 2; i++)
+            {
+                cout << ' ';
+            }
+        }
+        cout << menu_name;
+        if (login == 1) // 로그인 안했을 때
+        {
+            for (int i = 0; i < 21 - menu_name.length() / 2; i++)
+            {
+                cout << ' ';
+            }
+            cout << "회원가입 / 로그인 |" << endl;
+        }
+        else  // 로그인 했을 때
+        {
+            for (int i=0; i < 42 - id.length() - menu_name.length(); i++)
+            {
+                cout << ' ';
+            }
+            cout << id << " 님 |"<< endl;
+        }
+
+        cout << "|--------------------------------------------------------------------------|" << endl;
+}
+
 //객체출력
 void Car::print(){
     cout << right << setw(20) << fixed << car_id << " " << brand << " " << name << " " << min_price
@@ -177,6 +216,12 @@ bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page,
 	int start_idx = (page - 1 ) * item; //시작 인덱스
 	int end_idx = start_idx + item - 1; //끝 인덱스
 
+    //상단바
+    cout << "|--------------------------------------------------------------------------|" << endl;
+    cout << "|      전체            차종별            엔진            차 이름 검색      |" << endl;
+    cout << "|--------------------------------------------------------------------------|" << endl;
+
+
     //페이지에 해당되는 리스트 출력
     cout << endl;
     cout << "|  총 " << total_cnt << "건 조회";
@@ -213,8 +258,12 @@ bool Car::getCarInfo(string car_id){
             return false;
     else{
          Car car = car_list_m[car_id];
-         car.print();
-         cout << endl;
+            //상단바
+        cout << "|--------------------------------------------------------------------------|" << endl;
+        cout << "|      전체            차종별            엔진            차 이름 검색      |" << endl;
+        cout << "|--------------------------------------------------------------------------|" << endl; 
+        car.print();
+        cout << endl;
     }
     return true;
 }
