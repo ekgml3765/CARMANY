@@ -295,7 +295,7 @@ int main()
                 int reco_menu_num = 9;
                 vector<Car> list = car.car_list_v; //페이징 처리를 위해 담을 리스트 초기화
                 string brand[] = {"KIA", "HYUNDAI", "GENESIS"};
-                string age[] = {"10대", "20대", "30대", "40대", "50대"};
+                string age[] = {"20대", "30대", "40대", "50대"};
                 while(true){
                     //초기 현대 브랜드 리스트 뿌리기
                     if(reco_menu_num == 9){
@@ -313,7 +313,7 @@ int main()
                     }
                     //연령별 추천
                     else if(reco_menu_num == 1){
-                        cout << "추천받으실 연령대를 고르세요. (1.10대, 2.20대, 3.30대 4.40대 5.50대):";
+                        cout << "추천받으실 연령대를 고르세요. (1.20대, 2.30대, 3.40대 4.50대):";
                         int age_no;
                         cin >> age_no;
                         car.getRecoListByAge(age[age_no-1], list, buyList_file, userfile_path);
