@@ -51,6 +51,12 @@ public:
 	string getDate() const{ return date;}
 	int getStock() const{ return stock;}
 	int getTotalStock() const{ return total_stock;}
+	string getName() const{return name;}
+	string getBrand() const{return brand;}
+	int getCarId() const{return car_id;}
+	string getType() const{return type;}
+	string getColor() const{return color;}
+	string getEngine() const{return engine;}
 
 	//추천
 	bool getRecoListByBrand(string brandname, vector<Car> &list, int page=1);
