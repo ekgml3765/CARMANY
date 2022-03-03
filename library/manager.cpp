@@ -46,6 +46,7 @@ void getManagerList(){
 
 bool managerLogin(){
     char id[256], password[256];
+    callPrint("CARMANY", "");
 
     cout<<"관리자 로그인 선택하였습니다"<<endl;
     cout<<"아이디와 비밀번호 입력해주세요\n"<<endl;
@@ -58,8 +59,8 @@ bool managerLogin(){
   for(int i = 0; i < managerVector.size(); i++){
         if ((strcmp(id, managerVector[i].id)==0)&&(strcmp(password, managerVector[i].password)==0)){
             manager_id = managerVector[i].manager_id;
+            callPrint("Manager", id);
             cout<<"관리자 로그인 되었습니다."<<endl;
-            cout<<id<<"매니저님 환영합니다!"<<endl;
             return true;
         }
     }
@@ -164,6 +165,7 @@ bool outputBuyList(){
     }
 
     for(int i=0; i<buyListVector.size(); i++){
+        //네모에 출력될 내용
         cout<<to_string(i+1)<<" "<<buyListVector[i].buyer<<" "<<buyListVector[i].carname<<" "<<buyListVector[i].brand<<" "<<buyListVector[i].engine<<" "<<buyListVector[i].color<<" "<<buyListVector[i].price<<"\n";
     }
     return true;
@@ -188,7 +190,53 @@ bool buyListCarcnt(int& total_sales){
 
 bool stockOutput(int m_choice){
     if (m_choice == 1){
+        string menu_name = "MANAGER", id="";
+    cout << "+--------------------------------------------------------------------------+" << endl;
+        cout << '|';
+        if (menu_name.length() % 2 == 0)
+        {
+            for (int i = 0; i < 34 - menu_name.length() / 2 + 1; i++)
+            {
+                cout << ' ';
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 34 - menu_name.length() / 2; i++)
+            {
+                cout << ' ';
+            }
+        }
+        cout << menu_name;
+        id = "";
+
+        for (int i=0; i < 42 - id.length() - menu_name.length(); i++)
+        {
+            cout << ' ';
+        }
+        cout <<"관리자님 |"<< endl;
+        cout << "|--------------------------------------------------------------------------|" << endl;
+        cout << "|                       전체 재고               상품별 재고                |" << endl;
+        cout << "|--------------------------------------------------------------------------|" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                            ** 전체 재고 확인                             |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "+--------------------------------------------------------------------------+" << endl;
+        
         int total =0, total_sales=0;
+        //네모에 들어가는 내용
         cout<<"전체 수량 확인을 선택하셨습니다.\n";
         // if (carListcnt(total)){
             cout<<"현재 재고 수량"<<total<<"\n";
@@ -256,6 +304,51 @@ bool buyListOutput(int m_choice){
         return outputBuyList();
     }
     else if (m_choice == 2){
+        string menu_name = "MANAGER", id="";
+        cout << "+--------------------------------------------------------------------------+" << endl;
+        cout << '|';
+        if (menu_name.length() % 2 == 0)
+        {
+            for (int i = 0; i < 34 - menu_name.length() / 2 + 1; i++)
+            {
+                cout << ' ';
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 34 - menu_name.length() / 2; i++)
+            {
+                cout << ' ';
+            }
+        }
+        cout << menu_name;
+        id = "";
+
+        for (int i=0; i < 42 - id.length() - menu_name.length(); i++)
+        {
+            cout << ' ';
+        }
+        cout <<"관리자님 |"<< endl;
+        cout << "|--------------------------------------------------------------------------|" << endl;
+        cout << "|    전체 구매 리스트        차량별 구매 리스트         회원별 구매 리스트   |" << endl;
+        cout << "|--------------------------------------------------------------------------|" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                            전체 구매 리스트                               |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                            차량별 구매 리스트                             |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                            **회원별 구매리스트                           |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "|                                                                          |" << endl;
+        cout << "+--------------------------------------------------------------------------+" << endl;
+        
         string name;
         cout<<"검색할 회원명을 입력하세요.:";
         cin>>name;
