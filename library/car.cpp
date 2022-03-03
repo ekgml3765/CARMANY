@@ -4,7 +4,7 @@
 /*다희*/
 
 //전역변수
-extern string menu_name; 
+extern int menu_no; 
 extern string id;
 extern int login;
 
@@ -16,21 +16,24 @@ map<string, Car> Car::car_list_m;
 Car::Car(){};
 
 //상단바 출력
-void Car::navbarPrint(int login, string menu_name, string id){
+
+
+void Car::navbarPrint(int login, int menu_no, string id){
+string menu_name[] = {"CARMANY", "CARLIST", "CAR Recommend", "MYPAGE", "MANAGER"};
 cout << endl;
 cout << endl;
 cout << "+--------------------------------------------------------------------------+" << endl;
         cout << '|';
-        if (menu_name.length() % 2 == 0)
+        if (menu_name[menu_no].length() % 2 == 0)
         {
-            for (int i = 0; i < 34 - menu_name.length() / 2 + 1; i++)
+            for (int i = 0; i < 34 - menu_name[menu_no].length() / 2 + 1; i++)
             {
                 cout << ' ';
             }
         }
         else
         {
-            for (int i = 0; i < 34 - menu_name.length() / 2; i++)
+            for (int i = 0; i < 34 - menu_name[menu_no].length() / 2; i++)
             {
                 cout << ' ';
             }
@@ -38,7 +41,7 @@ cout << "+----------------------------------------------------------------------
         cout << menu_name;
         if (login == 1) // 로그인 안했을 때
         {
-            for (int i = 0; i < 21 - menu_name.length() / 2; i++)
+            for (int i = 0; i < 21 - menu_name[menu_no].length() / 2; i++)
             {
                 cout << ' ';
             }
@@ -46,7 +49,7 @@ cout << "+----------------------------------------------------------------------
         }
         else  // 로그인 했을 때
         {
-            for (int i=0; i < 42 - id.length() - menu_name.length(); i++)
+            for (int i=0; i < 42 - id.length() - menu_name[menu_no].length(); i++)
             {
                 cout << ' ';
             }
@@ -273,7 +276,7 @@ bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page,
 	int end_idx = start_idx + item - 1; //끝 인덱스
 
     //상단바 - 출력
-    navbarPrint(login, menu_name, id);
+    navbarPrint(login, menu_no, id);
     if(is_reco == true){
         cout << "|              연령대별 추천               브랜드별 추천               |" << endl;
         cout << "|--------------------------------------------------------------------------|" << endl;
@@ -330,7 +333,7 @@ bool Car::getCarInfo(string car_id, bool is_reco){
     else{
         Car car = car_list_m[car_id];
         //상단바 출력
-        navbarPrint(login, menu_name, id);
+        navbarPrint(login, menu_no, id);
         if(is_reco == true){
             cout << "|              연령대별 추천               브랜드별 추천               |" << endl;
             cout << "|--------------------------------------------------------------------------|" << endl;   

@@ -1,7 +1,7 @@
 #include "../header/car.h"
 
 //전역변수
-extern string menu_name; 
+extern int menu_no; 
 extern string id;
 extern int login;
 
@@ -83,7 +83,7 @@ bool Car::getRecoListByAge(string age, vector<Car> &list, string buyList_file, s
 
     list = tmp;
     int total_cnt = list.size();    
-    navbarPrint(login, menu_name, id);
+    navbarPrint(login, menu_no, id);
     cout << "|              연령대별 추천               브랜드별 추천               |" << endl;
     cout << "|--------------------------------------------------------------------------|" << endl;
                    
@@ -151,7 +151,7 @@ bool Car::getRecoListByBrand(string brand, vector<Car> &list, int page){
         return  a_dif_stock > b_dif_sock;
     }); 
 
-    navbarPrint(login, menu_name, id);
+    navbarPrint(login, menu_no, id);
     cout << "|              연령대별 추천               브랜드별 추천               |" << endl;
     cout << "|--------------------------------------------------------------------------|" << endl;
      

@@ -11,7 +11,7 @@ vector<Manager> managerVector;
 vector<buyList> buyListVector;
 userLinkedList userlist;
 string username;
-string menu_name; 
+int menu_no; 
 string id;
 int login;
 
@@ -19,7 +19,7 @@ int main()
 {
     //user.txt 열고 userlist 생성
     openFile();
-    userlist.show();
+
     //관리자 자료구조 호출
     getManagerList();
     //buyList 호출
@@ -28,7 +28,7 @@ int main()
     //Car::openCarFile("car.txt");
     Car::openCarFile("C:\\Users\\user\\Documents\\GitHub\\data\\car.txt");
 
-    menu_name = "MANAGER";
+    menu_no = 0; //0.{"CARMANY", "CARLIST", "CAR Recommend", "MYPAGE", "MANAGER"}
     id = "";
     login = 1;
 
@@ -46,6 +46,8 @@ int main()
     //string buyList_file = "./user.txt";
     // Car::openCarFile(carfile_path);
 
+
+    //CARMANY = 0, CARLIST = , CARRECO = 3, MYPATE = 4 , MANAGER =5
     while(1)
     {
         if (login == -1)
@@ -55,14 +57,14 @@ int main()
         }
         if (id == "관리자")
         {
-            menu_name = "Manager";
+            menu_no = 4;
         }
 
         // ui 시작
-        if(menu_name != "CARLIST")
-            car.navbarPrint(login, menu_name, id);
+        if(menu_no != 1 || menu_no != 2)
+            car.navbarPrint(login, menu_no, id);
 
-        if (menu_name == "CARMANY")
+        if (menu_no == 0)
         {
             cout << "|      차량 구매                차량 추천                  마이페이지      |" << endl;
             cout << "|--------------------------------------------------------------------------|" << endl;
@@ -116,7 +118,7 @@ int main()
                 else if (choice == 3){
                     cout<<"비회원으로 로그인하셨습니다. !! 비회원 계정은 검색만 가능합니다."<<endl;
                     username = "비회원";
-                    menu_name = "CARLIST";
+                    menu_no = 1;
                     continue;
                 }
                 else if (choice == 4){
@@ -124,7 +126,7 @@ int main()
                         continue;
                     }
                     else{
-                        menu_name = "MANAGER";
+                        menu_no = 4;
                         login = 0;
                         id = "관리자";
                         continue;
@@ -137,17 +139,17 @@ int main()
                 cin >> order1;
                 if (order1 == 1)
                 {
-                    menu_name = "CARLIST";
+                    menu_no = 1;
                     break;
                 }
                 else if (order1 == 2)
                 {
-                    menu_name = "CAR Recommend";
+                    menu_no = 2;
                     break;
                 }
                 else if (order1 == 3)
                 {
-                    menu_name = "MYPAGE";
+                    menu_no = 3;
                     break;
                 }
                 else if (order1 == 4)
@@ -180,7 +182,7 @@ int main()
             continue;
 
         }
-        if (menu_name == "CARLIST")
+        if (menu_no == 1)
         {
                 
                 vector<Car> list = car.car_list_v; //페이징 처리를 위해 담을 리스트 초기화
@@ -271,18 +273,18 @@ int main()
                     if(car_menu_num == -1)
                         break;
                 } 
-                menu_name = "CARMANY";       
+                menu_no = 0;       
                 continue;
         }
 
 
 
-        if (menu_name == "CAR Recommend")
+        if (menu_no == 2)
         {
             cout << "|   연령대별 추천       성별 추천       브랜드별 추천        개인화 추천   |" << endl;
             cout << "|--------------------------------------------------------------------------|" << endl;
         }
-        if (menu_name == "MYPAGE")
+        if (menu_no == 3)
         {
 
             
@@ -294,7 +296,7 @@ int main()
             
         }
 
-        if (menu_name == "MANAGER")  // 관리자는 로그아웃하지 않는 이상 이 안에서만 놀게함 -> 얘는 디폴트 화면 -> order2에 20000할당
+        if (menu_no == 4)  // 관리자는 로그아웃하지 않는 이상 이 안에서만 놀게함 -> 얘는 디폴트 화면 -> order2에 20000할당
         {
             if (order2 == 20000)
             {

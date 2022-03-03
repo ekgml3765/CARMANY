@@ -17,7 +17,7 @@ extern vector<Manager> managerVector;
 extern vector<buyList> buyListVector;
 extern userLinkedList userlist;
 extern int manager_id;
-vector<Car> tmp = Car::car_list_v;
+
 
 void getManagerList(){
     string line, word;
@@ -180,6 +180,7 @@ bool buyListCarcnt(int& total_sales){
 }
 
 bool carListcnt(int& total){
+    vector<Car> tmp = Car::car_list_v;
     if (tmp.empty()) return false;
 
     for(int i=0; i<=tmp.size(); i++){
@@ -203,6 +204,7 @@ bool stockOutput(int m_choice){
         return false;
     }
     else if (m_choice == 2){
+        vector<Car> tmp = Car::car_list_v;
         for(int i=0; i<tmp.size(); i++){
             cout<<i+1<<tmp[i].getName()<<tmp[i].getBrand()<<tmp[i].getTotalStock()<<tmp[i].getStock()<<endl;
         }
@@ -326,6 +328,8 @@ int compare(const pair<int, int>& a, const pair<int, int>& b){
 }
 
 bool statistics(){
+    vector<Car> tmp = Car::car_list_v;
+    cout << tmp.size() << endl;
     cout<<"|                 통계 선택하셨습니다.                 |"<<endl;
     cout<<"|    성별에 따라 최다 판매된 상품 10개를 출력해드립니다. | "<<endl;
     cout << "|--------------------------------------------------------------------------|" << endl;
