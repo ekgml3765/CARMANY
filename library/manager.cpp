@@ -80,13 +80,14 @@ bool appendCarFile(){
     ifstream fin;
     string line, word;
     vector<string> v;
-
-	fout.open("car.txt", ios::app);
+    int cnt =0;
+    
+	fout.open("car.txt", ios::out | ios::app);
 	// fout.open("C:\\Users\\user\\Documents\\GitHub\\data\\car.txt", ios::app);
 	fin.open("inputCar.txt");
 	// fin.open("C:\\Users\\user\\Documents\\GitHub\\data\\inputCar.txt");
 
-    if (fout.is_open()&&fin.is_open()){
+    if (fout.is_open()&&fin.is_open()){;
         while(getline(fin,line)){
             istringstream ss(line);
             v.clear();
