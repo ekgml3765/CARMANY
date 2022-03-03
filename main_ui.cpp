@@ -2,14 +2,30 @@
 #include <string>
 #include "header/car.h"
 #include "header/user.h"
+#include "header/buylist.h"
 using namespace std;
+
 
 int active_user_id = -1;
 string username;
 userLinkedList userlist;
 
+extern buylist mark[200];
+extern int totalBuyList;
+
 int main()
 {
+
+
+    /*자동차 데이터 세팅*/
+    Car car;
+    // ifstream fin("C:\\Users\\user\\Documents\\GitHub\\data\\car.txt");
+    ifstream fin("./car.txt"); //linux
+    // string buyList_file = "C:\\Users\\user\\Documents\\GitHub\\data\\buyList.txt";
+    //string buyList_file = "./buyList.txt";
+    Car::openCarFile(fin);
+
+    getMyCarList();
 
 
 
@@ -21,7 +37,7 @@ int main()
     menu_name = "CARMANY";
 
     string id; // 로그인 했을 때 아이디
-    id = "관리자";
+    id = "모비스";
 
     int login; // 로그인시 0, 비회원 1, 종료 -1
     login = 0;
@@ -127,23 +143,27 @@ int main()
                 else if (order1 == 4)
                 {
                     char o;
-                    cout << "정말 종료하시겠습니까? (y/n)";
-                    cin >> o;
-                    if (o == 'y' || o == 'Y')
+                    while (1)
                     {
-                        login = -1;
-                        break;
+                        cout << "정말 종료하시겠습니까? (y/n)";
+                        cin >> o;
+                        if (o == 'y' || o == 'Y')
+                        {
+                            login = -1;
+                            break;
+                        }
+                        else if (o == 'n' || o == 'N')
+                        {
+                            // cout << "메뉴를 선택해주세요.(1. 차량구매 2. 차량 추천 3. 마이페이지 4. 프로그램 종료)" << endl;
+                            break;
+                        }
+                        else
+                        {
+                            cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
+                            continue;
+                        }
                     }
-                    else if (o == 'n' || o == 'N')
-                    {
-                        cout << "메뉴를 선택해주세요.(1. 차량구매 2. 차량 추천 3. 마이페이지 4. 프로그램 종료)" << endl;
-                        continue;
-                    }
-                    else
-                    {
-                        cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
-                        continue;
-                    }
+                    break;
                     
                 }
                 else
@@ -193,6 +213,7 @@ int main()
             else if (order2 == 20000)
             {
                 // 자동차 전체 리스트 출력하는 함수
+                car.getCarList(1, 1);
             }
             else if (order2 >= 30001 && order2 <= 30005)
             {
@@ -404,10 +425,10 @@ int main()
         }
         if (menu_name == "MYPAGE")
         {
-
-            
-            cout << "|      구매 리스트              찜 리스트                 회원정보 수정    |" << endl;
+            cout << "|      구매 리스트                                        회원정보 수정    |" << endl;
             cout << "|--------------------------------------------------------------------------|" << endl;
+            viewMyCar(1);
+            menu_name = "CARMANY";
             
         }
 
