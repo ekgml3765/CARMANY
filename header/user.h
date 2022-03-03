@@ -3,6 +3,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
+#include <vector>
 
 using namespace std;
 
@@ -187,7 +189,7 @@ class userLinkedList{
 
 			while(ptr!=nullptr){
 				if (ptr->user_id == user_id){
-					cout<<ptr->sex<<"ptr->sex"<<endl;
+					// cout<<ptr->sex<<"ptr->sex"<<endl;
 					get_gender = ptr->sex;
 					break;
 				}
