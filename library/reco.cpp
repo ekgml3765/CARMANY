@@ -84,7 +84,7 @@ bool Car::getRecoListByAge(string age, vector<Car> &list, string buyList_file, s
     list = tmp;
     int total_cnt = list.size();    
     navbarPrint(login, menu_no, id);
-    cout << "|              연령대별 추천               브랜드별 추천               |" << endl;
+    cout << "|              연령대별 추천               브랜드별 추천                   |" << endl;
     cout << "|--------------------------------------------------------------------------|" << endl;
                    
     
@@ -96,11 +96,17 @@ bool Car::getRecoListByAge(string age, vector<Car> &list, string buyList_file, s
 	int end_idx = start_idx + item - 1; //끝 인덱스
 
     //페이지에 해당되는 리스트 출력
-    cout << endl;
     cout << "| 총 " << total_cnt << "건 조회";
-    cout << "|                                                                          |" << endl;
+    if (to_string(total_cnt).length() == 2)
+    {
+        cout << "                                                             |" << endl;
+    }
+    else if (to_string(total_cnt).length() == 1)
+    {
+        cout << "                                                              |" << endl;
+    }
     cout << "| n  brand    name          price     type      engine   date    sales     |" << endl;
-
+                     
     end_idx = (end_idx < total_cnt)? end_idx : total_cnt-1;
 	if(start_idx < total_cnt) {
 		for (int i = start_idx; i <= end_idx; i++) {
@@ -110,21 +116,27 @@ bool Car::getRecoListByAge(string age, vector<Car> &list, string buyList_file, s
 
 		}
         //페이지 번호 출력
-        cout << endl;
-        cout << "              [                   " ;
+        cout << "|                                                                          |" << endl;
+        cout << "|    " ;
+        int cnt=0;
         for(int i = 1; i <= total_page; i++){ 
             if(i == page){
                 cout << "'" << i  << "'"<< "  ";
+                cnt+=4;
             }else{
                 cout << i << "  ";
+                cnt+=3;
             }
         }
-        cout << "                    ]" << endl;
-        cout << endl;
-        cout << "|--------------------------------------------------------------------------|" << endl;
+        for (int i = 0; i < 69 - cnt; i++)
+        {
+            cout << " ";
+        }
+        cout << "|" << endl;
+        cout << "+--------------------------------------------------------------------------+" << endl;
         cout << endl;
 	}else{
-        cout << "|--------------------------------------------------------------------------|" << endl;
+        cout << "+--------------------------------------------------------------------------+" << endl;
         cout << endl;
         return false;
     }
@@ -152,9 +164,9 @@ bool Car::getRecoListByBrand(string brand, vector<Car> &list, int page){
     }); 
 
     navbarPrint(login, menu_no, id);
-    cout << "|              연령대별 추천               브랜드별 추천               |" << endl;
+    cout << "|              연령대별 추천               브랜드별 추천                   |" << endl;
     cout << "|--------------------------------------------------------------------------|" << endl;
-     
+
     
     //페이징
     int item = 10;
@@ -163,9 +175,15 @@ bool Car::getRecoListByBrand(string brand, vector<Car> &list, int page){
 	int end_idx = start_idx + item - 1; //끝 인덱스
 
     //페이지에 해당되는 리스트 출력
-    cout << endl;
     cout << "| 총 " << total_cnt << "건 조회";
-    cout << "|                                                                          |" << endl;
+    if (to_string(total_cnt).length() == 2)
+    {
+        cout << "                                                             |" << endl;
+    }
+    else if (to_string(total_cnt).length() == 1)
+    {
+        cout << "                                                              |" << endl;
+    }
     cout << "| n  brand    name          price     type      engine   date    sales     |" << endl;
 
     end_idx = (end_idx < total_cnt)? end_idx : total_cnt-1;
@@ -177,21 +195,27 @@ bool Car::getRecoListByBrand(string brand, vector<Car> &list, int page){
 
 		}
         //페이지 번호 출력
-        cout << endl;
-        cout << "              [                   " ;
+        cout << "|                                                                          |" << endl;
+        cout << "|    " ;
+        int cnt=0;
         for(int i = 1; i <= total_page; i++){ 
             if(i == page){
                 cout << "'" << i  << "'"<< "  ";
+                cnt+=4;
             }else{
                 cout << i << "  ";
+                cnt+=3;
             }
         }
-        cout << "                    ]" << endl;
-        cout << endl;
-        cout << "|--------------------------------------------------------------------------|" << endl;
+        for (int i = 0; i < 69 - cnt; i++)
+        {
+            cout << " ";
+        }
+        cout << "|" << endl;
+        cout << "+--------------------------------------------------------------------------+" << endl;
         cout << endl;
 	}else{
-        cout << "|--------------------------------------------------------------------------|" << endl;
+        cout << "+--------------------------------------------------------------------------+" << endl;
         cout << endl;
         return false;
     }
