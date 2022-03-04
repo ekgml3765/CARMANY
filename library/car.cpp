@@ -138,7 +138,7 @@ bool Car::openCarFile(string carfile_path){
     // 파일 열기 실패
     ifstream fin(carfile_path);
     if(!fin) { 
-		cout << "Can't Open File";
+		cout << "Can't Open Car File";
         return false;
 	}
 
@@ -304,11 +304,11 @@ bool Car::getCarList(int category,  vector<Car> &list, string keyword, int page,
         cout << "| 총 " << total_cnt << "건 조회";
         if (to_string(total_cnt).length() == 2)
         {
-        cout << "               필터 [인기순/출시순/낮은 가격순/높은 가격순]  |" << endl;
+        cout << "               필터 [출시순/낮은 가격순/높은 가격순/인기순]  |" << endl;
         }
         else if (to_string(total_cnt).length() == 1)
         {
-        cout << "                필터 [인기순/출시순/낮은 가격순/높은 가격순]  |" << endl;
+        cout << "                필터 [출시순/낮은 가격순/높은 가격순/인기순]  |" << endl;
         }
         cout << "|                                                                          |" << endl;
     }
