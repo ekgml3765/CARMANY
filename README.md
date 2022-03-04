@@ -4,7 +4,8 @@
 - **프로젝트명**: CARMANY 카매니
 - **슬로건:** 자동차 거래 시스템
 - **개발 기간**: 22.02.25~ 22.03.03 (1주)
-- **개발 환경**: C, C++, Raspbian**,** GitHub
+- **개발 환경**: C, C++, Raspbian, GitHub
+- **공동 문서**: https://splashy-twill-960.notion.site/e0fde5eadcde4fec8367db233b7a00fc
 
 
 
