@@ -167,7 +167,13 @@ bool outputBuyList(){
 
     for(int i=0; i<buyListVector.size(); i++){
         //네모에 출력될 내용
-        cout<<"   "<<to_string(i+1)<<"      "<<buyListVector[i].buyer<<"      "<<buyListVector[i].carname<<"      "<<buyListVector[i].brand<<"      "<<buyListVector[i].engine<<"      "<<buyListVector[i].color<<"      "<<buyListVector[i].price<<endl;
+        cout<<"  "<<to_string(i+1)<<" "<<buyListVector[i].buyer<<" "<<buyListVector[i].carname;
+        string tmp = buyListVector[i].carname;
+        for(int i=0; i < 16 - tmp.length(); i++)
+        {
+            cout << " ";
+        }
+        cout<<buyListVector[i].brand<<"  "<<buyListVector[i].engine<<"  "<<buyListVector[i].color<<"  "<<buyListVector[i].price<<endl;
     }
     return true;
 }
@@ -216,15 +222,23 @@ bool stockOutput(int m_choice){
 
 bool find_By_param_buyList(int m_choice, string param){
     cout << "----------------------------------------------------------------------------" << endl;
-    cout<<  "|        구매자   차량 이름   브랜드   차종  엔진  색상                    |"<<endl;
-    cout << "----------------------------------------------------------------------------" << endl;
+    // cout<<  "|        구매자   차량 이름   브랜드   차종  엔진  색상                    |"<<endl;
+    // cout << "----------------------------------------------------------------------------" << endl;
 
     bool flag = false;
     if (m_choice == 0){
         for(int i=0; i<buyListVector.size(); i++){
             if (buyListVector[i].buyer == param){
                 flag = true;
-                cout<<"   "<<buyListVector[i].buyer<<"      "<<buyListVector[i].carname<<"      "<<buyListVector[i].brand<<"      "<<buyListVector[i].carType<<"      "<<buyListVector[i].engine<<"      "<<buyListVector[i].color<<endl;
+                // cout<<"   "<<buyListVector[i].buyer<<"      "<<buyListVector[i].carname<<"      "<<buyListVector[i].brand<<"      "
+                // <<buyListVector[i].carType<<"      "<<buyListVector[i].engine<<"      "<<buyListVector[i].color<<endl;
+                cout<<"  "<<buyListVector[i].buyer<<" "<<buyListVector[i].carname;
+                string tmp = buyListVector[i].carname;
+                for(int i=0; i < 16 - tmp.length(); i++)
+                {
+                    cout << " ";
+                }
+                cout<<buyListVector[i].brand<<"  "<<buyListVector[i].carType<<"  "<<buyListVector[i].engine<<"  "<<buyListVector[i].color<<endl;
             }
         }
 
@@ -239,7 +253,15 @@ bool find_By_param_buyList(int m_choice, string param){
         for(int i=0; i<buyListVector.size(); i++){
             if (buyListVector[i].brand == param){
                 flag = true;
-                cout<<"   "<<buyListVector[i].buyer<<"  "<<buyListVector[i].carname<<"  "<<buyListVector[i].brand<<"  "<<buyListVector[i].carType<<"  "<<buyListVector[i].engine<<"  "<<buyListVector[i].color<<endl;
+                // cout<<"   "<<buyListVector[i].buyer<<"      "<<buyListVector[i].carname<<"      "<<buyListVector[i].brand<<"      "
+                // <<buyListVector[i].carType<<"      "<<buyListVector[i].engine<<"      "<<buyListVector[i].color<<endl;
+                cout<<"  "<<buyListVector[i].buyer<<" "<<buyListVector[i].carname;
+                string tmp = buyListVector[i].carname;
+                for(int i=0; i < 16 - tmp.length(); i++)
+                {
+                    cout << " ";
+                }
+                cout<<buyListVector[i].brand<<"  "<<buyListVector[i].carType<<"  "<<buyListVector[i].engine<<"  "<<buyListVector[i].color<<endl;
             }
         }
 
