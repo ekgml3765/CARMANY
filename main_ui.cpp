@@ -589,6 +589,19 @@ int main()
                         billing(2);
 
                     }
+                    string chk;
+
+                    while(1){
+                        cout<<"메인으로 돌아가시겠습니까? (-1 입력)>>";
+                        cin >>chk;
+
+                        if (chk == "-1"){
+                            break;
+                        } 
+                        else{
+                            cout<<"잘못 입력하셨습니다!"<<endl;
+                        }
+                    }
                     order2 = 20000;
                     continue;
                 }
