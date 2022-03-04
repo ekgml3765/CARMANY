@@ -27,6 +27,7 @@ bool userLogout();
 bool userUpdate();
 bool createUser();
 void appendInFile(int userid, string id, string password, string phone, string name, string age, int sex);
+bool exception(int s, int e, int& tmp);
 
 class userLinkedList{
 	userNode *HEAD;
