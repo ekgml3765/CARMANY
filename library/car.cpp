@@ -399,14 +399,17 @@ bool Car::getBuyCar(string car_id, int user_id, string username, string buyList_
         } 
 
         while(true){
+            try{
             cout << "*구매하실 색상을 입력해주세요. ";
             cout << "(";
             for(int i = 0; i < color_list.size(); i++){
                 cout <<i+1 << "." << color_list[i] << " ";
             }
             cout << ") :";
-            int color_num;
-            cin >> color_num;
+            
+            string n;
+            cin >> n;
+            int color_num = stoi(n);
             if(color_num < 1 || color_num > color_list.size()){
                 cout << "*해당 색상은 존재하지 않습니다." << endl;
             }else{
@@ -415,8 +418,15 @@ bool Car::getBuyCar(string car_id, int user_id, string username, string buyList_
                 cout << "*구매하실 모델을 선택해주세요. (1. 하위, 2. 상위): ";
                 string model_num;
                 cin >> model_num;
-                int price = (model_num == "1")? car.min_price : car.max_price;
-                
+                int price;
+                if(model_num == "1")
+                    price = car.min_price;
+                else if(model_num == "2")
+                    price = car.max_price;
+                else{
+                    cout << "잘못된 모델을 선택하셨습니다. 다시 입력해주세요";
+                    continue;
+                }
                 //파일 쓰기
                 ofstream fout(buyList_file, ios::app); //쓰기모드, 파일 끝에 추가
                 if(!fout) {
@@ -441,6 +451,10 @@ bool Car::getBuyCar(string car_id, int user_id, string username, string buyList_
                 car_list_m[car_id] = car;
                 cout << car.name << " " << color << "색상 차량 구매가 성공적으로 이루어졌습니다 !!" << endl;
                 break;
+                }
+            }catch(std::exception & e){
+                cout << "*잘못된 입력입니다! 다시 입력해주세요." << endl;
+                continue;
             }
          }
          cout << endl;

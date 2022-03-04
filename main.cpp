@@ -210,16 +210,17 @@ int main()
         if (menu_no == 1)
         {        
                 vector<Car> list = car.car_list_v; //페이징 처리를 위해 담을 리스트 초기화
-                int sub_menu_num;
+                string sub_menu_num;
                 int car_menu_num = 1;
                 string engine[] = {"electric", "gasoline", "diesel", "hybrid", "hydrogen", "LPG"};
                 string type[] = {"sedan", "SUV", "RV", "hatchback", "truck"};
                 while(true){
+                    try{
                     //상세보기
                     if(car_menu_num == 0){
                         string car_id;
                         cout << "*조회할 자동차 번호를 입력하세요: ";
-                        cin >> car_id;
+                        cin >> car_id;  
                         if(!car.getCarInfo(car_id))
                             cout << "*해당 번호는 없는 번호입니다." << endl;
                     }
@@ -234,9 +235,10 @@ int main()
                     else if(car_menu_num == 2){
                         cout << "*검색할 차종 번호를 입력해주세요. (1.세단, 2.SUV, 3.RV, 4.해치백, 5.트럭): ";
                         cin >> sub_menu_num;
-                        if(sub_menu_num < 1 || sub_menu_num > 5)
+                        int n = stoi(sub_menu_num);
+                        if(n < 1 || n > 5)
                             cout << "*잘못된 차종 번호입니다." << endl;
-                        car.getCarList(2, list, type[sub_menu_num-1]);
+                        car.getCarList(2, list, type[n-1]);
                         cout << "*차종별 자동차 리스트 입니다. ";
                         
                     }
@@ -244,9 +246,10 @@ int main()
                     else if(car_menu_num == 3){
                         cout << "*검색할 엔진 번호를 입력해주세요. (1.전기, 2.가솔린, 3.디젤, 4.하이브리드, 5.수소, 6.LPG): ";
                         cin >> sub_menu_num;
-                        if(sub_menu_num < 1 || sub_menu_num > 5)
+                        int n = stoi(sub_menu_num);
+                        if(n < 1 || n > 5)
                             cout << "*잘못된 엔진 번호입니다." << endl;
-                        car.getCarList(3, list, engine[sub_menu_num-1]);
+                        car.getCarList(3, list, engine[n-1]);
                         cout <<  "*엔진별 자동차 리스트 입니다. ";
                         
                     }
@@ -262,16 +265,22 @@ int main()
                     //필터
                     else if(car_menu_num == 5){
                         cout << "*적용하실 필터 번호를 입력해주세요. (1. 출시순, 2.낮은 가격순, 3.높은 가격순, 4.인기순): ";
-                        int filter;
+                        string filter;
                         cin >> filter;
-                        car.getCarList(5, list, "", 1, filter);
+                        int n = stoi(filter);
+                        car.getCarList(5, list, "", 1, n);
                     }
                     //페이지 이동
                     else if(car_menu_num == 6){
                         cout << "*이동하실 페이지 번호를 입력해주세요: ";
-                        int page;
+                        string page;
                         cin >> page;
-                        bool flag = car.getCarList(6, list, "", page);
+                        int n = stoi(page);
+                        if(n <= 0){
+                             cout << "*잘못된 페이지 접근입니다. " <<endl;
+                             continue;
+                        }
+                        bool flag = car.getCarList(6, list, "", n);
                         if(!flag)
                             cout << "*잘못된 페이지 접근입니다. " <<endl;
                     }
@@ -294,9 +303,15 @@ int main()
                     }
                     cout << "메뉴를 선택해 주세요. (-1. 입력시 홈 화면 이동)" << endl;
                     cout << "*0. 상세보기 1. 전체보기 2. 차종별 보기 3. 엔진별 보기 4. 차 이름 검색 5. 필터\n 6. 페이지 이동, 7. 구매 >>"  ; 
-                    cin>>car_menu_num;
+                    string cmn;
+                    cin>>cmn;
+                    car_menu_num = stoi(cmn);
                     if(car_menu_num == -1)
                         break;
+                    }catch(std::exception & e){
+                        cout << "*잘못된 입력입니다! 다시 입력해주세요." << endl;
+                        continue;
+                    }
                 } 
                 menu_no = 0; 
                 continue;
@@ -312,6 +327,7 @@ int main()
                 string brand[] = {"KIA", "HYUNDAI", "GENESIS"};
                 string age[] = {"20대", "30대", "40대", "50대"};
                 while(true){
+                    try{
                     //초기 현대 브랜드 리스트 뿌리기
                     if(reco_menu_num == 9){
                         list = car.car_list_v;
@@ -324,35 +340,58 @@ int main()
                         cout << "조회할 자동차 번호를 입력하세요:";
                         cin >> car_id;
                         if(!car.getCarInfo(car_id, true))
-                            cout << "해당 번호는 없는 번호입니다." << endl;
+                            cout << "*해당 번호는 없는 번호입니다." << endl;
                     }
                     //연령별 추천
                     else if(reco_menu_num == 1){
-                        cout << "추천받으실 연령대를 고르세요. (1.20대, 2.30대, 3.40대 4.50대):";
-                        int age_no;
+                        cout << "*추천받으실 연령대를 고르세요. (1.20대, 2.30대, 3.40대 4.50대):";
+                        string age_no;
                         cin >> age_no;
-                        car.getRecoListByAge(age[age_no-1], list, buyList_file, userfile_path);
+                        int n = stoi(age_no);
+                        if(1 <= n && n <=4){
+                            cout << "번호를 잘못 입력하셨습니다. 다시 입력해주세요.";
+                            continue;
+                        }
+                        car.getRecoListByAge(age[n-1], list, buyList_file, userfile_path);
                     }
                     //브랜드별 추천
                     else if(reco_menu_num == 2){
-                        cout << "추천받으실 브랜드를 고르세요. (1.KIA, 2.HYUNDAI, 3.GENESIS):";
-                        int brand_no;
+                        cout << "*추천받으실 브랜드를 고르세요. (1.KIA, 2.HYUNDAI, 3.GENESIS):";
+                        string brand_no;
                         cin >> brand_no;
-                        car.getRecoListByBrand(brand[brand_no-1], list);
+                        int n = stoi(brand_no);
+                        if(n < 0 || n > 3){
+                            cout << "*해당 브랜드는 없는 브랜드 입니다. 다시 입력하세요";
+                            continue;
+                        }
+                        car.getRecoListByBrand(brand[n-1], list);
                     }
                     //페이지 이동
                     else if(reco_menu_num == 3){
-                        cout << "이동하실 페이지 번호를 입력해주세요: ";
-                        int page;
+                        cout << "*이동하실 페이지 번호를 입력해주세요: ";
+                        string page;
                         cin >> page;
-                        bool flag = car.getCarList(6, list, "", page, 0, true);
+                        int n = stoi(page);
+                        if(n <= 0){
+                             cout << "*잘못된 페이지 접근입니다. " <<endl;
+                             continue;
+                        }
+                        bool flag = car.getCarList(6, list, "", n, 0, true);
                         if(!flag)
-                            cout << "잘못된 페이지 접근입니다. " <<endl;
+                            cout << "*잘못된 페이지 접근입니다. " <<endl;
+                    } //잘못된 입력
+                    else{
+                        cout << "*메뉴 번호를 잘못 입력하셨습니다.";
                     }
                     cout << "메뉴를 선택해주세요 (0.상세보기. 1. 연령별 추천, 2.브랜드별 추천 3. 페이지 이동 -1.메인으로 돌아가기) >>" << endl; 
-                    cin>>reco_menu_num;
+                    string rmn;
+                    cin>>rmn;
+                    reco_menu_num = stoi(rmn);
                     if(reco_menu_num == -1)
                         break;
+                    }catch(std::exception & e){
+                        cout << "*잘못된 입력입니다! 다시 입력해주세요." << endl;
+                    }
                 }
                 menu_no = 0;       
                 continue;      
