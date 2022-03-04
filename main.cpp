@@ -348,7 +348,7 @@ int main()
                         string age_no;
                         cin >> age_no;
                         int n = stoi(age_no);
-                        if(1 <= n && n <=4){
+                        if(n < 1 || 4 < n ){
                             cout << "번호를 잘못 입력하셨습니다. 다시 입력해주세요.";
                             continue;
                         }
