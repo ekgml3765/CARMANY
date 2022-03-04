@@ -310,7 +310,7 @@ bool buyListOutput(int m_choice){
 }
 
 void billingBybrand(){
-    string brand[3] = {"KIA", "HYNDAI", "GENESIS"};
+    string brand[3] = {"KIA", "HYUNDAI", "GENESIS"};
 
     for(int i=0; i<3; i++){
         int tot = 0;
