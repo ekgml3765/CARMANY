@@ -17,8 +17,8 @@ int menu_no;
 string id;
 int login;
 
-extern buylistC mark[200];
-extern int totalBuyList;
+buylistC mark[200];
+int totalBuyList;
 
 int main()
 {

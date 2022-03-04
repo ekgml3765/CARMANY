@@ -14,8 +14,8 @@
 #include<stdlib.h>
 #define file_name "buyList.txt"
 #include "../header/buylist.h"
-buylistC mark[200];
-int totalBuyList;
+extern buylistC mark[200];
+extern int totalBuyList;
 
 
 
@@ -97,7 +97,7 @@ int viewMyCar(int user_num)
         {
             // printf("%d %s %s %s %s %s %s\n", index, mark[i].brand, mark[i].carname, mark[i].engine, mark[i].color, mark[i].price);
             
-            printf("| %d", index);
+            printf("  %d", index);
             if (index >= 10)
             {
                 printf(" ");
@@ -126,9 +126,9 @@ int viewMyCar(int user_num)
             {
                 printf(" ");
             }
-            mark[i].price[strlen(mark[i].price) - 1] = '\0';
-            printf("%s ", mark[i].price);
-            printf(" |\n");
+            // mark[i].price[strlen(mark[i].price) - 1] = '\0';
+            printf("%s", mark[i].price);
+            // printf(" |\n");
             index++;
         }
     }
