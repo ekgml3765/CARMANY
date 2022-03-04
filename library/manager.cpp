@@ -71,7 +71,7 @@ bool managerLogin(){
 
 bool managerLogout(){
     cout<<"로그아웃을 선택하셨습니다.\n";
-    cout<<"프로그램을 종료합니다.\n 다음에 또 방문해주세요!";
+    cout<<"프로그램을 종료합니다.\n 다음에 또 방문해주세요!"<<endl;
     exit(0);
 }
 
