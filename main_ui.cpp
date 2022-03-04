@@ -415,7 +415,7 @@ int main()
                 cout << "|                                                                          |" << endl;
                 cout << "|                                                                          |" << endl;
                 cout << "+--------------------------------------------------------------------------+" << endl;
-                cout << "메뉴 선택 1.입출고 관리 2. 재고 현황 3. 구매 리스트 4. 매출 관리 5. 로그아웃" << endl;
+                cout << "메뉴 선택 (1.입출고 관리 2. 재고 현황 3. 구매 리스트 4. 매출 관리 5. 로그아웃) >>" ;
             }
             else
             {
@@ -573,14 +573,32 @@ int main()
 
             while (1)
             {
-                cin >> order1;
+                string chk;
+                cin >> chk;
+                if (chk == "1" || chk == "2"|| chk=="3" || chk=="4"||chk=="5"){
+				    order1 = stoi(chk);
+			    }
+                else{
+                    cout<<"다시 입력해주세요!"<<endl;
+                    continue;
+                }
+
                 if (order1 == 1)
                 {
                     cout << "세부 메뉴를 선택해 주세요. ";
-                    cout << "1. 차량 입고 2. 차량 출고 >>" << endl;
                     while (1)  // 입출고 관리 10001, 10002 할당
-                    {
-                        cin >> order2;
+                    {   
+                        cout << "1. 차량 입고 2. 차량 출고 >>";
+                        string chkk;
+                        cin >> chkk;
+                        if (chkk == "1" || chkk == "2"){
+                            order2 = stoi(chkk);
+                        }
+                        else{
+                            cout<<"다시 입력해주세요!"<<endl;
+                            continue;
+                        }
+
                         if (order2 == 1)
                         {
                             order2 = 10001;
@@ -591,20 +609,25 @@ int main()
                             order2 = 10002;
                             break;
                         }
-                        else
-                        {
-                            cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
-                        }
                     }
                     break;
                 }
                 else if (order1 == 2)
                 {
                     cout << "세부 메뉴를 선택해 주세요." << endl;
-                    cout << "1. 전체 재고 2. 상품별 재고" << endl;
                     while (1)  // 재고 현황은 20001, 20002 할당
-                    {
-                        cin >> order2;
+                    {   
+                        cout << "1. 전체 재고 2. 상품별 재고 >>" ;
+                        string chkk;
+                        cin >> chkk;
+                        if (chkk == "1" || chkk == "2"){
+                            order2 = stoi(chkk);
+                        }
+                        else{
+                            cout<<"다시 입력해주세요!"<<endl;
+                            continue;
+                        }
+
                         if (order2 == 1)
                         {
                             order2 = 20001;
@@ -615,20 +638,25 @@ int main()
                             order2 = 20002;
                             break;
                         }
-                        else
-                        {
-                            cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
-                        }
                     }
                     break;
                 }
                 else if (order1 == 3)
                 {
                     cout << "세부 메뉴를 선택해 주세요." << endl;
-                    cout << "1. 전체 구매 리스트 2. 브랜드별 구매 리스트 3. 회원별 구매 리스트" << endl;
                     while (1)  // 구매리스트 30001, 30002, 30003 할당
                     {
-                        cin >> order2;
+                        cout << "1. 전체 구매 리스트 2. 브랜드별 구매 리스트 3. 회원별 구매 리스트 >>" ;
+                        string chkk;
+                        cin >> chkk;
+                        if (chkk == "1" || chkk == "2" || chkk == "3"){
+                            order2 = stoi(chkk);
+                        }
+                        else{
+                            cout<<"다시 입력해주세요!"<<endl;
+                            continue;
+                        }
+
                         if (order2 == 1)
                         {
                             order2 = 30001;
@@ -644,20 +672,25 @@ int main()
                             order2 = 30003;
                             break;
                         }
-                        else
-                        {
-                            cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
-                        }
                     }
                     break;
                 }
                 else if (order1 == 4)
                 {
                     cout << "세부 메뉴를 선택해 주세요." << endl;
-                    cout << "1. 전체 매출 2. 브랜드별 매출" << endl;
                     while (1)  // 매출 관리는 40001, 40002 할당
                     {
-                        cin >> order2;
+                        cout << "1. 전체 매출 2. 브랜드별 매출 >>";
+                        string chkk;
+                        cin >> chkk;
+                        if (chkk == "1" || chkk == "2"){
+                            order2 = stoi(chkk);
+                        }
+                        else{
+                            cout<<"다시 입력해주세요!"<<endl;
+                            continue;
+                        }
+
                         if (order2 == 1)
                         {
                             order2 = 40001;
@@ -667,10 +700,6 @@ int main()
                         {
                             order2 = 40002;
                             break;
-                        }
-                        else
-                        {
-                            cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
                         }
                     }
                     break;
