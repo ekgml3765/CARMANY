@@ -93,11 +93,20 @@ int main()
 
             cout << "대한민국 No.1 자동차 플랫폼 CARMANY 입니다.\n"; 
 
-           if (login == 0) cout << "메뉴를 선택해주세요.(1. 차량구매 2. 차량 추천 3. 마이페이지 4. 프로그램 종료)" << endl;
+           if (login == 0) cout << "메뉴를 선택해주세요.(1. 차량구매 2. 차량 추천 3. 마이페이지 4. 프로그램 종료)>>";
            else{
                 int choice;
+                
                 cout<<"메뉴를 선택해주세요.(1. 로그인 2. 회원 가입 3. 비회원 로그인 4. 관리자 로그인)>>";
-                cin>>choice;
+                string chk;
+                cin >> chk;
+                if (chk == "1" || chk == "2"|| chk=="3" || chk=="4"){
+				    choice = stoi(chk);
+			    }
+                else{
+                    cout<<"다시 입력해주세요!"<<endl;
+                    continue;
+                }
                 
                 if (choice == 1){
                     if (!userLogin()) continue;
@@ -142,7 +151,17 @@ int main()
                         
             while (1)
             {
-                cin >> order1;
+
+                string chk;
+                cin >> chk;
+                if (chk == "1" || chk == "2"|| chk=="3" || chk=="4"){
+				    order1 = stoi(chk);
+			    }
+                else{
+                    cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
+                    continue;
+                }
+
                 if (order1 == 1)
                 {
                     menu_no = 1;
@@ -183,10 +202,6 @@ int main()
                     }
                     break;
                     
-                }
-                else
-                {
-                    cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
                 }
             }
             continue;
@@ -278,8 +293,8 @@ int main()
                         cout << "*메뉴 번호를 잘못 입력하셨습니다.";
                     }
                     cout << "메뉴를 선택해 주세요. (-1. 입력시 홈 화면 이동)" << endl;
-                    cout << "*0. 상세보기 1. 전체보기 2. 차종별 보기 3. 엔진별 보기 4. 차 이름 검색 5. 필터\n 6. 페이지 이동, 7. 구매" << endl;
-                    cin >> car_menu_num;
+                    cout << "*0. 상세보기 1. 전체보기 2. 차종별 보기 3. 엔진별 보기 4. 차 이름 검색 5. 필터\n 6. 페이지 이동, 7. 구매 >>"  ; 
+                    cin>>car_menu_num;
                     if(car_menu_num == -1)
                         break;
                 } 
@@ -335,7 +350,7 @@ int main()
                             cout << "잘못된 페이지 접근입니다. " <<endl;
                     }
                     cout << "메뉴를 선택해주세요 (0.상세보기. 1. 연령별 추천, 2.브랜드별 추천 3. 페이지 이동 -1.메인으로 돌아가기) >>" << endl; 
-                    cin >> reco_menu_num;
+                    cin>>reco_menu_num;
                     if(reco_menu_num == -1)
                         break;
                 }
@@ -367,10 +382,20 @@ int main()
                 }
             }
 
-            cout << "메뉴를 선택해주세요 (0.구매 리스트 보기. 1. 회원정보 수정 -1.메인으로 돌아가기)" << endl;
             while (1)
             {
-                cin >> order2;
+                cout << "메뉴를 선택해주세요 (0.구매 리스트 보기. 1. 회원정보 수정 -1.메인으로 돌아가기) >>" ;
+                //예외처리
+                    string chk;
+                    cin >> chk;
+                    if (chk == "0" || chk == "1"|| chk=="-1"){
+                        order2 = stoi(chk);
+                    }
+                    else{
+                        cout << "잘못된 입력입니다! 다시 입력해 주세요." << endl;
+                        continue;
+                    }
+                    //예외처리
                 if (order2 == 0)
                 {
                     order2 = 20000;
@@ -572,7 +597,7 @@ int main()
             }
 
             while (1)
-            {
+            {   cout << "메뉴 선택 (1.입출고 관리 2. 재고 현황 3. 구매 리스트 4. 매출 관리 5. 로그아웃) >>" ;
                 string chk;
                 cin >> chk;
                 if (chk == "1" || chk == "2"|| chk=="3" || chk=="4"||chk=="5"){
@@ -643,10 +668,10 @@ int main()
                 }
                 else if (order1 == 3)
                 {
-                    cout << "세부 메뉴를 선택해 주세요." << endl;
+                    cout << "세부 메뉴를 선택해 주세요.";
                     while (1)  // 구매리스트 30001, 30002, 30003 할당
                     {
-                        cout << "1. 전체 구매 리스트 2. 브랜드별 구매 리스트 3. 회원별 구매 리스트 >>" ;
+                        cout << "(1. 전체 구매 리스트 2. 브랜드별 구매 리스트 3. 회원별 구매 리스트) >>" ;
                         string chkk;
                         cin >> chkk;
                         if (chkk == "1" || chkk == "2" || chkk == "3"){
@@ -677,10 +702,10 @@ int main()
                 }
                 else if (order1 == 4)
                 {
-                    cout << "세부 메뉴를 선택해 주세요." << endl;
+                    cout << "세부 메뉴를 선택해 주세요."; 
                     while (1)  // 매출 관리는 40001, 40002 할당
                     {
-                        cout << "1. 전체 매출 2. 브랜드별 매출 >>";
+                        cout << "(1. 전체 매출 2. 브랜드별 매출) >>";
                         string chkk;
                         cin >> chkk;
                         if (chkk == "1" || chkk == "2"){
